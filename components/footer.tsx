@@ -123,7 +123,7 @@ export default function Footer() {
         );
     }
 
-    function TechRow() {
+    function CopyrightRow() {
         return (
             <Grid container spacing={2}>
                 <Grid item>
@@ -154,7 +154,7 @@ export default function Footer() {
                 </Grid>
 
                 <Grid item container>
-                    <TechRow/>
+                    <CopyrightRow/>
                 </Grid>
             </Grid>
 
