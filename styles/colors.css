@@ -1,0 +1,194 @@
+:root {
+    /* Discord Colors */
+    --discord-blurple: #7289DA;
+    --discord-greyple: #99AAB5;
+    --discord-dark-but-not-black: #2C2F33;
+    --discord-not-quite-black: #23272A;
+
+    /* DisCal Colors */
+    --discal-blue: #5566C2;
+    --discal-red: #EF0813;
+    --discal-light-gray: #BCBCBC;
+    --discal-dark-gray: #3C3D41;
+    --discal-not-black: #242428;
+
+    /* Google Colors */
+    --google-brand: #EA4335;
+    --google-mauve: #DBADFF;
+    --google-tangerine: #FF887C;
+    --google-dandelion: #FBD75B;
+    --google-mac-and-cheese: #FFB878;
+    --google-turquoise: #46D6DB;
+    --google-mercury: #E1E1E1;
+    --google-blue: #5484ED;
+    --google-green: #5484ED;
+    --google-red: #5484ED;
+
+    /* Misc Colors */
+    --white: white;
+}
+
+/* Discord Colors */
+.discord-blurple-text {
+    color: var(--discord-blurple);
+}
+
+.discord-blurple-bg {
+    background-color: var(--discord-blurple);
+}
+
+.discord-greyple-text {
+    color: var(--discord-greyple);
+}
+
+.discord-greyple-bg {
+    background-color: var(--discord-greyple);
+}
+
+.discord-dark-but-not-black-text {
+    color: var(--discord-dark-but-not-black);
+}
+
+.discord-dark-but-not-black-bg {
+    background-color: var(--discord-dark-but-not-black);
+}
+
+.discord-not-quite-black-text {
+    color: var(--discord-not-quite-black);
+}
+
+.discord-not-quite-black-bg {
+    background-color: var(--discord-not-quite-black);
+}
+
+/* DisCal Colors */
+
+.discal-blue-text {
+    color: var(--discal-blue);
+}
+
+.discal-blue-bg {
+    background-color: var(--discal-blue);
+}
+
+.discal-red-text {
+    color: var(--discal-red);
+}
+
+.discal-red-bg {
+    background-color: var(--discal-red);
+}
+
+.discal-light-gray-text {
+    color: var(--discal-light-gray);
+}
+
+.discal-light-gray-bg {
+    background-color: var(--discal-light-gray);
+}
+
+.discal-dark-gray-text {
+    color: var(--discal-dark-gray);
+}
+
+.discal-dark-gray-bg {
+    background-color: var(--discal-dark-gray);
+}
+
+.discal-not-black-text {
+    color: var(--discal-not-black);
+}
+
+.discal-not-black-bg {
+    background-color: var(--discal-not-black);
+}
+
+/* Google Colors */
+.google-brand-text {
+    color: var(--google-brand);
+}
+
+.google-brand-bg {
+    background-color: var(--google-brand);
+}
+
+.google-mauve-text {
+    color: var(--google-mauve);
+}
+
+.google-mauve-bg {
+    background-color: var(--google-mauve);
+}
+
+.google-tangerine-text {
+    color: var(--google-tangerine);
+}
+
+.google-tangerine-bg {
+    background-color: var(--google-tangerine);
+}
+
+.google-dandelion-text {
+    color: var(--google-dandelion);
+}
+
+.google-dandelion-bg {
+    background-color: var(--google-dandelion);
+}
+
+.google-mac-and-cheese-text {
+    color: var(--google-mac-and-cheese);
+}
+
+.google-mac-and-cheese-bg {
+    background-color: var(--google-mac-and-cheese);
+}
+
+.google-turquoise-text {
+    color: var(--google-turquoise);
+}
+
+.google-turquoise-bg {
+    background-color: var(--google-turquoise);
+}
+
+.google-mercury-text {
+    color: var(--google-mercury);
+}
+
+.google-mercury-bg {
+    background-color: var(--google-mercury);
+}
+
+.google-blue-text {
+    color: var(--google-blue);
+}
+
+.google-blue-bg {
+    background-color: var(--google-blue);
+}
+
+.google-green-text {
+    color: var(--google-green);
+}
+
+.google-green-bg {
+    background-color: var(--google-green);
+}
+
+.google-red-text {
+    color: var(--google-red);
+}
+
+.google-red-bg {
+    background-color: var(--google-red);
+}
+
+/* Misc Colors */
+.white-text {
+    color: var(--white);
+}
+
+.white-bg {
+    background-color: var(--white);
+}

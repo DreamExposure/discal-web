@@ -1,81 +1,135 @@
-import styles from "../styles/Home.module.css";
+import styles from "../styles/footer.module.css";
 import * as React from 'react';
-import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {Box} from "@material-ui/core";
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        paper: {
-            textAlign: 'center',
-            color: theme.palette.text.secondary,
-        },
-        something: {
-            display: 'flex',
-        },
-        text_stuff: {
-            padding: theme.spacing(2),
-        }
-    }),
-);
+import Image from "next/image";
+import {Container, Link, Typography} from "@mui/material";
 
 export default function Footer() {
-    const classes = useStyles();
 
     function BrandingRow() {
         return (
-            <React.Fragment>
-                <div className={classes.something}>
-                    <image>
-                        <img src="/logos/dark/transparent/logo.png" width={64} alt="DisCal Logo"/>
-                    </image>
-                    <div className={classes.text_stuff}>Text</div>
-                </div>
-            </React.Fragment>
+            <Grid container direction={"column"} alignItems="flex-start">
+                <Grid item>
+                    <Image
+                        src="/logos/light/transparent/logo-type.png" width={235} height={64}
+                        alt="DisCal Logo"
+                    />
+                </Grid>
+                <Grid item>
+                    <Typography variant={"subtitle1"} className={'white-text'}>
+                        The Ultimate Calendar Bot
+                    </Typography>
+                </Grid>
+            </Grid>
         );
     }
 
     function LinksRow() {
         return (
-            <React.Fragment>
-                <Grid item xs={4}>
-                    <Box className={classes.paper}>item1</Box>
+            <Grid container direction={"column"} spacing={2}>
+                <Grid item>
+                    <Typography variant={"h5"} className={'white-text'}>
+                        DisCal
+                    </Typography>
                 </Grid>
-                <Grid item xs={4}>
-                    <Box className={classes.paper}>item2</Box>
+                <Grid item>
+                    <Link href="#" underline="hover">
+                        <Typography variant="body1" className="discal-light-gray-text">
+                            Premium
+                        </Typography>
+                    </Link>
                 </Grid>
-                <Grid item xs={4}>
-                    <Box className={classes.paper}>item3</Box>
+                <Grid item>
+                    <Link href="#" underline="hover">
+                        <Typography variant="body1" className="discal-light-gray-text">
+                            Invite
+                        </Typography>
+                    </Link>
                 </Grid>
-            </React.Fragment>
+                <Grid item>
+                    <Link href="#" underline="hover">
+                        <Typography variant="body1" className="discal-light-gray-text">
+                            Support
+                        </Typography>
+                    </Link>
+                </Grid>
+                <Grid item>
+                    <Link href="#" underline="hover">
+                        <Typography variant="body1" className="discal-light-gray-text">
+                            GitHub
+                        </Typography>
+                    </Link>
+                </Grid>
+            </Grid>
         );
     }
 
     function LegalRow() {
         return (
-            <React.Fragment>
-                <Grid item xs={4}>
-                    <Box className={classes.paper}>item1</Box>
+            <Grid container direction={"column"} spacing={2}>
+                <Grid item>
+                    <Typography variant={"h5"} className={'white-text'}>
+                        Legal
+                    </Typography>
                 </Grid>
-                <Grid item xs={4}>
-                    <Box className={classes.paper}>item2</Box>
+                <Grid item>
+                    <Link href="#" underline="hover">
+                        <Typography variant="body1" className="discal-light-gray-text">
+                            Terms of Service
+                        </Typography>
+                    </Link>
                 </Grid>
-                <Grid item xs={4}>
-                    <Box className={classes.paper}>item3</Box>
+                <Grid item>
+                    <Link href="#" underline="hover">
+                        <Typography variant="body1" className="discal-light-gray-text">
+                            Privacy Policy
+                        </Typography>
+                    </Link>
                 </Grid>
-            </React.Fragment>
+                <Grid item>
+                    <Link href="#" underline="hover">
+                        <Typography variant="body1" className="discal-light-gray-text">
+                            Contact
+                        </Typography>
+                    </Link>
+                </Grid>
+            </Grid>
+        );
+    }
+
+    function TechRow() {
+        return (
+            <Grid container spacing={2}>
+                <Grid item>
+                    <Typography variant="body1" className="discal-light-gray-text">
+                        Copyright © 2017 - 2021 DreamExposure Studios - Licensed under GPLv3.
+                    </Typography>
+                </Grid>
+            </Grid>
         );
     }
 
     return (
-        <footer className={styles.footer}>
-            <Grid container>
-                <Grid container direction={"column"}>
-                    <BrandingRow/>
-                    <LinksRow/>
-                    <LegalRow/>
+        <Container maxWidth={false} className={styles.footer}>
+            <Grid container alignItems="flex-start" spacing={2}>
+                <Grid item container alignItems="flex-start" spacing={4}>
+                    <Grid item xs={12} md={8}>
+                        <BrandingRow/>
+                    </Grid>
+                    <Grid item xs={12} sm>
+                        <LinksRow/>
+                    </Grid>
+                    <Grid item xs={12} sm>
+                        <LegalRow/>
+                    </Grid>
+                </Grid>
+
+                <Grid item container>
+                    <TechRow/>
                 </Grid>
             </Grid>
-        </footer>
+
+        </Container>
     );
 }

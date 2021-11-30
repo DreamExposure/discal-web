@@ -1,0 +1,9 @@
+.footer {
+    display: flex;
+    flex: 1;
+    border-top: 1px solid var(--discord-blurple);
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
