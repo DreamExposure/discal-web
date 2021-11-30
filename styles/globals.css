@@ -12,6 +12,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+    text-underline-color: var(--discord-blurple);
+}
+
 * {
   box-sizing: border-box;
 }

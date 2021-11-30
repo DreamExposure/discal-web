@@ -1,7 +1,6 @@
 import styles from "../styles/footer.module.css";
 import * as React from 'react';
 import Grid from '@material-ui/core/Grid';
-import {Box} from "@material-ui/core";
 import Image from "next/image";
 import {Container, Link, Typography} from "@mui/material";
 
@@ -43,6 +42,13 @@ export default function Footer() {
                 <Grid item>
                     <Link href="#" underline="hover">
                         <Typography variant="body1" className="discal-light-gray-text">
+                            Commands
+                        </Typography>
+                    </Link>
+                </Grid>
+                <Grid item>
+                    <Link href="#" underline="hover">
+                        <Typography variant="body1" className="discal-light-gray-text">
                             Invite
                         </Typography>
                     </Link>
@@ -51,6 +57,25 @@ export default function Footer() {
                     <Link href="#" underline="hover">
                         <Typography variant="body1" className="discal-light-gray-text">
                             Support
+                        </Typography>
+                    </Link>
+                </Grid>
+            </Grid>
+        );
+    }
+
+    function DevelopersRow() {
+        return (
+            <Grid container direction={"column"} spacing={2}>
+                <Grid item>
+                    <Typography variant={"h5"} className={'white-text'}>
+                        Developers
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Link href="#" underline="hover">
+                        <Typography variant="body1" className="discal-light-gray-text">
+                            API
                         </Typography>
                     </Link>
                 </Grid>
@@ -103,7 +128,7 @@ export default function Footer() {
             <Grid container spacing={2}>
                 <Grid item>
                     <Typography variant="body1" className="discal-light-gray-text">
-                        Copyright © 2017 - 2021 DreamExposure Studios - Licensed under GPLv3.
+                        Copyright © 2017 - {new Date().getFullYear()} DreamExposure Studios - Licensed under GPLv3.
                     </Typography>
                 </Grid>
             </Grid>
@@ -112,13 +137,16 @@ export default function Footer() {
 
     return (
         <Container maxWidth={false} className={styles.footer}>
-            <Grid container alignItems="flex-start" spacing={2}>
+            <Grid container spacing={2}>
                 <Grid item container alignItems="flex-start" spacing={4}>
                     <Grid item xs={12} md={8}>
                         <BrandingRow/>
                     </Grid>
                     <Grid item xs={12} sm>
                         <LinksRow/>
+                    </Grid>
+                    <Grid item xs={12} sm>
+                        <DevelopersRow/>
                     </Grid>
                     <Grid item xs={12} sm>
                         <LegalRow/>
