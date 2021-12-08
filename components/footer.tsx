@@ -1,8 +1,15 @@
 import styles from "../styles/footer.module.css";
-import Grid from '@material-ui/core/Grid';
-import Image from "next/image";
-import {Container, Link, Typography} from "@mui/material";
 
+export default function Footer() {
+
+
+    return (
+      <>
+      </>
+    );
+}
+
+/*
 export default function Footer() {
 
     function BrandingRow() {
@@ -160,3 +167,4 @@ export default function Footer() {
         </Container>
     );
 }
+ */

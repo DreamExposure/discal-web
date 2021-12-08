@@ -1,9 +1,0 @@
-.navbar {
-    display: flex;
-    flex: 1;
-    border-bottom: 1px solid var(--discord-blurple);
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-}
-
