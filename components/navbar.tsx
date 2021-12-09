@@ -61,18 +61,18 @@ export default function Navbar() {
         return <div className="hidden sm:block sm:ml-6">
             <div className="flex space-x-4">
                 {navigation.map((item) => (
-                    <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                            item.current ? 'bg-discal-dark-blue text-white' :
-                                'text-discal-light-grey hover:bg-discal-dark-grey hover:text-white',
-                            'px-3 py-2 rounded-md text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                    >
-                        {item.name}
-                    </a>
+                    <Link href={item.href} key={item.name}>
+                        <a
+                            className={classNames(
+                                item.current ? 'bg-discal-dark-blue text-white' :
+                                    'text-discal-light-grey hover:bg-discal-dark-grey hover:text-white',
+                                'px-3 py-2 rounded-md text-sm font-medium'
+                            )}
+                            aria-current={item.current ? 'page' : undefined}
+                        >
+                            {item.name}
+                        </a>
+                    </Link>
                 ))}
             </div>
         </div>
@@ -89,9 +89,11 @@ export default function Navbar() {
     }
 
     function loginButton() {
-        return <a href="/login" className="bg-discal-dark-blue text-white px-3 py-2 rounded-md text-sm font-medium">
-            Login
-        </a>
+        return <Link href="/login">
+            <a className="bg-discal-dark-blue text-white px-3 py-2 rounded-md text-sm font-medium">
+                Login
+            </a>
+        </Link>
     }
 
     function profileDropdown() {
@@ -125,7 +127,7 @@ export default function Navbar() {
                         </p>
                     </Menu.Item>
                     <Menu.Item>
-                        <a href="#" className="block px-4 py-2 text-sm text-discal-red">
+                        <a role={"button"} className="block px-4 py-2 text-sm text-discal-red" onClick={() => alert("TODO: Sign out")}>
                             Sign out
                         </a>
                     </Menu.Item>
@@ -138,19 +140,19 @@ export default function Navbar() {
         return <Disclosure.Panel className="sm:hidden" onClick={() => setOpen(!open)}>
             <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
-                    <Disclosure.Button
-                        key={item.name}
-                        as="a"
-                        href={item.href}
-                        className={classNames(
-                            item.current ? 'bg-discal-dark-blue text-white' :
-                                'text-discal-light-grey hover:bg-discal-dark-grey hover:text-white',
-                            'block px-3 py-2 rounded-md text-base font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                    >
-                        {item.name}
-                    </Disclosure.Button>
+                    <Link href={item.href} key={item.name} passHref>
+                        <Disclosure.Button
+                            as="a"
+                            className={classNames(
+                                item.current ? 'bg-discal-dark-blue text-white' :
+                                    'text-discal-light-grey hover:bg-discal-dark-grey hover:text-white',
+                                'block px-3 py-2 rounded-md text-base font-medium'
+                            )}
+                            aria-current={item.current ? 'page' : undefined}
+                        >
+                            {item.name}
+                        </Disclosure.Button>
+                    </Link>
                 ))}
             </div>
         </Disclosure.Panel>
