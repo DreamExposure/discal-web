@@ -1,9 +1,9 @@
 import {NextPage} from "next";
+import Container from "../../components/container";
 
 
 const PrivacyPolicy: NextPage = () => {
-    return <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto pt-10">
+    return <Container>
             <h1 className='text-3xl font-semibold text-discal-blue uppercase tracking-wide text-center'>
                 Privacy Policy
             </h1>
@@ -25,7 +25,7 @@ const PrivacyPolicy: NextPage = () => {
             <p className='text-discal-light-grey pt-5'>
                 IP Addresses are only collected for debugging purposes and deleted every rolling 24 hour period. In
                 order to debug various API endpoints and pages, IP addresses may be logged. This information is vital to
-                assessing issues within DreamExposure's websites and services.
+                assessing issues within DreamExposure&apos;s websites and services.
             </p>
 
             <p className='text-discal-light-grey pt-5'>
@@ -36,8 +36,7 @@ const PrivacyPolicy: NextPage = () => {
             <p className='text-discal-light-grey pt-20 pb-10 tracking-tight'>
                 Last Updated: August 29, 2018.
             </p>
-        </div>
-    </div>
+        </Container>
 }
 
 export default PrivacyPolicy
