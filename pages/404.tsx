@@ -3,8 +3,7 @@ import {useRouter} from "next/router";
 export default function Custom404() {
     const router = useRouter()
 
-    return <main className="min-h-full">
-        <div className="max-w-7xl mx-auto px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8 lg:py-48">
+    return <div className="max-w-7xl mx-auto px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8 lg:py-48">
             <h1 className="text-3xl font-semibold text-discal-blue uppercase tracking-wide">
                 404 error
             </h1>
@@ -22,7 +21,4 @@ export default function Custom404() {
                     </button>
             </div>
         </div>
-    </main>
-
-
 }
