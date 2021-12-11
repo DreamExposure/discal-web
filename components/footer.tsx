@@ -160,7 +160,7 @@ export default function Footer() {
         </div>
     }
 
-    return <footer className="bg-discal-not-black border-t-2 border-discal-blue" aria-labelledby="footer-heading">
+    return <footer className="bg-discal-not-black border-t border-discal-blue" aria-labelledby="footer-heading">
         <h2 id="footer-heading" className="sr-only">
             Footer
         </h2>
