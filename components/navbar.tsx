@@ -2,25 +2,29 @@ import React, {Fragment} from 'react'
 import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {MenuIcon, QuestionMarkCircleIcon, XIcon} from '@heroicons/react/outline'
 import Link from 'next/link'
+import {NextRouter, useRouter} from 'next/router'
+import {UserContext} from "../lib/context";
+import User from "../lib/object/user";
 
-//TODO: Move this to global state
 const navigation = [
-    {name: 'Commands', href: '/commands', current: false},
-    {name: 'Dashboard', href: '/dashboard', current: false},
-    {name: 'Status', href: '/status', current: false},
-    {name: 'Invite', href: '/invite', current: false},
-    {name: 'Premium', href: '/premium', current: false},
+    {name: 'Commands', href: '/commands'},
+    {name: 'Dashboard', href: '/dashboard'},
+    {name: 'Status', href: '/status'},
+    {name: 'Invite', href: '/invite'},
+    {name: 'Premium', href: '/premium'},
 ]
-
-//TODO: Move this to global state
-const loggedIn = false
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
+function currentPage(router: NextRouter, href: string): Boolean {
+    return router.pathname.startsWith(href)
+}
+
 export default function Navbar() {
     const [open, setOpen] = React.useState(false)
+    const router = useRouter()
 
     function mobileMenuButton() {
         return <div className="absolute inset-y-0 left-0 flex items-center sm:hidden" onClick={() => setOpen(!open)}>
@@ -64,11 +68,11 @@ export default function Navbar() {
                     <Link href={item.href} key={item.name}>
                         <a
                             className={classNames(
-                                item.current ? 'bg-discal-dark-blue text-white' :
+                                currentPage(router, item.href) ? 'bg-discal-dark-blue text-white' :
                                     'text-discal-light-grey hover:bg-discal-dark-grey hover:text-white',
                                 'px-3 py-2 rounded-md text-sm font-medium'
                             )}
-                            aria-current={item.current ? 'page' : undefined}
+                            aria-current={currentPage(router, item.href) ? 'page' : undefined}
                         >
                             {item.name}
                         </a>
@@ -96,16 +100,15 @@ export default function Navbar() {
         </Link>
     }
 
-    function profileDropdown() {
+    function profileDropdown(user: User) {
         return <Menu as="div" className="ml-3 relative">
             <div>
                 <Menu.Button
                     className="bg-discal-dark-blue flex text-sm rounded-full focus:outline-none focus:ring-2
                                         focus:ring-offset-2 focus:ring-offset-discal-dark-grey focus:ring-white">
                     <span className="sr-only">Open user menu</span>
-                    {/* TODO: Use discord profile picture if one exists */}
                     <img className="h-8 w-8 rounded-full"
-                         src="/defaults/profile.png"
+                         src={user.avatar}
                          alt="Profile Photo"
                     />
                 </Menu.Button>
@@ -123,7 +126,7 @@ export default function Navbar() {
                                         bg-discord-not-quite-black ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <Menu.Item>
                         <p className="block px-4 py-2 text-sm text-discal-light-grey">
-                            Username#1234
+                            {user.username}#{user.discrim}
                         </p>
                     </Menu.Item>
                     <Menu.Item>
@@ -144,11 +147,11 @@ export default function Navbar() {
                         <Disclosure.Button
                             as="a"
                             className={classNames(
-                                item.current ? 'bg-discal-dark-blue text-white' :
+                                currentPage(router, item.href) ? 'bg-discal-dark-blue text-white' :
                                     'text-discal-light-grey hover:bg-discal-dark-grey hover:text-white',
                                 'block px-3 py-2 rounded-md text-base font-medium'
                             )}
-                            aria-current={item.current ? 'page' : undefined}
+                            aria-current={currentPage(router, item.href) ? 'page' : undefined}
                         >
                             {item.name}
                         </Disclosure.Button>
@@ -170,7 +173,9 @@ export default function Navbar() {
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto
                     sm:ml-6 sm:pr-0">
                         {supportButton()}
-                        {loggedIn ? profileDropdown() : loginButton()}
+                        <UserContext.Consumer>
+                            {(user) => user != null ? profileDropdown(user) : loginButton()}
+                        </UserContext.Consumer>
                     </div>
                 </div>
             </div>
