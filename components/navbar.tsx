@@ -5,6 +5,7 @@ import Link from 'next/link'
 import {NextRouter, useRouter} from 'next/router'
 import {UserContext} from "../lib/context";
 import User from "../lib/object/user";
+import {classNames} from "../lib/utils";
 
 const navigation = [
     {name: 'Commands', href: '/commands'},
@@ -13,10 +14,6 @@ const navigation = [
     {name: 'Invite', href: '/invite'},
     {name: 'Premium', href: '/premium'},
 ]
-
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ')
-}
 
 function currentPage(router: NextRouter, href: string): Boolean {
     return router.pathname.startsWith(href)
