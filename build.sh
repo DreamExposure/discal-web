@@ -27,7 +27,7 @@ fi
 
 # Login to container registry
 echo "Logging in to container registry..."
-docker login login rg.nl-ams.scaleway.com/dreamexposure -u "$SCW_USER" -p "$SCW_SECRET"
+docker login rg.nl-ams.scaleway.com/dreamexposure -u "$SCW_USER" -p "$SCW_SECRET"
 
 # Push docker image to our container registry
 
