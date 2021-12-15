@@ -1,0 +1,30 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.3.0
+
+      # Login to our CR then build and push using custom build script
+      - name: Login to
+          uses: actions-hub/docker/login@master
+          env:
+            DOCKER_USERNAME: ${{ secrets.SCW_USER }}
+            DOCKER_PASSWORD:  ${{ secrets.SCW_SECRET }}
+            DOCKER_REGISTRY_URL: docker.pkg.github.com
+          run: bash ./build.sh
+
+      # Have K8S pull latest images for dev pods
+      - name: Trigger dev deploy
+        uses: Consensys/kubernetes-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: delete -n discal pods -l profile=dev,app=discal,module=web
