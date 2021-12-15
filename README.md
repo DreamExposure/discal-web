@@ -1,6 +1,6 @@
 # DisCal Website
 
-The official DisCal Bot website, built with [Next.js](https://nextjs.org/).
+The official [DisCal Bot](https://discalbot.com) website, built with [Next.js](https://nextjs.org/) and [TailwindCSS](https://tailwindcss.com/).
 
 ## Development
 
@@ -13,8 +13,9 @@ Requirements:
     - `yarn install`
 - Build and develop
     1. `yarn clean`
-    2. `yarn generate`
-    3. `yarn dev`
+    2. `yarn run`
+    3. Open `http://localhost:3000` and make your changes
+    4. Commit your changes and open a pull request
 
 ## Licensing
 
