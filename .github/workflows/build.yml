@@ -19,7 +19,6 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.SCW_USER }}
           DOCKER_PASSWORD:  ${{ secrets.SCW_SECRET }}
           DOCKER_REGISTRY_URL: rg.nl-ams.scw.cloud/dreamexposure
-        run: bash ./build.sh
 
       # Make build script executable
       - name: Correct file permissions
