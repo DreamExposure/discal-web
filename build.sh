@@ -18,7 +18,6 @@ esac
 # Build docker image
 echo "Building docker image..."
 docker build -t $repository/$image:latest .
-echo "Docker image built."
 
 # Tag it
 if [ $snapshot = false ]; then
@@ -26,17 +25,18 @@ if [ $snapshot = false ]; then
   docker tag $repository/$image:latest $repository/$image:"$version"
 fi
 
+# Login to container registry
+echo "Logging in to container registry..."
+docker login login rg.nl-ams.scaleway.com/dreamexposure -u "$SCW_USER" -p "$SCW_SECRET"
+
 # Push docker image to our container registry
 
 echo "Pushing latest tag..."
 docker push $repository/$image:latest
 
-echo "Pushed latest tag."
-
 if [ $snapshot = false ]; then
     echo "Pushing release version tag..."
     docker push $repository/$image:latest
-    echo "Pushed release version tag."
 fi
 
-echo "Successfully built and deployed~!"
+echo "Done~!"
