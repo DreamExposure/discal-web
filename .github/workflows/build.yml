@@ -12,14 +12,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.0
 
-      # Login to our CR then build and push using custom build script
-      - name: Build and deploy to CR
+      # Login to scaleway container registry
+      - name: Login to container registry
         uses: actions-hub/docker/login@master
         env:
           DOCKER_USERNAME: ${{ secrets.SCW_USER }}
           DOCKER_PASSWORD:  ${{ secrets.SCW_SECRET }}
           DOCKER_REGISTRY_URL: rg.nl-ams.scw.cloud/dreamexposure
         run: bash ./build.sh
+
+      # Make build script executable
+      - name: Correct file permissions
+        run: chmod +x ./build.sh
+
+        # Run our build script to build and deploy
+      - name: Build and deploy
+        run: ./build.sh
 
       # Have K8S pull latest images for dev pods
       - name: Trigger dev deploy
