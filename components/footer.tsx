@@ -11,7 +11,7 @@ const navigation = {
         {name: 'Support', href: 'https://discord.gg/2TFqyuy'},
     ],
     developers: [
-        {name: 'API', href: '/docs/api'},
+        {name: 'API', href: '/docs/api/reference'},
         {name: 'GitHub', href: 'https://github.com/DreamExposure/DisCal-Discord-Bot'},
     ],
     company: [
