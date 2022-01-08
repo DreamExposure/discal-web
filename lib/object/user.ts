@@ -4,14 +4,14 @@ export default class User {
 
     id: string;
     username: string;
-    discrim: number;
+    discriminator: string;
     avatar: string = '/defaults/profile.png';
     guilds: Array<TSAnyKeyword> = [];
 
 
-    constructor(id: string, username: string, discrim: number) {
+    constructor(id: string, username: string, discrim: string) {
         this.id = id;
         this.username = username;
-        this.discrim = discrim;
+        this.discriminator = discrim;
     }
 }

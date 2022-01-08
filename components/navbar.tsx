@@ -1,9 +1,9 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useContext, useState} from 'react'
 import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {MenuIcon, QuestionMarkCircleIcon, XIcon} from '@heroicons/react/outline'
 import Link from 'next/link'
 import {NextRouter, useRouter} from 'next/router'
-import {UserContext} from "../lib/context";
+import SessionContext from "../lib/context";
 import User from "../lib/object/user";
 import {classNames} from "../lib/utils";
 
@@ -20,10 +20,11 @@ function currentPage(router: NextRouter, href: string): Boolean {
 }
 
 export default function Navbar() {
+    const { session, setSession } = useContext(SessionContext);
     const [open, setOpen] = React.useState(false)
     const router = useRouter()
 
-    function mobileMenuButton() {
+    function MobileMenuButton() {
         return <div className="absolute inset-y-0 left-0 flex items-center sm:hidden" onClick={() => setOpen(!open)}>
             <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md
                                 text-discal-light-grey hover:text-white hover:bg-discal-dark-grey focus:outline-none
@@ -38,7 +39,7 @@ export default function Navbar() {
         </div>
     }
 
-    function brandingImage() {
+    function BrandingImage() {
         return <div className="flex-shrink-0 flex items-center">
             <Link href={"/"}>
                 <a>
@@ -58,7 +59,7 @@ export default function Navbar() {
         </div>
     }
 
-    function desktopNavigationItems() {
+    function DesktopNavigationItems() {
         return <div className="hidden sm:block sm:ml-6">
             <div className="flex space-x-4">
                 {navigation.map((item) => (
@@ -79,7 +80,7 @@ export default function Navbar() {
         </div>
     }
 
-    function supportButton() {
+    function SupportButton() {
         return <a className="bg-discal-dark-blue p-1 rounded-full text-discal-light-grey
             hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-discal-dark-grey
             focus:ring-white mx-2" href="https://discord.gg/2TFqyuy" target={'_blank'} rel="noreferrer"
@@ -123,10 +124,11 @@ export default function Navbar() {
                                         bg-discord-not-quite-black ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <Menu.Item>
                         <p className="block px-4 py-2 text-sm text-discal-light-grey">
-                            {user.username}#{user.discrim}
+                            {user.username}#{user.discriminator}
                         </p>
                     </Menu.Item>
                     <Menu.Item>
+                        {/* TODO: Sign out */}
                         <a role={"button"} className="block px-4 py-2 text-sm text-discal-red" onClick={() => alert("TODO: Sign out")}>
                             Sign out
                         </a>
@@ -136,7 +138,7 @@ export default function Navbar() {
         </Menu>
     }
 
-    function mobileDropdownNav() {
+    function MobileDropdownNav() {
         return <Disclosure.Panel className="sm:hidden" onClick={() => setOpen(!open)}>
             <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
@@ -162,22 +164,20 @@ export default function Navbar() {
         <Disclosure as="nav" className="bg-discal-blue">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex items-center justify-between h-16">
-                    {mobileMenuButton()}
+                    <MobileMenuButton/>
                     <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                        {brandingImage()}
-                        {desktopNavigationItems()}
+                        <BrandingImage/>
+                        <DesktopNavigationItems/>
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto
                     sm:ml-6 sm:pr-0">
-                        {supportButton()}
-                        <UserContext.Consumer>
-                            {(user) => user != null ? profileDropdown(user) : loginButton()}
-                        </UserContext.Consumer>
+                        <SupportButton/>
+                        {session.user != null ? profileDropdown(session.user) : loginButton()}
                     </div>
                 </div>
             </div>
 
-            {mobileDropdownNav()}
+            <MobileDropdownNav/>
         </Disclosure>
     )
 }

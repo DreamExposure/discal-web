@@ -1,4 +1,9 @@
 import React from "react";
-import User from "./object/user";
+import Session from "./object/session";
 
-export const UserContext = React.createContext<User | null>(null);
+const SessionContext = React.createContext({
+    session: new Session(null, null),
+    setSession: (session: Session) => {},
+});
+
+export default SessionContext
