@@ -7,7 +7,6 @@ import SessionContext from "../../lib/context";
 import {Const} from "../../lib/utils";
 import {Client} from "../../lib/client";
 
-
 function CodeHandler(): JSX.Element {
     const router = useRouter()
     const { session, setSession } = useContext(SessionContext);
@@ -21,13 +20,17 @@ function CodeHandler(): JSX.Element {
         if (params.has("code") && params.has("state")) {
             // Send code and state to backend
             Client.requestJson(Const.CAM_URL + '/oauth2/discord/code', 'POST', {
-
+                code: params.get("code"),
+                state: params.get("state")
             }).then(data => {
-                //TODO: Save token and user data to context/state and redirect
-                //setSession(new Session(null, new User('', 'UsErNaMe', "1234")))
+                console.log(data) //TODO: Remove logging
 
-                console.log(data)
-                router.push('/')
+                // set session
+                const session = data as Session
+                console.log(session) //TODO: Remove logging
+                setSession(session)
+
+                router.push('/') //TODO: Redirect to previous page
             })
             setSession(new Session(null, null, new User('', 'UsErNaMe', "1234")))
             router.push('/')

@@ -1,6 +1,3 @@
-import {router} from "next/client";
-import {useRouter} from "next/router";
-
 export type Props = {
     children?: JSX.Element | JSX.Element[] | string
     extraClass?: string
@@ -38,9 +35,16 @@ export class Const {
 
     static get API_URL() {
         if (typeof window !== 'undefined') {
-            if (window.location.hostname === 'dev.discalbot.com') return 'https://dev-api.discalbot.com'
-            else return 'https://api.discalbot.com'
-        } else return
+            switch (window.location.hostname) {
+                case 'dev.discalbot.com':
+                    return 'https://dev-api.discalbot.com'
+                case 'discalbot.com':
+                case 'www.discalbot.com':
+                    return 'https://api.discalbot.com'
+                default:
+                    return 'invalid-hostname'
+            }
+        } else return 'no-hostname-found'
     }
 
     static get CAM_URL() {

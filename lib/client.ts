@@ -1,7 +1,7 @@
 
 export class Client {
 
-    static async requestJson(url: string, method: string, data: Object) {
+    static async requestJson(url: string, method: string, data: Object): Promise<Object> {
         const response = await fetch(url, {
             method: method,
             headers: {
