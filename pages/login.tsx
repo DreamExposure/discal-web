@@ -8,7 +8,7 @@ function RedirectHandler(): JSX.Element {
 
     useEffect(() => {
         // redirect to login url
-        router.push(Const.CAM_URL + "/oauth2/discord/login", '/login')
+        router.push(Const.CAM_URL + "/oauth2/discord/login", '/oauth2/discord/login')
     }, []);
 
     return <p className='text-discal-light-grey pt-10 text-center'>
