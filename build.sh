@@ -6,21 +6,18 @@ image="discal-web2"
 
 version=$(cat VERSION)
 snapshot=false # Set default
-nextCmd=start # Default to prod
 
 # Determine if this is a snapshot build
 
 case "$version" in
 *SNAPSHOT*)
   snapshot=true
-  nextCmd=dev
   ;;
 esac
 
-
 # Build docker image
 echo "Building docker image..."
-docker build -t $repository/$image:latest --build-arg node_mode=$nextCmd.
+docker build -t $repository/$image:latest .
 
 # Tag it
 if [ $snapshot = false ]; then

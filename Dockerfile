@@ -27,10 +27,6 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-# So that we can have the images running prod or dev env vars
-ARG node_mode
-ENV NODE_CMD=$node_mode
-
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 
@@ -52,4 +48,4 @@ ENV PORT 3000
 # Uncomment the following line in case you want to disable telemetry.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["node_modules/.bin/next", '$NODE_CMD']
+CMD ["node_modules/.bin/next", "start"]
