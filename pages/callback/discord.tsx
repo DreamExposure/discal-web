@@ -32,8 +32,6 @@ function CodeHandler(): JSX.Element {
 
                 router.push('/') //TODO: Redirect to previous page
             })
-            setSession(new Session(null, null, new User('', 'UsErNaMe', "1234")))
-            router.push('/')
         } else {
             // redirect to error page
             router.push("/400")
