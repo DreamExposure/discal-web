@@ -1,11 +1,11 @@
-import React, {Fragment, useContext, useState} from 'react'
+import React, {Fragment, useContext} from 'react'
 import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {MenuIcon, QuestionMarkCircleIcon, XIcon} from '@heroicons/react/outline'
 import Link from 'next/link'
 import {NextRouter, useRouter} from 'next/router'
 import SessionContext from "../lib/context";
 import User from "../lib/object/user";
-import {classNames} from "../lib/utils";
+import {classNames, StorageUtil} from "../lib/utils";
 
 const navigation = [
     {name: 'Commands', href: '/commands'},
@@ -20,7 +20,7 @@ function currentPage(router: NextRouter, href: string): Boolean {
 }
 
 export default function Navbar() {
-    const { session, setSession } = useContext(SessionContext);
+    const {session} = useContext(SessionContext);
     const [open, setOpen] = React.useState(false)
     const router = useRouter()
 
@@ -92,7 +92,8 @@ export default function Navbar() {
 
     function loginButton() {
         return <Link href="/login">
-            <a className="bg-discal-dark-blue text-white px-3 py-2 rounded-md text-sm font-medium">
+            <a className="bg-discal-dark-blue text-white px-3 py-2 rounded-md text-sm font-medium"
+               onClick={() => StorageUtil.save("previous_page", window.location.href)}>
                 Login
             </a>
         </Link>
@@ -128,10 +129,11 @@ export default function Navbar() {
                         </p>
                     </Menu.Item>
                     <Menu.Item>
-                        {/* TODO: Sign out */}
-                        <a role={"button"} className="block px-4 py-2 text-sm text-discal-red" onClick={() => alert("TODO: Sign out")}>
-                            Sign out
-                        </a>
+                        <Link href='/logout'>
+                            <a role={"button"} className="block px-4 py-2 text-sm text-discal-red">
+                                Sign out
+                            </a>
+                        </Link>
                     </Menu.Item>
                 </Menu.Items>
             </Transition>
@@ -160,24 +162,21 @@ export default function Navbar() {
         </Disclosure.Panel>
     }
 
-    return (
-        <Disclosure as="nav" className="bg-discal-blue">
-            <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-                <div className="relative flex items-center justify-between h-16">
-                    <MobileMenuButton/>
-                    <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                        <BrandingImage/>
-                        <DesktopNavigationItems/>
-                    </div>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto
+    return <Disclosure as="nav" className="bg-discal-blue">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div className="relative flex items-center justify-between h-16">
+                <MobileMenuButton/>
+                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                    <BrandingImage/>
+                    <DesktopNavigationItems/>
+                </div>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto
                     sm:ml-6 sm:pr-0">
-                        <SupportButton/>
-                        {session.user != null ? profileDropdown(session.user) : loginButton()}
-                    </div>
+                    <SupportButton/>
+                    {session.user != null ? profileDropdown(session.user) : loginButton()}
                 </div>
             </div>
-
-            <MobileDropdownNav/>
-        </Disclosure>
-    )
+        </div>
+        <MobileDropdownNav/>
+    </Disclosure>
 }

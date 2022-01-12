@@ -2,50 +2,52 @@ import type { NextPage } from 'next'
 import React, {useContext, useEffect} from "react";
 import {useRouter} from "next/router";
 import Session from "../../lib/object/session";
-import User from "../../lib/object/user";
 import SessionContext from "../../lib/context";
-import {Const} from "../../lib/utils";
-import {Client} from "../../lib/client";
+import {Const, StorageUtil} from "../../lib/utils";
+import {useRequestJson} from "../../lib/client";
+import Container from "../../components/container";
+import Loader from "../../components/loader";
 
 function CodeHandler(): JSX.Element {
     const router = useRouter()
-    const { session, setSession } = useContext(SessionContext);
+    const { setSession } = useContext(SessionContext);
+    const requestJson = useRequestJson()
 
     useEffect(() => {
 
         /* Check if we have code, if so, request token from server */
-
         const params = new URL(window.location.href).searchParams
 
         if (params.has("code") && params.has("state")) {
             // Send code and state to backend
-            Client.requestJson(Const.CAM_URL + '/oauth2/discord/code', 'POST', {
+            requestJson('POST', Const.CAM_URL + '/oauth2/discord/code', {
                 code: params.get("code"),
                 state: params.get("state")
             }).then(data => {
-                console.log(data) //TODO: Remove logging
-
                 // set session
                 const session = data as Session
-                console.log(session) //TODO: Remove logging
                 setSession(session)
 
-                router.push('/') //TODO: Redirect to previous page
+                // check if redirect is stored and then redirect
+                let storedUrl = StorageUtil.load("previous_page", "/")
+                StorageUtil.remove("previous_page")
+
+                router.push(storedUrl)
             })
         } else {
             // redirect to error page
             router.push("/400")
         }
-    }, []);
+    }, [])
 
-    return <p className='text-discal-light-grey pt-10 text-center'>
-        Redirecting...
-    </p>
+    return <Loader/>
 }
 
 const DiscordCallback: NextPage = () => {
 
-    return <CodeHandler/>
+    return <Container>
+        <CodeHandler/>
+    </Container>
 }
 
 export default DiscordCallback

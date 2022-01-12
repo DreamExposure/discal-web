@@ -2,32 +2,32 @@ import {useRouter} from "next/router";
 import React, {useEffect} from "react";
 import {NextPage} from "next";
 import {Const} from "../lib/utils";
-import {Client} from "../lib/client";
+import {useRequestJson} from "../lib/client";
 import LoginResponse from "../lib/json/login-response";
+import Container from "../components/container";
+import Loader from "../components/loader";
 
 function RedirectHandler(): JSX.Element {
     const router = useRouter()
+    const requestJson = useRequestJson()
 
     useEffect(() => {
-        // Send code and state to backend
-        Client.requestJson(Const.CAM_URL + '/oauth2/discord/login', 'GET', {}).then(data => {
-            console.log(data) //TODO: Remove logging
-
-            // get link and push the client to it
+        // get link and push the client to it
+        requestJson('GET', Const.CAM_URL + '/oauth2/discord/login').then(data => {
             const response = data as LoginResponse
 
             router.push(response.link)
         })
     }, []);
 
-    return <p className='text-discal-light-grey pt-10 text-center'>
-        Redirecting...
-    </p>
+    return <Loader/>
 }
 
 const Login: NextPage = () => {
 
-    return <RedirectHandler/>
+    return <Container>
+        <RedirectHandler/>
+    </Container>
 }
 
 export default Login

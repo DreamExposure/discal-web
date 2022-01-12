@@ -1,15 +1,29 @@
+import {useCallback, useContext} from "react";
+import SessionContext from "./context";
+import type {HeadersInit} from "next/dist/server/web/spec-compliant/headers";
 
-export class Client {
+export function useRequestJson() {
+    const {session} = useContext(SessionContext);
+    const token = session.token
 
-    static async requestJson(url: string, method: string, data: Object): Promise<Object> {
+    return useCallback(async (method: string, url: string, data?: Object) => {
+        const headers: HeadersInit = {
+            "Content-Type": "application/json",
+        };
+
+        if (token) {
+            headers["Authorization"] = `Bearer ${token}`;
+        }
+
+        const body: BodyInit | null = data ? JSON.stringify(data) : null;
+
         const response = await fetch(url, {
             method: method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
+            headers: headers,
+            body: body
+        });
 
         return response.json()
-    }
+    }, [token])
 }
+
