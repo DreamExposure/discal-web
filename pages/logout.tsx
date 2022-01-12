@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import React, {useContext, useEffect} from "react";
-import {useRequestJson} from "../lib/client";
+import {useRequestEmpty} from "../lib/client";
 import {Const} from "../lib/utils";
 import Loader from "../components/loader";
 import {NextPage} from "next";
@@ -11,11 +11,11 @@ import Session from "../lib/object/session";
 function RedirectHandler(): JSX.Element {
     const router = useRouter()
     const {setSession} = useContext(SessionContext);
-    const requestJson = useRequestJson()
+    const requestEmpty = useRequestEmpty()
 
     useEffect(() => {
         // clear session
-        requestJson('GET', Const.CAM_URL + '/oauth2/discord/logout').finally(() => {
+        requestEmpty('GET', Const.CAM_URL + '/oauth2/discord/logout').finally(() => {
             setSession(new Session())
             router.back()
         })
