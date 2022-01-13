@@ -6,6 +6,8 @@ import SessionContext from "../lib/context";
 import {useEffect, useState} from "react";
 import Session from "../lib/object/session";
 import {StorageUtil} from "../lib/utils";
+import {ToastContainer} from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 
 export default function MyApp({Component, pageProps}: AppProps) {
     const [session, setSession] = useState(() => {
@@ -24,10 +26,15 @@ export default function MyApp({Component, pageProps}: AppProps) {
         StorageUtil.save("session", session)
     }, [session])
 
+    if (typeof document !== 'undefined') {
+        injectStyle();
+    }
+
     return <SessionContext.Provider value={value}>
         <Navbar/>
         <main className="min-h-screen">
             <Component {...pageProps}/>
+            <ToastContainer/>
         </main>
         <Footer/>
     </SessionContext.Provider>
