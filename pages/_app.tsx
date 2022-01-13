@@ -34,7 +34,15 @@ export default function MyApp({Component, pageProps}: AppProps) {
         <Navbar/>
         <main className="min-h-screen">
             <Component {...pageProps}/>
-            <ToastContainer/>
+            <ToastContainer
+                position='bottom-right'
+                autoClose={5000}
+                newestOnTop
+                closeOnClick
+                draggable
+                pauseOnFocusLoss
+                pauseOnHover={true}
+            />
         </main>
         <Footer/>
     </SessionContext.Provider>
