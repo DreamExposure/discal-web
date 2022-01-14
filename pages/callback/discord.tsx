@@ -7,6 +7,7 @@ import {Const, StorageUtil} from "../../lib/utils";
 import {useRequestJson} from "../../lib/client";
 import Container from "../../components/container";
 import Loader from "../../components/loader";
+import {toast} from "react-toastify";
 
 function CodeHandler(): JSX.Element {
     const router = useRouter()
@@ -15,8 +16,12 @@ function CodeHandler(): JSX.Element {
 
     useEffect(() => {
 
-        /* Check if we have code, if so, request token from server */
+        // Check if we have code, if so, request token from server
         const params = new URL(window.location.href).searchParams
+
+        // check if previous page is stored, otherwise redirect to home
+        let storedUrl = StorageUtil.load("previous_page", "/")
+        StorageUtil.remove("previous_page")
 
         if (params.has("code") && params.has("state")) {
             // Send code and state to backend
@@ -28,15 +33,21 @@ function CodeHandler(): JSX.Element {
                 const session = data as Session
                 setSession(session)
 
-                // check if redirect is stored and then redirect
-                let storedUrl = StorageUtil.load("previous_page", "/")
-                StorageUtil.remove("previous_page")
+                toast("Logged in successfully")
+                router.push(storedUrl)
+            }).catch(err => {
+                console.error(err)
 
+                toast.error("Something went wrong, please try again")
                 router.push(storedUrl)
             })
         } else {
-            // redirect to error page
-            router.push("/400")
+            let storedUrl = StorageUtil.load("previous_page", "/")
+            StorageUtil.remove("previous_page")
+
+            // redirect and show error toast
+            toast.error("Something went wrong, please try again")
+            router.push(storedUrl)
         }
     }, [])
 

@@ -6,7 +6,6 @@ import {useRequestJson} from "../lib/client";
 import LoginResponse from "../lib/json/login-response";
 import Container from "../components/container";
 import Loader from "../components/loader";
-import {toast} from "react-toastify";
 
 function RedirectHandler(): JSX.Element {
     const router = useRouter()
@@ -17,7 +16,6 @@ function RedirectHandler(): JSX.Element {
         requestJson('GET', Const.CAM_URL + '/oauth2/discord/login').then(data => {
             const response = data as LoginResponse
 
-            toast("Logged in successfully")
             router.push(response.link)
         })
     }, []);
