@@ -348,7 +348,7 @@ function AnnouncementCommandTable(): JSX.Element {
              access='privileged'
         />
         <Row command='publish'
-             description='Toggles if the announcement should be cross-posted'
+             description='Toggles if the announcement should be pushed to channel subscribers'
              usage='/announcement publish [true/false]'
              access='privileged, patron-only'
         />
@@ -438,7 +438,7 @@ function SettingsCommandTable(): JSX.Element {
              access='elevated'
         />
         <Row command='branding'
-             description='Toggles between using discal branding or the guild&apos; name/image where possible'
+             description='Toggles between using discal branding or the guild&apos;s name/image where possible'
              usage='settings branding [true/false]'
              access='elevated, patron-only'
         />
