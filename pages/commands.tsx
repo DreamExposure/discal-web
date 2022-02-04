@@ -34,7 +34,7 @@ function Row(props: RowProps): JSX.Element {
         <td className='p-3 block md:table-cell text-left md:text-center text-discord-blurple'>{props.command}</td>
         <td className='p-3 block md:table-cell text-left text-white'>{props.description}</td>
         <td className='p-3 block md:table-cell text-left text-discord-greyple opacity-75'>{props.usage}</td>
-        <td className='p-3 hidden md:table-cell text-left text-discal-red'>{props.access}</td>
+        <td className='p-3 block md:table-cell text-left text-discal-red'>{props.access}</td>
     </tr>
 }
 /*
