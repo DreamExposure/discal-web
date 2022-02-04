@@ -161,7 +161,7 @@ function LinksBlock() {
 }
 
 export default function Footer() {
-    return <footer className="bg-discal-not-black border-t border-discal-blue" aria-labelledby="footer-heading">
+    return <footer className="bg-discal-not-black border-t border-discal-blue mt-10" aria-labelledby="footer-heading">
         <h2 id="footer-heading" className="sr-only">
             Footer
         </h2>
