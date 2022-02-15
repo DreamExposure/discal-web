@@ -2,17 +2,17 @@ import {useRouter} from "next/router";
 import React, {useEffect} from "react";
 import {NextPage} from "next";
 import {Const} from "../lib/utils";
-import {useRequestJson} from "../lib/client";
+import {useRequestJson, useRequestText} from "../lib/client";
 import Container from "../components/container";
 import Loader from "../components/loader";
 
 function RedirectHandler(): JSX.Element {
     const router = useRouter()
-    const requestJson = useRequestJson()
+    const requestText = useRequestText()
 
     useEffect(() => {
         // get link and push the client to it
-        requestJson('GET', Const.API_URL + '/v3/invite').then(data => {
+        requestText('GET', Const.API_URL + '/v3/invite').then(data => {
             router.push(data)
         })
     }, []);
