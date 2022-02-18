@@ -19,6 +19,7 @@ module.exports = {
                 'discal-red': '#EF0813',
                 'discal-dark-red': '#9E050D',
                 'discal-green': '#046244',
+                'discal-light-green': '#08B67F',
                 'discal-light-grey': '#CCCCCC',
                 'discal-dark-grey': '#3C3D41',
                 'discal-not-black': '#242428',
