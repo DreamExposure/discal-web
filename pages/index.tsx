@@ -32,7 +32,7 @@ function Hero(): JSX.Element {
             return <div className="rounded-md shadow">
                 <Link href='/invite' passHref>
                     <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base
-                    font-medium rounded-md text-white bg-discord-blurple hover:bg-discal-light-green
+                    font-medium rounded-md text-white bg-discord-blurple hover:bg-discal-green
                     hover:text-discord-not-quite-black md:py-4 md:text-lg md:px-10">
                         Get Started
                     </a>
@@ -86,7 +86,7 @@ function Example(): JSX.Element {
         <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
             <div>
                 <h2 className="text-base font-semibold tracking-wider text-discord-blurple uppercase">Seamless</h2>
-                <p className="mt-2 text-3xl font-extrabold text-discal-light-green tracking-tight sm:text-4xl">
+                <p className="mt-2 text-3xl font-extrabold text-discal-green tracking-tight sm:text-4xl">
                     No browser? No problem.
                 </p>
                 <p className="mt-5 max-w-prose mx-auto text-xl text-discal-light-grey">
@@ -140,7 +140,7 @@ function FeatureList(): JSX.Element {
             <h2 className="text-base font-semibold tracking-wider text-discal-blue uppercase">
                 Scheduler Easier
             </h2>
-            <p className="mt-2 text-3xl font-extrabold text-discal-light-green tracking-tight sm:text-4xl">
+            <p className="mt-2 text-3xl font-extrabold text-discal-green tracking-tight sm:text-4xl">
                 Everything you need to organize your community
             </p>
             <p className="mt-5 max-w-prose mx-auto text-xl text-discal-light-grey">
@@ -198,7 +198,7 @@ function CTA(): JSX.Element {
     function InviteButton(): JSX.Element {
         return <Link href='/invite' passHref>
             <a className="mt-8 bg-white border border-transparent rounded-md shadow px-5 py-3 inline-flex items-center
-            text-base font-medium text-discal-blue hover:bg-discal-light-green hover:text-white">
+            text-base font-medium text-discal-blue hover:bg-discal-green hover:text-white">
                 Invite DisCal
             </a>
         </Link>
