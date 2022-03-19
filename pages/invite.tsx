@@ -2,7 +2,7 @@ import {useRouter} from "next/router";
 import React, {useEffect} from "react";
 import {NextPage} from "next";
 import {Const} from "../lib/utils";
-import {useRequestJson, useRequestText} from "../lib/client";
+import {useRequestText} from "../lib/client";
 import Container from "../components/container";
 import Loader from "../components/loader";
 
