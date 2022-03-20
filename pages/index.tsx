@@ -44,7 +44,7 @@ function Hero(): JSX.Element {
             return <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
                 <Link href='/premium' passHref>
                     <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base
-                    font-medium rounded-md text-discord-blurple bg-opacoty-25 bg-white hover:bg-opacity-50 duration-200 md:py-4 md:text-lg
+                    font-medium rounded-md text-discord-blurple bg-opacity-25 bg-white hover:bg-opacity-50 duration-200 md:py-4 md:text-lg
                     md:px-10">
                         Premium
                     </a>
