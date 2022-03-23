@@ -3,9 +3,9 @@ import React, {useEffect} from "react";
 import {NextPage} from "next";
 import {Const} from "../lib/utils";
 import {useRequestJson} from "../lib/client";
-import LoginResponse from "../lib/json/login-response";
 import Container from "../components/container";
 import Loader from "../components/loader";
+import type {LoginResponse} from "../lib/types";
 
 function RedirectHandler(): JSX.Element {
     const router = useRouter()

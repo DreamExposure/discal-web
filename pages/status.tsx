@@ -4,21 +4,26 @@ import {Const} from "../lib/utils";
 import {useRequestJson}  from "../lib/client";
 import Container from "../components/container";
 import Loader from "../components/loader";
+import {toast} from "react-toastify";
+import {useRouter} from "next/router";
+import type {NetworkStatus} from "../lib/types";
 
 function Handler(): JSX.Element {
+    const router = useRouter()
     const requestJson = useRequestJson()
 
-    const [data, setData] = useState(null)
+    const [data, setData] = useState<NetworkStatus>()
     const [isLoading, setLoading] = useState(false)
 
     useEffect(() => {
         setLoading(true)
         // get link and push the client to it
         requestJson('GET', Const.API_URL + '/v3/status').then(data => {
-            // TODO: deserialize and set data
-
+            setData(JSON.parse(data))
         }).catch(error => {
-            // TODO: Handle error, redirect to error page??
+            console.error("Status get error", error)
+            toast.error("Failed to get status")
+            router.push('/500')
         }).finally(() => {
             // Always set loading state here rather than in the above handlers just for sanity
             setLoading(false)
