@@ -19,7 +19,7 @@ function Handler(): JSX.Element {
         setLoading(true)
         // get link and push the client to it
         requestJson('GET', Const.API_URL + '/v3/status').then(data => {
-            setData(JSON.parse(data))
+            setData(data)
         }).catch(error => {
             console.error("Status get error", error)
             toast.error("Failed to get status")
