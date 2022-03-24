@@ -42,7 +42,7 @@ export class Const {
                 case 'www.discalbot.com':
                     return 'https://api.discalbot.com'
                 case 'localhost':
-                    return '/api/'
+                    return '/api'
                 default:
                     return 'invalid-hostname'
             }
