@@ -1,3 +1,14 @@
+/////////* Props */////////
+export type Props = {
+    children?: JSX.Element | JSX.Element[] | string
+    extraClass?: string
+    caption?: string
+}
+
+export type NetworkProps = {
+    data: NetworkStatus,
+}
+
 /////////* Network Objects */////////
 export type NetworkStatus = {
     total_calendars: number;
