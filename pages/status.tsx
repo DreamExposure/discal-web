@@ -7,6 +7,7 @@ import Loader from "../components/loader";
 import {toast} from "react-toastify";
 import type {NetworkProps, NetworkStatus} from "../lib/types";
 import Custom500 from "./500";
+import {stat} from "fs";
 
 function Handler(): JSX.Element {
     const requestJson = useRequestJson()
@@ -40,11 +41,21 @@ function GeneralStats(props: NetworkProps): JSX.Element {
     const stats = [
         {name: 'Total Guilds', stat: props.data.total_guilds},
         {name: 'Total Calendars', stat: props.data.total_calendars},
-        {name: 'Total Announcements', stat: props.data.total_announcements},
+        {name: 'Announcements', stat: props.data.total_announcements},
         {name: 'Connected Shards', stat: props.data.bot_status.length + '/' + props.data.expected_shard_count},
-        {name: 'Memory Usage', stat: '24.57%'},
+        {name: 'Memory Usage', stat: totalMemUsageInGb(props.data) + "GB"},
     ]
 
+    function totalMemUsageInGb(data: NetworkStatus) {
+        let totalMem = 0.0
+
+        totalMem += data.api_status.memory
+        totalMem += data.cam_status?.memory ?? 0.0
+
+        data.bot_status.forEach(value => totalMem += value.instance.memory)
+
+        return (((totalMem / 1024) * 100) / 100).toFixed(2)
+    }
 
     return <div>
         <h3 className="text-xl leading-6 font-medium text-discal-blue">Network Statistics</h3>
