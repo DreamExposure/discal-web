@@ -10,8 +10,6 @@ import Custom500 from "./500";
 import {LockClosedIcon, ServerIcon} from "@heroicons/react/solid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRobot } from "@fortawesome/free-solid-svg-icons"
-import {func} from "prop-types";
-import {list} from "postcss";
 
 
 function Handler(): JSX.Element {
@@ -32,7 +30,7 @@ function Handler(): JSX.Element {
             // Always set loading state here rather than in the above handlers just for sanity
             setLoading(false)
         })
-    }, []);
+    }, [requestJson]);
 
     if (isLoading) return <Loader/>
     if (!data) return <Custom500/>
@@ -195,11 +193,11 @@ function minutesAgo(past: Date): string {
     return seconds > 60 ? (seconds / 60).toFixed(1) + 'm ago' : seconds.toFixed(0) + 's ago';
 }
 
-const Invite: NextPage = () => {
+const Status: NextPage = () => {
 
     return <Container>
         <Handler/>
     </Container>
 }
 
-export default Invite
+export default Status
