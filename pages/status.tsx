@@ -8,9 +8,8 @@ import {toast} from "react-toastify";
 import type {NetworkProps, NetworkStatus} from "../lib/types";
 import Custom500 from "./500";
 import {LockClosedIcon, ServerIcon} from "@heroicons/react/solid";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRobot } from "@fortawesome/free-solid-svg-icons"
-
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faRobot} from "@fortawesome/free-solid-svg-icons"
 
 function Handler(): JSX.Element {
     const requestJson = useRequestJson()
@@ -41,6 +40,7 @@ function Handler(): JSX.Element {
         <ShardStats data={data}/>
     </div>
 }
+
 function GeneralStats(props: NetworkProps): JSX.Element {
     const stats = [
         {name: 'Guilds', stat: props.data.total_guilds},
