@@ -7,7 +7,12 @@ import Loader from "../components/loader";
 import {toast} from "react-toastify";
 import type {NetworkProps, NetworkStatus} from "../lib/types";
 import Custom500 from "./500";
-import {ServerIcon} from "@heroicons/react/solid";
+import {LockClosedIcon, ServerIcon} from "@heroicons/react/solid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRobot } from "@fortawesome/free-solid-svg-icons"
+import {func} from "prop-types";
+import {list} from "postcss";
+
 
 function Handler(): JSX.Element {
     const requestJson = useRequestJson()
@@ -35,6 +40,7 @@ function Handler(): JSX.Element {
     return <div>
         <GeneralStats data={data}/>
         <ServiceStats data={data}/>
+        <ShardStats data={data}/>
     </div>
 }
 function GeneralStats(props: NetworkProps): JSX.Element {
@@ -59,7 +65,7 @@ function GeneralStats(props: NetworkProps): JSX.Element {
 
     return <div>
         <h3 className="text-2xl leading-6 font-medium text-discal-blue">Network Statistics</h3>
-        <dl className="mt-5 grid grid-cols-1 rounded-lg bg-discal-light-grey overflow-hidden shadow divide-y
+        <dl className="mt-5 grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y
         divide-discal-dark-grey md:grid-cols-5 md:divide-y-0 md:divide-x">
             {stats.map((item) => (
                 <div key={item.name} className="px-4 py-5 sm:p-6">
@@ -79,6 +85,7 @@ function ServiceStats(props: NetworkProps): JSX.Element {
     const services = [
         {
             name: 'API',
+            icon: ServerIcon,
             version: props.data.api_status.version,
             d4jVersion: props.data.api_status.d4j_version,
             memory: mbToGb(props.data.api_status.memory) + 'GB',
@@ -87,6 +94,7 @@ function ServiceStats(props: NetworkProps): JSX.Element {
         },
         {
             name: 'Authentication',
+            icon: LockClosedIcon,
             version: props.data.cam_status.version,
             d4jVersion: props.data.cam_status.d4j_version,
             memory: mbToGb(props.data.cam_status.memory) + 'GB',
@@ -95,12 +103,6 @@ function ServiceStats(props: NetworkProps): JSX.Element {
         }
         // More services one day, hopefully...
     ]
-
-    function minutesAgo(past: Date): string {
-        let seconds = ((new Date().getTime() - past.getTime()) / 1000)
-
-        return seconds > 60 ? (seconds / 60).toFixed(1) + 'm ago' : seconds.toFixed(0) + 's ago';
-    }
 
     function ServiceList(): JSX.Element {
         return <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -120,7 +122,7 @@ function ServiceStats(props: NetworkProps): JSX.Element {
                             <p className="mt-1 text-gray-500 text-sm truncate">Uptime: {srv.uptime}</p>
                             <p className="mt-1 text-gray-500 text-sm truncate">Last Heartbeat: {srv.lastHeartbeat}</p>
                         </div>
-                        <ServerIcon className="w-10 h-10 rounded-full flex-shrink-0"/>
+                        <srv.icon className="w-10 h-10 rounded-full flex-shrink-0"/>
                     </div>
                 </li>
             ))}
@@ -128,13 +130,69 @@ function ServiceStats(props: NetworkProps): JSX.Element {
     }
 
     return <div className='mt-10'>
-        <h3 className="text-2xl leading-6 font-medium text-discal-blue mb-5">Service Statistics</h3>
+        <h3 className="text-2xl leading-6 font-medium text-discal-blue mb-5">Service Status</h3>
         <ServiceList/>
+    </div>
+}
+
+function ShardStats(props: NetworkProps): JSX.Element {
+    function listAll(): any[] {
+
+        let array: any[] = [];
+
+        props.data.bot_status.forEach(bot => {
+            array.push({
+                name: 'Shard ' + bot.shard_index,
+                version: bot.instance.version,
+                d4jVersion: bot.instance.d4j_version,
+                memory: mbToGb(bot.instance.memory) + 'GB',
+                uptime: bot.instance.human_uptime,
+                lastHeartbeat: minutesAgo(new Date(bot.instance.last_heartbeat))
+            })
+        })
+
+        return array
+    }
+
+    function ShardList(): JSX.Element {
+        return <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {listAll().map((srv) => (
+                <li key={srv.name} className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+                    <div className="w-full flex items-center justify-between p-6 space-x-6">
+                        <div className="flex-1 truncate">
+                            <div className="flex items-center space-x-3">
+                                <h3 className="text-gray-900 text-sm font-medium truncate">{srv.name}</h3>
+                                <span className="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs
+                                font-medium bg-green-100 rounded-full">
+                                    {srv.version}
+                                </span>
+                            </div>
+                            <p className="mt-1 text-gray-500 text-sm truncate">Discord4J Version: {srv.d4jVersion}</p>
+                            <p className="mt-1 text-gray-500 text-sm truncate">RAM Usage: {srv.memory}</p>
+                            <p className="mt-1 text-gray-500 text-sm truncate">Uptime: {srv.uptime}</p>
+                            <p className="mt-1 text-gray-500 text-sm truncate">Last Heartbeat: {srv.lastHeartbeat}</p>
+                        </div>
+                        <FontAwesomeIcon icon={faRobot} className="w-10 h-10 rounded-full flex-shrink-0"/>
+                    </div>
+                </li>
+            ))}
+        </ul>
+    }
+
+    return <div className='mt-10'>
+        <h3 className="text-2xl leading-6 font-medium text-discal-blue mb-5">Bot Client Status</h3>
+        <ShardList/>
     </div>
 }
 
 function mbToGb(value: number) {
     return (((value / 1024) * 100) / 100).toFixed(2)
+}
+
+function minutesAgo(past: Date): string {
+    let seconds = ((new Date().getTime() - past.getTime()) / 1000)
+
+    return seconds > 60 ? (seconds / 60).toFixed(1) + 'm ago' : seconds.toFixed(0) + 's ago';
 }
 
 const Invite: NextPage = () => {
