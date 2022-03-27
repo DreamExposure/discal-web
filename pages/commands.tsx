@@ -1,7 +1,7 @@
 import type {NextPage} from 'next'
 import React from 'react';
 import Container from "../components/container";
-import {Props} from "../lib/utils";
+import type {Props} from "../lib/types";
 
 // Table building components
 type RowProps = {
