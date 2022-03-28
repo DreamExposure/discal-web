@@ -62,7 +62,7 @@ function GeneralStats(props: NetworkProps): JSX.Element {
     }
 
     return <div>
-        <h3 className="text-2xl leading-6 font-medium text-discal-blue">Network Statistics</h3>
+        <h3 className="text-2xl leading-6 font-medium text-discord-blurple">Network Statistics</h3>
         <dl className="mt-5 grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y
         divide-discal-dark-grey md:grid-cols-5 md:divide-y-0 md:divide-x">
             {stats.map((item) => (
@@ -105,22 +105,30 @@ function ServiceStats(props: NetworkProps): JSX.Element {
     function ServiceList(): JSX.Element {
         return <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {services.map((srv) => (
-                <li key={srv.name} className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+                <li key={srv.name} className="col-span-1 bg-white rounded-lg shadow divide-y">
                     <div className="w-full flex items-center justify-between p-6 space-x-6">
                         <div className="flex-1 truncate">
                             <div className="flex items-center space-x-3">
-                                <h3 className="text-gray-900 text-sm font-medium truncate">{srv.name}</h3>
+                                <h3 className="text-discal-not-black text-sm font-semibold truncate">{srv.name}</h3>
                                 <span className="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs
-                                font-medium bg-green-100 rounded-full">
+                                font-medium bg-green-100 rounded-full" aria-label='version'>
                                     {srv.version}
                                 </span>
                             </div>
-                            <p className="mt-1 text-gray-500 text-sm truncate">Discord4J Version: {srv.d4jVersion}</p>
-                            <p className="mt-1 text-gray-500 text-sm truncate">RAM Usage: {srv.memory}</p>
-                            <p className="mt-1 text-gray-500 text-sm truncate">Uptime: {srv.uptime}</p>
-                            <p className="mt-1 text-gray-500 text-sm truncate">Last Heartbeat: {srv.lastHeartbeat}</p>
+                            <p className="mt-1 text-discal-not-black text-sm truncate">
+                                Discord4J Version: {srv.d4jVersion}
+                            </p>
+                            <p className="mt-1 text-discal-not-black text-sm truncate">
+                                RAM Usage: {srv.memory}
+                            </p>
+                            <p className="mt-1 text-discal-not-black text-sm truncate">
+                                Uptime: {srv.uptime}
+                            </p>
+                            <p className="mt-1 text-discal-not-black text-sm truncate">
+                                Last Heartbeat: {srv.lastHeartbeat}
+                            </p>
                         </div>
-                        <srv.icon className="w-10 h-10 rounded-full flex-shrink-0"/>
+                        <srv.icon className="w-10 h-10 rounded-full flex-shrink-0 text-discal-dark-blue"/>
                     </div>
                 </li>
             ))}
@@ -128,14 +136,13 @@ function ServiceStats(props: NetworkProps): JSX.Element {
     }
 
     return <div className='mt-10'>
-        <h3 className="text-2xl leading-6 font-medium text-discal-blue mb-5">Service Status</h3>
+        <h3 className="text-2xl leading-6 font-medium text-discord-blurple mb-5">Service Status</h3>
         <ServiceList/>
     </div>
 }
 
 function ShardStats(props: NetworkProps): JSX.Element {
     function listAll(): any[] {
-
         let array: any[] = [];
 
         props.data.bot_status.forEach(bot => {
@@ -143,6 +150,7 @@ function ShardStats(props: NetworkProps): JSX.Element {
                 name: 'Shard ' + bot.shard_index,
                 version: bot.instance.version,
                 d4jVersion: bot.instance.d4j_version,
+                guilds: bot.guilds,
                 memory: mbToGb(bot.instance.memory) + 'GB',
                 uptime: bot.instance.human_uptime,
                 lastHeartbeat: minutesAgo(new Date(bot.instance.last_heartbeat))
@@ -155,22 +163,34 @@ function ShardStats(props: NetworkProps): JSX.Element {
     function ShardList(): JSX.Element {
         return <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {listAll().map((srv) => (
-                <li key={srv.name} className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+                <li key={srv.name} className="col-span-1 bg-white rounded-lg shadow divide-y">
                     <div className="w-full flex items-center justify-between p-6 space-x-6">
                         <div className="flex-1 truncate">
                             <div className="flex items-center space-x-3">
-                                <h3 className="text-gray-900 text-sm font-medium truncate">{srv.name}</h3>
+                                <h3 className="text-discal-not-black text-sm font-semibold truncate">{srv.name}</h3>
                                 <span className="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs
-                                font-medium bg-green-100 rounded-full">
+                                font-medium bg-green-100 rounded-full" aria-label='version'>
                                     {srv.version}
                                 </span>
                             </div>
-                            <p className="mt-1 text-gray-500 text-sm truncate">Discord4J Version: {srv.d4jVersion}</p>
-                            <p className="mt-1 text-gray-500 text-sm truncate">RAM Usage: {srv.memory}</p>
-                            <p className="mt-1 text-gray-500 text-sm truncate">Uptime: {srv.uptime}</p>
-                            <p className="mt-1 text-gray-500 text-sm truncate">Last Heartbeat: {srv.lastHeartbeat}</p>
+                            <p className="mt-1 text-discal-not-black text-sm truncate">
+                                Guilds: {srv.guilds}
+                            </p>
+                            <p className="mt-1 text-discal-not-black text-sm truncate">
+                                Discord4J Version: {srv.d4jVersion}
+                            </p>
+                            <p className="mt-1 text-discal-not-black text-sm truncate">
+                                RAM Usage: {srv.memory}
+                            </p>
+                            <p className="mt-1 text-discal-not-black text-sm truncate">
+                                Uptime: {srv.uptime}
+                            </p>
+                            <p className="mt-1 text-discal-not-black text-sm truncate">
+                                Last Heartbeat: {srv.lastHeartbeat}
+                            </p>
                         </div>
-                        <FontAwesomeIcon icon={faRobot} className="w-10 h-10 rounded-full flex-shrink-0"/>
+                        <FontAwesomeIcon icon={faRobot}
+                                         className="w-10 h-10 rounded-full flex-shrink-0 text-discal-dark-blue"/>
                     </div>
                 </li>
             ))}
@@ -178,7 +198,7 @@ function ShardStats(props: NetworkProps): JSX.Element {
     }
 
     return <div className='mt-10'>
-        <h3 className="text-2xl leading-6 font-medium text-discal-blue mb-5">Bot Client Status</h3>
+        <h3 className="text-2xl leading-6 font-medium text-discord-blurple mb-5">Bot Client Status</h3>
         <ShardList/>
     </div>
 }
