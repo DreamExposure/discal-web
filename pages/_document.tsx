@@ -14,7 +14,11 @@ class MyDocument extends Document {
                     <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
 
                     <meta property='og:title' content='DisCal - The Ultimate Calendar Bot'/>
-                    <meta property='og:description' content=''/>
+                    <meta property='og:description' content='A calendar bot made for communities,
+                        DisCal integrates directly with calendar services to bring you superior support and features.
+                        Custom calendars, events, automated reminders and more,
+                        ready for you, and ready for your community.'
+                    />
                     <meta property='og:site_name' content='DisCal'/>
                     <meta property='og:image' content='/logos/dark/opaque/logo-type.png'/>
                     <meta name='theme-color' content='#5566C2'/>
