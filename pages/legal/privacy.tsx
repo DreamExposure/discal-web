@@ -1,5 +1,7 @@
+import Container from "../../components/container";
+
 export default function PrivacyPolicy() {
-    return <>
+    return <Container>
         <h1 className='text-3xl font-semibold text-discal-blue uppercase tracking-wide text-center'>
             Privacy Policy
         </h1>
@@ -32,5 +34,5 @@ export default function PrivacyPolicy() {
         <p className='text-discal-light-grey pt-20 pb-10 tracking-tight'>
             Last Updated: August 29, 2018.
         </p>
-    </>
+    </Container>
 }

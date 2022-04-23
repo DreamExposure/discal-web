@@ -1,5 +1,7 @@
+import Container from "../../components/container";
+
 export default function TermsOfService() {
-    return <>
+    return <Container>
         <h1 className='text-3xl font-semibold text-discal-blue uppercase tracking-wide text-center'>
             Terms of Service
         </h1>
@@ -76,6 +78,6 @@ export default function TermsOfService() {
         <p className='text-discal-light-grey pt-20 pb-10 tracking-tight'>
             Last edited: August 29, 2018.
         </p>
-    </>
+    </Container>
 }
 

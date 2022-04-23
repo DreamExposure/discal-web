@@ -1,5 +1,6 @@
 import React from 'react';
 import type {Props} from "../lib/types";
+import Container from "../components/container";
 
 // Table building components
 type RowProps = {
@@ -475,60 +476,58 @@ function OtherCommandsTable(): JSX.Element {
 }
 
 export default function Commands() {
-    return (
-        <>
-            <h1 className="text-4xl font-semibold text-discal-blue uppercase tracking-wide text-center my-5">
-                Commands
-            </h1>
-            <Permissions/>
-            <hr className='mt-10 border-discal-blue'/>
+    return <Container>
+        <h1 className="text-4xl font-semibold text-discal-blue uppercase tracking-wide text-center my-5">
+            Commands
+        </h1>
+        <Permissions/>
+        <hr className='mt-10 border-discal-blue'/>
 
-            <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
-                /calendar commands
-            </h2>
-            <CalendarCommandTable/>
-            <hr className='mt-10 border-discal-blue'/>
+        <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
+            /calendar commands
+        </h2>
+        <CalendarCommandTable/>
+        <hr className='mt-10 border-discal-blue'/>
 
-            <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
-                /displaycal commands
-            </h2>
-            <DisplayCalendarCommandTable/>
-            <hr className='mt-10 border-discal-blue'/>
+        <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
+            /displaycal commands
+        </h2>
+        <DisplayCalendarCommandTable/>
+        <hr className='mt-10 border-discal-blue'/>
 
-            <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
-                /event commands
-            </h2>
-            <EventCommandTable/>
-            <hr className='mt-10 border-discal-blue'/>
+        <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
+            /event commands
+        </h2>
+        <EventCommandTable/>
+        <hr className='mt-10 border-discal-blue'/>
 
-            <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
-                /events commands
-            </h2>
-            <EventsCommandTable/>
-            <hr className='mt-10 border-discal-blue'/>
+        <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
+            /events commands
+        </h2>
+        <EventsCommandTable/>
+        <hr className='mt-10 border-discal-blue'/>
 
-            <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
-                /rsvp commands
-            </h2>
-            <RsvpCommandTable/>
-            <hr className='mt-10 border-discal-blue'/>
+        <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
+            /rsvp commands
+        </h2>
+        <RsvpCommandTable/>
+        <hr className='mt-10 border-discal-blue'/>
 
-            <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
-                /announcement commands
-            </h2>
-            <AnnouncementCommandTable/>
-            <hr className='mt-10 border-discal-blue'/>
+        <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
+            /announcement commands
+        </h2>
+        <AnnouncementCommandTable/>
+        <hr className='mt-10 border-discal-blue'/>
 
-            <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
-                /settings commands
-            </h2>
-            <SettingsCommandTable/>
-            <hr className='mt-10 border-discal-blue'/>
+        <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
+            /settings commands
+        </h2>
+        <SettingsCommandTable/>
+        <hr className='mt-10 border-discal-blue'/>
 
-            <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
-                All other commands
-            </h2>
-            <OtherCommandsTable/>
-        </>
-    )
+        <h2 className='text-2xl font-semibold text-discal-blue uppercase tracking-wide text-left my-5'>
+            All other commands
+        </h2>
+        <OtherCommandsTable/>
+    </Container>
 }

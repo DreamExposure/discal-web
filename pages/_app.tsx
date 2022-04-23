@@ -7,7 +7,6 @@ import {useEffect, useState} from "react";
 import {loadFromLocalStorage, saveToLocalStorage} from "../lib/utils";
 import {ToastContainer} from "react-toastify";
 import {injectStyle} from "react-toastify/dist/inject-style";
-import Container from "../components/container";
 import {Session} from '../lib/types';
 
 export default function MyApp({Component, pageProps}: AppProps) {
@@ -32,9 +31,7 @@ export default function MyApp({Component, pageProps}: AppProps) {
     return <SessionContext.Provider value={value}>
         <Navbar/>
         <main className="min-h-screen">
-            <Container>
-                <Component {...pageProps}/>
-            </Container>
+            <Component {...pageProps}/>
             <ToastContainer
                 position='bottom-right'
                 autoClose={5000}

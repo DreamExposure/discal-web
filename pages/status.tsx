@@ -7,6 +7,7 @@ import {LockClosedIcon, ServerIcon} from "@heroicons/react/solid";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRobot} from "@fortawesome/free-solid-svg-icons"
 import {useRequestStatus} from "../lib/service";
+import Container from "../components/container";
 
 export default function StatusPage() {
     const requestStatus = useRequestStatus();
@@ -31,11 +32,11 @@ export default function StatusPage() {
     if (isLoading) return <Loader/>
     if (!data) return <Custom500/>
 
-    return <div>
+    return <Container>
         <GeneralStats data={data}/>
         <ServiceStats data={data}/>
         <ShardStats data={data}/>
-    </div>
+    </Container>
 }
 
 function GeneralStats(props: NetworkProps): JSX.Element {
