@@ -67,7 +67,7 @@ export default function Navbar() {
                         <a
                             className={classNames(
                                 currentPage(router, item.href) ? 'bg-discal-dark-blue text-white' :
-                                    'text-discal-light-grey hover:bg-discal-dark-grey hover:text-white',
+                                    'text-white hover:bg-discal-dark-grey hover:text-white',
                                 'px-3 py-2 rounded-md text-sm font-medium'
                             )}
                             aria-current={currentPage(router, item.href) ? 'page' : undefined}
@@ -149,7 +149,7 @@ export default function Navbar() {
                             as="a"
                             className={classNames(
                                 currentPage(router, item.href) ? 'bg-discal-dark-blue text-white' :
-                                    'text-discal-light-grey hover:bg-discal-dark-grey hover:text-white',
+                                    'text-white hover:bg-discal-dark-grey hover:text-white',
                                 'block px-3 py-2 rounded-md text-base font-medium'
                             )}
                             aria-current={currentPage(router, item.href) ? 'page' : undefined}

@@ -32,7 +32,7 @@ function Hero(): JSX.Element {
             return <div className="rounded-md shadow">
                 <Link href='/invite' passHref>
                     <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base
-                    font-medium rounded-md text-white bg-discord-blurple hover:bg-discal-green
+                    font-medium rounded-md text-white bg-discal-blue hover:bg-discal-green
                     hover:text-discord-not-quite-black md:py-4 md:text-lg md:px-10">
                         Get Started
                     </a>
@@ -44,8 +44,8 @@ function Hero(): JSX.Element {
             return <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
                 <Link href='/premium' passHref>
                     <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base
-                    font-medium rounded-md text-discord-blurple bg-white hover:bg-discal-light-grey md:py-4 md:text-lg
-                    md:px-10">
+                    font-medium rounded-md text-discal-blue bg-white hover:bg-discal-green
+                    hover:text-discord-not-quite-black md:py-4 md:text-lg md:px-10">
                         Premium
                     </a>
                 </Link>
