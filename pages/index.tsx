@@ -7,6 +7,7 @@ import {
     UserAddIcon,
     ViewListIcon,
 } from '@heroicons/react/outline'
+import Head from "next/head";
 
 function Hero(): JSX.Element {
     function Heading(): JSX.Element {
@@ -232,6 +233,9 @@ function CTA(): JSX.Element {
 
 export default function HomePage() {
     return <>
+        <Head>
+            <title>DisCal - The Ultimate Calendar Bot</title>
+        </Head>
         <Hero/>
         <Example/>
         <FeatureList/>

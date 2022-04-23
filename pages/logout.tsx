@@ -5,6 +5,7 @@ import SessionContext from "../lib/context";
 import {toast} from "react-toastify";
 import {useRequestLogout} from "../lib/service";
 import {Session} from "../lib/types";
+import Head from "next/head";
 
 export default function LogoutPage() {
     const router = useRouter()
@@ -21,5 +22,10 @@ export default function LogoutPage() {
         })
     }, [router, requestLogout, setSession])
 
-    return <Loader/>
+    return <>
+        <Head>
+            <title>Logout - DisCal Bot</title>
+        </Head>
+        <Loader/>
+    </>
 }

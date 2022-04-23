@@ -5,6 +5,7 @@ import {loadFromLocalStorage, removeFromLocalStorage} from "../../lib/utils";
 import Loader from "../../components/loader";
 import {toast} from "react-toastify";
 import {useRequestDiscordCode} from "../../lib/service";
+import Head from "next/head";
 
 export default function DiscordCallbackPage() {
     const router = useRouter()
@@ -42,5 +43,10 @@ export default function DiscordCallbackPage() {
         }
     }, [router, requestCode, setSession])
 
-    return <Loader/>
+    return <>
+        <Head>
+            <title>Discord Login- DisCal Bot</title>
+        </Head>
+        <Loader/>
+    </>
 }

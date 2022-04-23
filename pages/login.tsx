@@ -2,6 +2,7 @@ import {useRouter} from "next/router";
 import React, {useEffect} from "react";
 import Loader from "../components/loader";
 import {useRequestLogin} from "../lib/service";
+import Head from "next/head";
 
 export default function LoginPage() {
     const router = useRouter()
@@ -14,5 +15,10 @@ export default function LoginPage() {
         })
     }, [requestLogin, router]);
 
-    return <Loader/>
+    return <>
+        <Head>
+            <title>Login - DisCal Bot</title>
+        </Head>
+        <Loader/>
+    </>
 }

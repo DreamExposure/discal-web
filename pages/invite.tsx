@@ -2,6 +2,7 @@ import {useRouter} from "next/router";
 import React, {useEffect} from "react";
 import Loader from "../components/loader";
 import {useRequestInviteLink} from "../lib/service";
+import Head from "next/head";
 
 export default function InvitePage() {
     const router = useRouter()
@@ -14,5 +15,10 @@ export default function InvitePage() {
         })
     }, [router, requestInviteLink]);
 
-    return <Loader/>
+    return <>
+        <Head>
+            <title>Invite - DisCal Bot</title>
+        </Head>
+        <Loader/>
+    </>
 }
