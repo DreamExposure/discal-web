@@ -1,8 +1,5 @@
-import {NextPage} from "next";
-import Container from "../../components/container";
-
-const TermsOfService: NextPage = () => {
-    return <Container>
+export default function TermsOfService() {
+    return <>
         <h1 className='text-3xl font-semibold text-discal-blue uppercase tracking-wide text-center'>
             Terms of Service
         </h1>
@@ -79,7 +76,6 @@ const TermsOfService: NextPage = () => {
         <p className='text-discal-light-grey pt-20 pb-10 tracking-tight'>
             Last edited: August 29, 2018.
         </p>
-    </Container>
+    </>
 }
 
-export default TermsOfService

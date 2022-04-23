@@ -1,37 +1,25 @@
 import {useRouter} from "next/router";
 import React, {useContext, useEffect} from "react";
-import {useRequestEmpty} from "../lib/client";
-import {Const} from "../lib/utils";
 import Loader from "../components/loader";
-import {NextPage} from "next";
-import Container from "../components/container";
 import SessionContext from "../lib/context";
-import Session from "../lib/object/session";
 import {toast} from "react-toastify";
+import {useRequestLogout} from "../lib/service";
+import {Session} from "../lib/types";
 
-function RedirectHandler(): JSX.Element {
+export default function LogoutPage() {
     const router = useRouter()
     const {setSession} = useContext(SessionContext);
-    const requestEmpty = useRequestEmpty()
+    const requestLogout = useRequestLogout()
 
     useEffect(() => {
         // clear session
-        requestEmpty('GET', Const.CAM_URL + '/oauth2/discord/logout').finally(() => {
-            setSession(new Session())
+        requestLogout().finally(() => {
+            setSession({} as Session)
 
             toast("Logged out successfully")
             router.back()
         })
-    }, [])
+    }, [router, requestLogout, setSession])
 
     return <Loader/>
 }
-
-const Logout: NextPage = () => {
-
-    return <Container>
-        <RedirectHandler/>
-    </Container>
-}
-
-export default Logout

@@ -12,6 +12,13 @@ class MyDocument extends Document {
                     <link rel="manifest" href="/site.webmanifest"/>
 
                     <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
+
+                    <meta property='og:title' content='DisCal - The Ultimate Calendar Bot'/>
+                    <meta property='og:description' content=''/>
+                    <meta property='og:site_name' content='DisCal'/>
+                    <meta property='og:image' content='/logos/dark/opaque/logo-type.png'/>
+                    <meta name='theme-color' content='#5566C2'/>
+                    <meta name='twitter:card' content='summary_large_image'/>
                 </Head>
                 <body>
                 <Main/>

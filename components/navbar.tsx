@@ -4,8 +4,8 @@ import {MenuIcon, QuestionMarkCircleIcon, XIcon} from '@heroicons/react/outline'
 import Link from 'next/link'
 import {NextRouter, useRouter} from 'next/router'
 import SessionContext from "../lib/context";
-import User from "../lib/object/user";
-import {classNames, StorageUtil} from "../lib/utils";
+import {classNames, saveToLocalStorage} from "../lib/utils";
+import { User } from '../lib/types'
 
 const navigation = [
     {name: 'Commands', href: '/commands'},
@@ -93,7 +93,7 @@ export default function Navbar() {
     function loginButton() {
         return <Link href="/login">
             <a className="bg-discal-dark-blue text-white px-3 py-2 rounded-md text-sm font-medium"
-               onClick={() => StorageUtil.save("previous_page", window.location.href)}>
+               onClick={() => saveToLocalStorage("previous_page", window.location.href)}>
                 Login
             </a>
         </Link>

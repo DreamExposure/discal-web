@@ -35,13 +35,6 @@ export default function ({ children }) {
 
  */
 
-import { NextPage } from "next";
-import Container from "../../../components/container";
-
-const ApiReference: NextPage = () => {
-    return <Container>
-
-    </Container>
+export default function Reference() {
+    return <></>
 }
-
-export default ApiReference;

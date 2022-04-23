@@ -9,6 +9,22 @@ export type NetworkProps = {
     data: NetworkStatus,
 }
 
+/////////* Session Objects */////////
+export type User = {
+    id: string,
+    username: string,
+    discriminator: string,
+    avatar: string,
+    guilds: any[]
+}
+
+export type Session = {
+    token: string | null,
+    expires: Date | null,
+    user: User | null,
+}
+
+
 /////////* Network Objects */////////
 export type NetworkStatus = {
     total_calendars: number;

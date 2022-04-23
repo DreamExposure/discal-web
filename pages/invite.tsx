@@ -1,30 +1,18 @@
 import {useRouter} from "next/router";
 import React, {useEffect} from "react";
-import {NextPage} from "next";
-import {Const} from "../lib/utils";
-import {useRequestText} from "../lib/client";
-import Container from "../components/container";
 import Loader from "../components/loader";
+import {useRequestInviteLink} from "../lib/service";
 
-function RedirectHandler(): JSX.Element {
+export default function InvitePage() {
     const router = useRouter()
-    const requestText = useRequestText()
+    const requestInviteLink = useRequestInviteLink()
 
     useEffect(() => {
         // get link and push the client to it
-        requestText('GET', Const.API_URL + '/v3/invite').then(data => {
+        requestInviteLink().then(data => {
             router.push(data)
         })
-    }, []);
+    }, [router, requestInviteLink]);
 
     return <Loader/>
 }
-
-const Invite: NextPage = () => {
-
-    return <Container>
-        <RedirectHandler/>
-    </Container>
-}
-
-export default Invite

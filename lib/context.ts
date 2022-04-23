@@ -1,8 +1,8 @@
 import React from "react";
-import Session from "./object/session";
+import type { Session } from "./types";
 
 const SessionContext = React.createContext({
-    session: new Session(null, null),
+    session: {} as Session,
     setSession: (session: Session) => {},
 });
 

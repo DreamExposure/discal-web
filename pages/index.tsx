@@ -1,4 +1,3 @@
-import type {NextPage} from 'next'
 import Link from 'next/link'
 import {
     CalendarIcon,
@@ -231,7 +230,7 @@ function CTA(): JSX.Element {
     </div>
 }
 
-const Home: NextPage = () => {
+export default function HomePage() {
     return <>
         <Hero/>
         <Example/>
@@ -239,5 +238,3 @@ const Home: NextPage = () => {
         <CTA/>
     </>
 }
-
-export default Home

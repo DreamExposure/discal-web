@@ -1,6 +1,4 @@
-import type {NextPage} from 'next'
 import React from 'react';
-import Container from "../components/container";
 import type {Props} from "../lib/types";
 
 // Table building components
@@ -37,6 +35,7 @@ function Row(props: RowProps): JSX.Element {
         <td className='p-3 block md:table-cell text-left text-discal-red'>{props.access}</td>
     </tr>
 }
+
 /*
 <Row command=''
      description=''
@@ -475,9 +474,9 @@ function OtherCommandsTable(): JSX.Element {
     </CommandTable>
 }
 
-const Commands: NextPage = () => {
+export default function Commands() {
     return (
-        <Container>
+        <>
             <h1 className="text-4xl font-semibold text-discal-blue uppercase tracking-wide text-center my-5">
                 Commands
             </h1>
@@ -530,9 +529,6 @@ const Commands: NextPage = () => {
                 All other commands
             </h2>
             <OtherCommandsTable/>
-
-        </Container>
+        </>
     )
 }
-
-export default Commands

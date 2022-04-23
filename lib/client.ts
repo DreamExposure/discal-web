@@ -6,7 +6,7 @@ export function useRequestJson() {
     const {session} = useContext(SessionContext);
     const token = session.token
 
-    return useCallback(async (method: string, url: string, data?: Object) => {
+    return useCallback(async (method: string, endpoint: string, data?: Object) => {
         const headers: HeadersInit = {
             "Content-Type": "application/json",
         };
@@ -17,7 +17,7 @@ export function useRequestJson() {
 
         const body: BodyInit | null = data ? JSON.stringify(data) : null;
 
-        const response = await fetch(url, {
+        const response = await fetch(getBaseUrl() + endpoint, {
             method: method,
             headers: headers,
             body: body
@@ -31,7 +31,7 @@ export function useRequestText() {
     const {session} = useContext(SessionContext);
     const token = session.token
 
-    return useCallback(async (method: string, url: string, data?: Object) => {
+    return useCallback(async (method: string, endpoint: string, data?: Object) => {
         const headers: HeadersInit = {
             "Content-Type": "application/json",
         };
@@ -42,7 +42,7 @@ export function useRequestText() {
 
         const body: BodyInit | null = data ? JSON.stringify(data) : null;
 
-        const response = await fetch(url, {
+        const response = await fetch(getBaseUrl() + endpoint, {
             method: method,
             headers: headers,
             body: body
@@ -56,7 +56,7 @@ export function useRequestEmpty() {
     const {session} = useContext(SessionContext);
     const token = session.token
 
-    return useCallback(async (method: string, url: string, data?: Object) => {
+    return useCallback(async (method: string, endpoint: string, data?: Object) => {
         const headers: HeadersInit = {
             "Content-Type": "application/json",
         };
@@ -67,7 +67,7 @@ export function useRequestEmpty() {
 
         const body: BodyInit | null = data ? JSON.stringify(data) : null;
 
-        return await fetch(url, {
+        return await fetch(getBaseUrl() + endpoint, {
             method: method,
             headers: headers,
             body: body
@@ -75,4 +75,19 @@ export function useRequestEmpty() {
     }, [token])
 }
 
+function getBaseUrl(): string {
+    if (typeof window !== 'undefined') {
+        switch (window.location.hostname) {
+            case 'dev.discalbot.com':
+                return 'https://dev-api.discalbot.com'
+            case 'discalbot.com':
+            case 'www.discalbot.com':
+                return 'https://api.discalbot.com'
+            case 'localhost':
+                return '/api'
+            default:
+                return 'invalid-hostname'
+        }
+    } else return 'no-hostname-found'
+}
 

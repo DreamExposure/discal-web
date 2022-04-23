@@ -1,8 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {NextPage} from "next";
-import {Const} from "../lib/utils";
-import {useRequestJson} from "../lib/client";
-import Container from "../components/container";
 import Loader from "../components/loader";
 import {toast} from "react-toastify";
 import type {NetworkProps, NetworkStatus} from "../lib/types";
@@ -10,9 +6,10 @@ import Custom500 from "./500";
 import {LockClosedIcon, ServerIcon} from "@heroicons/react/solid";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRobot} from "@fortawesome/free-solid-svg-icons"
+import {useRequestStatus} from "../lib/service";
 
-function Handler(): JSX.Element {
-    const requestJson = useRequestJson()
+export default function StatusPage() {
+    const requestStatus = useRequestStatus();
 
     const [data, setData] = useState<NetworkStatus>()
     const [isLoading, setLoading] = useState(true)
@@ -20,7 +17,7 @@ function Handler(): JSX.Element {
     useEffect(() => {
         setLoading(true)
         // get link and push the client to it
-        requestJson('GET', Const.API_URL + '/v3/status').then(data => {
+        requestStatus().then(data => {
             setData(data)
         }).catch(error => {
             console.error("Status get error", error)
@@ -29,7 +26,7 @@ function Handler(): JSX.Element {
             // Always set loading state here rather than in the above handlers just for sanity
             setLoading(false)
         })
-    }, [requestJson]);
+    }, [requestStatus]);
 
     if (isLoading) return <Loader/>
     if (!data) return <Custom500/>
@@ -212,12 +209,3 @@ function minutesAgo(past: Date): string {
 
     return seconds > 60 ? (seconds / 60).toFixed(1) + 'm ago' : seconds.toFixed(0) + 's ago';
 }
-
-const Status: NextPage = () => {
-
-    return <Container>
-        <Handler/>
-    </Container>
-}
-
-export default Status
