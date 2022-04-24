@@ -59,3 +59,30 @@ export type LoginResponse = {
     link: string
 }
 
+/////////* Premium Plan stuff */////////
+export type Plan = {
+    title: string,
+    featured: boolean,
+    description: string,
+    priceMonthly: number,
+    priceYearly: number,
+    buyButtonText: string,
+    buyButtonLink: string,
+    mainFeatures: PlanFeature[],
+}
+
+export type PlanFeature = {
+    id: number,
+    value: string,
+}
+
+export type Feature = {
+    title: string,
+    tiers: FeatureTier[],
+}
+
+export type FeatureTier = {
+    title: string,
+    featured?: boolean,
+    value: string | boolean,
+}

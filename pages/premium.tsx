@@ -1,11 +1,12 @@
 import {CheckIcon, XIcon} from '@heroicons/react/solid'
 import {classNames} from "../lib/utils";
+import type {Feature, Plan} from "../lib/types";
 
-const plans = [
+const plans: Plan[] = [
     {
         title: 'Free',
         featured: false,
-        description: 'All your essential calendar needs, taken care of.',
+        description: 'All your essential calendar needs, taken care of',
         priceMonthly: 0,
         priceYearly: 0,
         buyButtonText: 'Get started',
@@ -48,7 +49,7 @@ const plans = [
         ],
     },
 ]
-const features = [
+const features: Feature[] = [
     {
         title: 'Ad free',
         tiers: [
@@ -106,7 +107,7 @@ const features = [
         ],
     },
 ]
-const perks = [
+const perks: Feature[] = [
     {
         title: 'Free Support',
         tiers: [
@@ -254,8 +255,59 @@ export default function PremiumPage() {
         </div>
     }
 
-    //TODO: Styling
-    function FeatureComparison() {
+    function FeatureComparisonMobile() {
+        function FakeCardBackground(props: { plan: Plan }): JSX.Element {
+            return <div aria-hidden="true" className="hidden absolute inset-0 pointer-events-none sm:block">
+                <div className={classNames(props.plan.featured ? 'shadow-md' : 'shadow',
+                    'absolute right-0 w-1/2 h-full bg-white rounded-lg'
+                )}/>
+            </div>
+        }
+
+        function FakeCardBorder(props: { plan: Plan }): JSX.Element {
+            return <div aria-hidden="true" className="hidden absolute inset-0 pointer-events-none sm:block">
+                <div className={classNames(props.plan.featured ? 'ring-2 ring-discal-blue' :
+                    'ring-1 ring-black ring-opacity-5', 'absolute right-0 w-1/2 h-full rounded-lg'
+                )}/>
+            </div>
+        }
+
+        function ChartCard(props: { plan: Plan, list: Feature[], index: number }): JSX.Element {
+            return <div className={classNames(props.plan.featured ? 'ring-2 ring-discal-blue shadow-md' :
+                    'ring-1 ring-black ring-opacity-5 shadow',
+                'relative py-3 px-4 bg-white rounded-lg sm:p-0 sm:bg-transparent sm:rounded-none sm:ring-0 sm:shadow-none'
+            )}>
+                <dl className="divide-y divide-gray-200">
+                    {props.list.map((feat) => (
+                        <div key={feat.title} className="py-3 flex items-center justify-between sm:grid sm:grid-cols-2">
+                            <dt className="pr-4 text-sm font-medium text-discal-dark-grey sm:text-gray-300">{feat.title}</dt>
+                            <dd className="flex items-center justify-end sm:px-4 sm:justify-center">
+                                {typeof feat.tiers[props.index].value === 'string' ? (
+                                    <span className={classNames(feat.tiers[props.index].featured ? 'text-discal-blue' :
+                                        'text-discal-dark-grey', 'text-sm font-medium'
+                                    )}>
+                                        {feat.tiers[props.index].value}
+                                    </span>
+                                ) : (
+                                    <>
+                                        {feat.tiers[props.index].value === true ? (
+                                            <CheckIcon className="mx-auto h-5 w-5 text-discal-blue" aria-hidden="true"/>
+                                        ) : (
+                                            <XIcon className="mx-auto h-5 w-5 text-gray-500" aria-hidden="true"/>
+                                        )}
+
+                                        <span className="sr-only">
+                                            {feat.tiers[props.index].value === true ? 'Yes' : 'No'}
+                                        </span>
+                                    </>
+                                )}
+                            </dd>
+                        </div>
+                    ))}
+                </dl>
+            </div>
+        }
+
         return <section aria-labelledby="mobile-comparison-heading" className="lg:hidden">
             <h2 id="mobile-comparison-heading" className="sr-only">
                 Feature comparison
@@ -268,8 +320,8 @@ export default function PremiumPage() {
                             '-mt-px pt-6 border-t-2 sm:w-1/2'
                         )}>
                             <h3 className={classNames(plan.featured ? 'text-discord-blurple' : 'text-white',
-                                'text-sm font-bold')}
-                            >
+                                'text-sm font-bold'
+                            )}>
                                 {plan.title}
                             </h3>
                             <p className="mt-2 text-sm text-gray-300">{plan.description}</p>
@@ -278,115 +330,22 @@ export default function PremiumPage() {
 
                         {/* Features List */}
                         <div className="mt-6 relative">
-                            {/* Fake card background */}
-                            <div aria-hidden="true" className="hidden absolute inset-0 pointer-events-none sm:block">
-                                <div className={classNames(plan.featured ? 'shadow-md' : 'shadow',
-                                    'absolute right-0 w-1/2 h-full bg-white rounded-lg'
-                                )}/>
-                            </div>
+                            <FakeCardBackground plan={plan}/>
 
-                            <div className={classNames(plan.featured ? 'ring-2 ring-indigo-600 shadow-md' :
-                                    'ring-1 ring-black ring-opacity-5 shadow', 'relative py-3 px-4 bg-white ' +
-                                'rounded-lg sm:p-0 sm:bg-transparent sm:rounded-none sm:ring-0 sm:shadow-none'
-                            )}>
-                                <dl className="divide-y divide-gray-200">
-                                    {features.map((feature) => (
-                                        <div key={feature.title}
-                                             className="py-3 flex items-center justify-between sm:grid sm:grid-cols-2"
-                                        >
-                                            <dt className="pr-4 text-sm font-medium text-gray-600">{feature.title}</dt>
-                                            <dd className="flex items-center justify-end sm:px-4 sm:justify-center">
-                                                {typeof feature.tiers[mobilePlanIndex].value === 'string' ? (
-                                                    <span
-                                                        className={classNames(
-                                                            feature.tiers[mobilePlanIndex].featured ? 'text-indigo-600' : 'text-gray-900',
-                                                            'text-sm font-medium'
-                                                        )}
-                                                    >
-                              {feature.tiers[mobilePlanIndex].value}
-                            </span>
-                                                ) : (
-                                                    <>
-                                                        {feature.tiers[mobilePlanIndex].value === true ? (
-                                                            <CheckIcon className="mx-auto h-5 w-5 text-indigo-600"
-                                                                       aria-hidden="true"/>
-                                                        ) : (
-                                                            <XIcon className="mx-auto h-5 w-5 text-gray-400"
-                                                                   aria-hidden="true"/>
-                                                        )}
+                            <ChartCard plan={plan} list={features} index={mobilePlanIndex}/>
 
-                                                        <span className="sr-only">
-                                {feature.tiers[mobilePlanIndex].value === true ? 'Yes' : 'No'}
-                              </span>
-                                                    </>
-                                                )}
-                                            </dd>
-                                        </div>
-                                    ))}
-                                </dl>
-                            </div>
-
-                            {/* Fake card border */}
-                            <div aria-hidden="true" className="hidden absolute inset-0 pointer-events-none sm:block">
-                                <div
-                                    className={classNames(
-                                        plan.featured ? 'ring-2 ring-indigo-600' : 'ring-1 ring-black ring-opacity-5',
-                                        'absolute right-0 w-1/2 h-full rounded-lg'
-                                    )}
-                                />
-                            </div>
+                            <FakeCardBorder plan={plan}/>
                         </div>
 
-                        <h4 className="mt-10 text-sm font-bold text-gray-900">Other perks</h4>
+                        <h4 className="mt-10 text-sm font-bold text-discord-blurple">Other perks</h4>
 
+                        {/* Perks List */}
                         <div className="mt-6 relative">
-                            {/* Fake card background */}
-                            <div aria-hidden="true" className="hidden absolute inset-0 pointer-events-none sm:block">
-                                <div
-                                    className={classNames(
-                                        plan.featured ? 'shadow-md' : 'shadow',
-                                        'absolute right-0 w-1/2 h-full bg-white rounded-lg'
-                                    )}
-                                />
-                            </div>
+                            <FakeCardBackground plan={plan}/>
 
-                            <div
-                                className={classNames(
-                                    plan.featured ? 'ring-2 ring-indigo-600 shadow-md' : 'ring-1 ring-black ring-opacity-5 shadow',
-                                    'relative py-3 px-4 bg-white rounded-lg sm:p-0 sm:bg-transparent sm:rounded-none sm:ring-0 sm:shadow-none'
-                                )}
-                            >
-                                <dl className="divide-y divide-gray-200">
-                                    {perks.map((perk) => (
-                                        <div key={perk.title}
-                                             className="py-3 flex justify-between sm:grid sm:grid-cols-2">
-                                            <dt className="text-sm font-medium text-gray-600 sm:pr-4">{perk.title}</dt>
-                                            <dd className="text-center sm:px-4">
-                                                {perk.tiers[mobilePlanIndex].value === true ? (
-                                                    <CheckIcon className="mx-auto h-5 w-5 text-indigo-600"
-                                                               aria-hidden="true"/>
-                                                ) : (
-                                                    <XIcon className="mx-auto h-5 w-5 text-gray-400"
-                                                           aria-hidden="true"/>
-                                                )}
+                            <ChartCard plan={plan} list={perks} index={mobilePlanIndex}/>
 
-                                                <span
-                                                    className="sr-only">{perk.tiers[mobilePlanIndex].value === true ? 'Yes' : 'No'}</span>
-                                            </dd>
-                                        </div>
-                                    ))}
-                                </dl>
-                            </div>
-
-                            {/* Fake card border */}
-                            <div aria-hidden="true" className="hidden absolute inset-0 pointer-events-none sm:block">
-                                <div
-                                    className={classNames(
-                                        plan.featured ? 'ring-2 ring-indigo-600' : 'ring-1 ring-black ring-opacity-5',
-                                        'absolute right-0 w-1/2 h-full rounded-lg'
-                                    )}
-                                />
-                            </div>
+                            <FakeCardBorder plan={plan}/>
                         </div>
                     </div>
                 ))}
@@ -395,52 +354,72 @@ export default function PremiumPage() {
     }
 
     //TODO: Styling
-    function FeatureComparisonLgPlus(): JSX.Element {
+    function FeatureComparisonDesktop(): JSX.Element {
+        function FakeCardBackground(): JSX.Element {
+            return <div className="absolute inset-0 flex items-stretch pointer-events-none" aria-hidden="true">
+                <div className="w-1/4 pr-4"/>
+                <div className="w-1/4 px-4">
+                    <div className="w-full h-full bg-white rounded-lg shadow"/>
+                </div>
+                <div className="w-1/4 px-4">
+                    <div className="w-full h-full bg-white rounded-lg shadow-md"/>
+                </div>
+                <div className="w-1/4 pl-4">
+                    <div className="w-full h-full bg-white rounded-lg shadow"/>
+                </div>
+            </div>
+        }
+
+        function FakeCardBorder(): JSX.Element {
+            return <div className="absolute inset-0 flex items-stretch pointer-events-none" aria-hidden="true">
+                <div className="w-1/4 pr-4"/>
+                <div className="w-1/4 px-4">
+                    <div className="w-full h-full rounded-lg ring-1 ring-black ring-opacity-5"/>
+                </div>
+                <div className="w-1/4 px-4">
+                    <div className="w-full h-full rounded-lg ring-2 ring-discord-blurple ring-opacity-100"/>
+                </div>
+                <div className="w-1/4 pl-4">
+                    <div className="w-full h-full rounded-lg ring-1 ring-black ring-opacity-5"/>
+                </div>
+            </div>
+        }
+
+        function PlanComparisonHeading(): JSX.Element {
+            return <div className="w-full border-t border-gray-200 flex items-stretch">
+                <div className="-mt-px w-1/4 py-6 pr-4 flex items-end">
+                    <h3 className="mt-auto text-sm font-bold text-discord-blurple">Core Features</h3>
+                </div>
+                {plans.map((plan, planIdx) => (
+                    <div key={plan.title} aria-hidden="true"
+                         className={classNames(planIdx === plans.length - 1 ? '' : 'pr-4', '-mt-px pl-4 w-1/4')}
+                    >
+                        <div className={classNames(plan.featured ? 'border-indigo-600' : 'border-transparent',
+                            'py-6 border-t-2'
+                        )}>
+                            <p className={classNames(plan.featured ? 'text-discord-blurple' : 'text-white', 'text-sm font-bold')}>
+                                {plan.title}
+                            </p>
+                            <p className="mt-2 text-sm text-gray-300">{plan.description}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        }
+
         return <section aria-labelledby="comparison-heading" className="hidden lg:block">
             <h2 id="comparison-heading" className="sr-only">
                 Feature comparison
             </h2>
 
             <div className="max-w-7xl mx-auto py-24 px-8">
-                <div className="w-full border-t border-gray-200 flex items-stretch">
-                    <div className="-mt-px w-1/4 py-6 pr-4 flex items-end">
-                        <h3 className="mt-auto text-sm font-bold text-gray-900">Catered for business</h3>
-                    </div>
-                    {plans.map((plan, planIdx) => (
-                        <div
-                            key={plan.title}
-                            aria-hidden="true"
-                            className={classNames(planIdx === plans.length - 1 ? '' : 'pr-4', '-mt-px pl-4 w-1/4')}
-                        >
-                            <div
-                                className={classNames(plan.featured ? 'border-indigo-600' : 'border-transparent', 'py-6 border-t-2')}
-                            >
-                                <p className={classNames(plan.featured ? 'text-indigo-600' : 'text-gray-900', 'text-sm font-bold')}>
-                                    {plan.title}
-                                </p>
-                                <p className="mt-2 text-sm text-gray-500">{plan.description}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                <PlanComparisonHeading/>
 
                 <div className="relative">
-                    {/* Fake card backgrounds */}
-                    <div className="absolute inset-0 flex items-stretch pointer-events-none" aria-hidden="true">
-                        <div className="w-1/4 pr-4"/>
-                        <div className="w-1/4 px-4">
-                            <div className="w-full h-full bg-white rounded-lg shadow"/>
-                        </div>
-                        <div className="w-1/4 px-4">
-                            <div className="w-full h-full bg-white rounded-lg shadow-md"/>
-                        </div>
-                        <div className="w-1/4 pl-4">
-                            <div className="w-full h-full bg-white rounded-lg shadow"/>
-                        </div>
-                    </div>
+                    <FakeCardBackground/>
 
                     <table className="relative w-full">
-                        <caption className="sr-only">Business feature comparison</caption>
+                        <caption className="sr-only">Core feature comparison</caption>
                         <thead>
                         <tr className="text-left">
                             <th scope="col">
@@ -496,37 +475,13 @@ export default function PremiumPage() {
                         </tbody>
                     </table>
 
-                    {/* Fake card borders */}
-                    <div className="absolute inset-0 flex items-stretch pointer-events-none" aria-hidden="true">
-                        <div className="w-1/4 pr-4"/>
-                        <div className="w-1/4 px-4">
-                            <div className="w-full h-full rounded-lg ring-1 ring-black ring-opacity-5"/>
-                        </div>
-                        <div className="w-1/4 px-4">
-                            <div className="w-full h-full rounded-lg ring-2 ring-indigo-600 ring-opacity-100"/>
-                        </div>
-                        <div className="w-1/4 pl-4">
-                            <div className="w-full h-full rounded-lg ring-1 ring-black ring-opacity-5"/>
-                        </div>
-                    </div>
+                    <FakeCardBorder/>
                 </div>
 
-                <h3 className="mt-10 text-sm font-bold text-gray-900">Other perks</h3>
+                <h3 className="mt-10 text-sm font-bold text-discord-blurple">Other perks</h3>
 
                 <div className="mt-6 relative">
-                    {/* Fake card backgrounds */}
-                    <div className="absolute inset-0 flex items-stretch pointer-events-none" aria-hidden="true">
-                        <div className="w-1/4 pr-4"/>
-                        <div className="w-1/4 px-4">
-                            <div className="w-full h-full bg-white rounded-lg shadow"/>
-                        </div>
-                        <div className="w-1/4 px-4">
-                            <div className="w-full h-full bg-white rounded-lg shadow-md"/>
-                        </div>
-                        <div className="w-1/4 pl-4">
-                            <div className="w-full h-full bg-white rounded-lg shadow"/>
-                        </div>
-                    </div>
+                    <FakeCardBackground/>
 
                     <table className="relative w-full">
                         <caption className="sr-only">Perk comparison</caption>
@@ -572,19 +527,7 @@ export default function PremiumPage() {
                         </tbody>
                     </table>
 
-                    {/* Fake card borders */}
-                    <div className="absolute inset-0 flex items-stretch pointer-events-none" aria-hidden="true">
-                        <div className="w-1/4 pr-4"/>
-                        <div className="w-1/4 px-4">
-                            <div className="w-full h-full rounded-lg ring-1 ring-black ring-opacity-5"/>
-                        </div>
-                        <div className="w-1/4 px-4">
-                            <div className="w-full h-full rounded-lg ring-2 ring-indigo-600 ring-opacity-100"/>
-                        </div>
-                        <div className="w-1/4 pl-4">
-                            <div className="w-full h-full rounded-lg ring-1 ring-black ring-opacity-5"/>
-                        </div>
-                    </div>
+                    <FakeCardBorder/>
                 </div>
             </div>
         </section>
@@ -600,8 +543,8 @@ export default function PremiumPage() {
             <Cards/>
         </div>
 
-        {/* Feature comparison (up to lg) */}
-        <FeatureComparison/>
-        <FeatureComparisonLgPlus/>
+        <FeatureComparisonMobile/>
+
+        <FeatureComparisonDesktop/>
     </>
 }
