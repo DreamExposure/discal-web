@@ -98,9 +98,9 @@ const features = [
         ],
     },
     {
-        title: 'Server Branding',
+        title: 'Auto-updating Calendar View',
         tiers: [
-            {title: 'free', value: false},
+            {title: 'free', value: true},
             {title: 'popular', featured: true, value: true},
             {title: 'large', value: true},
         ],
@@ -124,9 +124,9 @@ const perks = [
         ],
     },
     {
-        title: 'Auto-updating Calendar View',
+        title: 'Server Branding',
         tiers: [
-            {title: 'free', value: true},
+            {title: 'free', value: false},
             {title: 'popular', featured: true, value: true},
             {title: 'large', value: true},
         ],
@@ -263,42 +263,36 @@ export default function PremiumPage() {
 
             <div className="max-w-2xl mx-auto py-16 px-4 space-y-16 sm:px-6">
                 {plans.map((plan, mobilePlanIndex) => (
-                    <div key={plan.title} className="border-t border-gray-200">
-                        <div
-                            className={classNames(
-                                plan.featured ? 'border-indigo-600' : 'border-transparent',
-                                '-mt-px pt-6 border-t-2 sm:w-1/2'
-                            )}
-                        >
-                            <h3 className={classNames(plan.featured ? 'text-indigo-600' : 'text-gray-900', 'text-sm font-bold')}>
+                    <div key={plan.title} className="border-t border-discal-blue">
+                        <div className={classNames(plan.featured ? 'border-discord-blurple' : 'border-transparent',
+                            '-mt-px pt-6 border-t-2 sm:w-1/2'
+                        )}>
+                            <h3 className={classNames(plan.featured ? 'text-discord-blurple' : 'text-white',
+                                'text-sm font-bold')}
+                            >
                                 {plan.title}
                             </h3>
-                            <p className="mt-2 text-sm text-gray-500">{plan.description}</p>
+                            <p className="mt-2 text-sm text-gray-300">{plan.description}</p>
                         </div>
-                        <h4 className="mt-10 text-sm font-bold text-gray-900">Catered for business</h4>
+                        <h4 className="mt-10 text-sm font-bold text-discord-blurple">Core Features</h4>
 
+                        {/* Features List */}
                         <div className="mt-6 relative">
                             {/* Fake card background */}
                             <div aria-hidden="true" className="hidden absolute inset-0 pointer-events-none sm:block">
-                                <div
-                                    className={classNames(
-                                        plan.featured ? 'shadow-md' : 'shadow',
-                                        'absolute right-0 w-1/2 h-full bg-white rounded-lg'
-                                    )}
-                                />
+                                <div className={classNames(plan.featured ? 'shadow-md' : 'shadow',
+                                    'absolute right-0 w-1/2 h-full bg-white rounded-lg'
+                                )}/>
                             </div>
 
-                            <div
-                                className={classNames(
-                                    plan.featured ? 'ring-2 ring-indigo-600 shadow-md' : 'ring-1 ring-black ring-opacity-5 shadow',
-                                    'relative py-3 px-4 bg-white rounded-lg sm:p-0 sm:bg-transparent sm:rounded-none sm:ring-0 sm:shadow-none'
-                                )}
-                            >
+                            <div className={classNames(plan.featured ? 'ring-2 ring-indigo-600 shadow-md' :
+                                    'ring-1 ring-black ring-opacity-5 shadow', 'relative py-3 px-4 bg-white ' +
+                                'rounded-lg sm:p-0 sm:bg-transparent sm:rounded-none sm:ring-0 sm:shadow-none'
+                            )}>
                                 <dl className="divide-y divide-gray-200">
                                     {features.map((feature) => (
-                                        <div
-                                            key={feature.title}
-                                            className="py-3 flex items-center justify-between sm:grid sm:grid-cols-2"
+                                        <div key={feature.title}
+                                             className="py-3 flex items-center justify-between sm:grid sm:grid-cols-2"
                                         >
                                             <dt className="pr-4 text-sm font-medium text-gray-600">{feature.title}</dt>
                                             <dd className="flex items-center justify-end sm:px-4 sm:justify-center">
@@ -602,15 +596,12 @@ export default function PremiumPage() {
             <div aria-hidden="true" className="hidden absolute bg-discal-not-black w-full h-6 bottom-0 lg:block"/>
 
             <Header/>
-
             <h2 className="sr-only">Plans</h2>
-
             <Cards/>
         </div>
 
         {/* Feature comparison (up to lg) */}
         <FeatureComparison/>
         <FeatureComparisonLgPlus/>
-
     </>
 }
