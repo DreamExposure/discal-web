@@ -2,6 +2,7 @@ import {CheckIcon, XIcon} from '@heroicons/react/solid'
 import {classNames} from "../lib/utils";
 import type {Feature, Plan} from "../lib/types";
 
+//TODO: Probably link to a place to actually handle subscribing to the correct tier. Right now it just redirects to patreon
 const plans: Plan[] = [
     {
         title: 'Free',
@@ -49,6 +50,7 @@ const plans: Plan[] = [
         ],
     },
 ]
+
 const features: Feature[] = [
     {
         title: 'Ad free',
@@ -75,11 +77,19 @@ const features: Feature[] = [
         ],
     },
     {
-        title: 'Calendars (WIP)',
+        title: 'Auto-updating Calendar View',
+        tiers: [
+            {title: 'free', value: true},
+            {title: 'popular', featured: true, value: true},
+            {title: 'large', value: true},
+        ],
+    },
+    {
+        title: 'Calendars',
         tiers: [
             {title: 'free', value: '1 calendar'},
-            {title: 'popular', featured: true, value: 'Up to 2 calendars'},
-            {title: 'large', value: 'Up to 5 calendars'},
+            {title: 'popular', featured: true, value: 'Up to 2 calendars (WIP)'},
+            {title: 'large', value: 'Up to 5 calendars (WIP)'},
         ],
     },
     {
@@ -91,22 +101,15 @@ const features: Feature[] = [
         ],
     },
     {
-        title: 'Web Dashboard',
+        title: 'Web Dashboard (WIP)',
         tiers: [
             {title: 'free', value: false},
             {title: 'popular', featured: true, value: true},
             {title: 'large', value: true},
         ],
     },
-    {
-        title: 'Auto-updating Calendar View',
-        tiers: [
-            {title: 'free', value: true},
-            {title: 'popular', featured: true, value: true},
-            {title: 'large', value: true},
-        ],
-    },
 ]
+
 const perks: Feature[] = [
     {
         title: 'Free Support',
@@ -165,6 +168,8 @@ const perks: Feature[] = [
         ],
     },
 ]
+
+
 
 export default function PremiumPage() {
     function Header(): JSX.Element {
@@ -353,7 +358,6 @@ export default function PremiumPage() {
         </section>
     }
 
-    //TODO: Styling
     function FeatureComparisonDesktop(): JSX.Element {
         function FakeCardBackground(): JSX.Element {
             return <div className="absolute inset-0 flex items-stretch pointer-events-none" aria-hidden="true">
@@ -394,7 +398,7 @@ export default function PremiumPage() {
                     <div key={plan.title} aria-hidden="true"
                          className={classNames(planIdx === plans.length - 1 ? '' : 'pr-4', '-mt-px pl-4 w-1/4')}
                     >
-                        <div className={classNames(plan.featured ? 'border-indigo-600' : 'border-transparent',
+                        <div className={classNames(plan.featured ? 'border-discord-blurple' : 'border-transparent',
                             'py-6 border-t-2'
                         )}>
                             <p className={classNames(plan.featured ? 'text-discord-blurple' : 'text-white', 'text-sm font-bold')}>
@@ -405,6 +409,58 @@ export default function PremiumPage() {
                     </div>
                 ))}
             </div>
+        }
+
+        function ComparisonTable(props: { caption: string, name: string, list: Feature[] }): JSX.Element {
+            return <table className="relative w-full">
+                <caption className="sr-only">{props.caption}</caption>
+                <thead>
+                <tr className="text-left">
+                    <th scope="col">
+                        <span className="sr-only">{props.name}</span>
+                    </th>
+                    {plans.map((plan) => (
+                        <th key={plan.title} scope="col">
+                            <span className="sr-only">{plan.title} plan</span>
+                        </th>
+                    ))}
+                </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                {props.list.map((feature) => (
+                    <tr key={feature.title}>
+                        <th scope="row" className="w-1/4 py-3 pr-4 text-left text-sm font-medium text-gray-300">
+                            {feature.title}
+                        </th>
+                        {feature.tiers.map((tier, tierIdx) => (
+                            <td key={tier.title} className={classNames(tierIdx === feature.tiers.length - 1 ? 'pl-4' :
+                                'px-4', 'relative w-1/4 py-0 text-center'
+                            )}>
+                        <span className="relative w-full h-full py-3">
+                          {typeof tier.value === 'string' ? (
+                              <span className={classNames(tier.featured ? 'text-discal-blue' : 'text-discal-dark-grey',
+                                  'text-sm font-medium'
+                              )}>
+                              {tier.value}
+                            </span>
+                          ) : (
+                              <>
+                                  {tier.value ? (
+                                      <CheckIcon className="mx-auto h-5 w-5 text-discal-blue" aria-hidden="true"/>
+                                  ) : (
+                                      <XIcon className="mx-auto h-5 w-5 text-gray-500" aria-hidden="true"/>
+                                  )}
+
+                                  <span className="sr-only">{tier.value ? 'Yes' : 'No'}</span>
+                              </>
+                          )}
+                        </span>
+                            </td>
+                        ))}
+                    </tr>
+                ))}
+                </tbody>
+            </table>
         }
 
         return <section aria-labelledby="comparison-heading" className="hidden lg:block">
@@ -418,62 +474,7 @@ export default function PremiumPage() {
                 <div className="relative">
                     <FakeCardBackground/>
 
-                    <table className="relative w-full">
-                        <caption className="sr-only">Core feature comparison</caption>
-                        <thead>
-                        <tr className="text-left">
-                            <th scope="col">
-                                <span className="sr-only">Feature</span>
-                            </th>
-                            {plans.map((plan) => (
-                                <th key={plan.title} scope="col">
-                                    <span className="sr-only">{plan.title} plan</span>
-                                </th>
-                            ))}
-                        </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-100">
-                        {features.map((feature) => (
-                            <tr key={feature.title}>
-                                <th scope="row" className="w-1/4 py-3 pr-4 text-left text-sm font-medium text-gray-600">
-                                    {feature.title}
-                                </th>
-                                {feature.tiers.map((tier, tierIdx) => (
-                                    <td
-                                        key={tier.title}
-                                        className={classNames(
-                                            tierIdx === feature.tiers.length - 1 ? 'pl-4' : 'px-4',
-                                            'relative w-1/4 py-0 text-center'
-                                        )}
-                                    >
-                        <span className="relative w-full h-full py-3">
-                          {typeof tier.value === 'string' ? (
-                              <span
-                                  className={classNames(
-                                      tier.featured ? 'text-indigo-600' : 'text-gray-900',
-                                      'text-sm font-medium'
-                                  )}
-                              >
-                              {tier.value}
-                            </span>
-                          ) : (
-                              <>
-                                  {tier.value === true ? (
-                                      <CheckIcon className="mx-auto h-5 w-5 text-indigo-600" aria-hidden="true"/>
-                                  ) : (
-                                      <XIcon className="mx-auto h-5 w-5 text-gray-400" aria-hidden="true"/>
-                                  )}
-
-                                  <span className="sr-only">{tier.value === true ? 'Yes' : 'No'}</span>
-                              </>
-                          )}
-                        </span>
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                    <ComparisonTable caption={"Core feature comparison"} name={"Feature"} list={features}/>
 
                     <FakeCardBorder/>
                 </div>
@@ -483,49 +484,7 @@ export default function PremiumPage() {
                 <div className="mt-6 relative">
                     <FakeCardBackground/>
 
-                    <table className="relative w-full">
-                        <caption className="sr-only">Perk comparison</caption>
-                        <thead>
-                        <tr className="text-left">
-                            <th scope="col">
-                                <span className="sr-only">Perk</span>
-                            </th>
-                            {plans.map((plan) => (
-                                <th key={plan.title} scope="col">
-                                    <span className="sr-only">{plan.title} plan</span>
-                                </th>
-                            ))}
-                        </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-100">
-                        {perks.map((perk) => (
-                            <tr key={perk.title}>
-                                <th scope="row" className="w-1/4 py-3 pr-4 text-left text-sm font-medium text-gray-600">
-                                    {perk.title}
-                                </th>
-                                {perk.tiers.map((tier, tierIdx) => (
-                                    <td
-                                        key={tier.title}
-                                        className={classNames(
-                                            tierIdx === perk.tiers.length - 1 ? 'pl-4' : 'px-4',
-                                            'relative w-1/4 py-0 text-center'
-                                        )}
-                                    >
-                        <span className="relative w-full h-full py-3">
-                          {tier.value === true ? (
-                              <CheckIcon className="mx-auto h-5 w-5 text-indigo-600" aria-hidden="true"/>
-                          ) : (
-                              <XIcon className="mx-auto h-5 w-5 text-gray-400" aria-hidden="true"/>
-                          )}
-
-                            <span className="sr-only">{tier.value === true ? 'Yes' : 'No'}</span>
-                        </span>
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                    <ComparisonTable caption={"Perks comparison"} name={"Perk"} list={perks}/>
 
                     <FakeCardBorder/>
                 </div>
@@ -544,7 +503,6 @@ export default function PremiumPage() {
         </div>
 
         <FeatureComparisonMobile/>
-
         <FeatureComparisonDesktop/>
     </>
 }
