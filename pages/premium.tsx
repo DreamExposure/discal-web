@@ -169,7 +169,7 @@ export default function PremiumPage() {
     function Header(): JSX.Element {
         return <div className="relative max-w-2xl mx-auto pt-16 px-4 text-center sm:pt-32 sm:px-6 lg:max-w-7xl lg:px-8">
             <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
-                <span className="block lg:inline">Simple pricing,</span>
+                <span className="block lg:inline">Simple pricing,&nbsp;</span>
                 <span className="block lg:inline">no commitment.</span>
             </h1>
             <p className="mt-4 text-xl text-white">
@@ -254,20 +254,9 @@ export default function PremiumPage() {
         </div>
     }
 
-    return <>
-        <div className="relative bg-discal-blue">
-            {/* Overlapping background */}
-            <div aria-hidden="true" className="hidden absolute bg-discal-not-black w-full h-6 bottom-0 lg:block"/>
-
-            <Header/>
-
-            <h2 className="sr-only">Plans</h2>
-
-            <Cards/>
-        </div>
-
-        {/* Feature comparison (up to lg) */}
-        <section aria-labelledby="mobile-comparison-heading" className="lg:hidden">
+    //TODO: Styling
+    function FeatureComparison() {
+        return <section aria-labelledby="mobile-comparison-heading" className="lg:hidden">
             <h2 id="mobile-comparison-heading" className="sr-only">
                 Feature comparison
             </h2>
@@ -409,9 +398,11 @@ export default function PremiumPage() {
                 ))}
             </div>
         </section>
+    }
 
-        {/* Feature comparison (lg+) */}
-        <section aria-labelledby="comparison-heading" className="hidden lg:block">
+    //TODO: Styling
+    function FeatureComparisonLgPlus(): JSX.Element {
+        return <section aria-labelledby="comparison-heading" className="hidden lg:block">
             <h2 id="comparison-heading" className="sr-only">
                 Feature comparison
             </h2>
@@ -603,5 +594,23 @@ export default function PremiumPage() {
                 </div>
             </div>
         </section>
+    }
+
+    return <>
+        <div className="relative bg-discal-blue">
+            {/* Overlapping background */}
+            <div aria-hidden="true" className="hidden absolute bg-discal-not-black w-full h-6 bottom-0 lg:block"/>
+
+            <Header/>
+
+            <h2 className="sr-only">Plans</h2>
+
+            <Cards/>
+        </div>
+
+        {/* Feature comparison (up to lg) */}
+        <FeatureComparison/>
+        <FeatureComparisonLgPlus/>
+
     </>
 }
