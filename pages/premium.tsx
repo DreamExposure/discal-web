@@ -46,7 +46,8 @@ const plans: Plan[] = [
         buyButtonLink: 'https://www.patreon.com/Novafox',
         mainFeatures: [
             {id: 1, value: 'Up to 5 calendars'},
-            {id: 2, value: 'More coming soon'},
+            {id: 2, value: 'Activate in up to 3 servers'},
+            {id: 3, value: 'More coming soon'},
         ],
     },
 ]
@@ -90,6 +91,14 @@ const features: Feature[] = [
             {title: 'free', value: '1 calendar'},
             {title: 'popular', featured: true, value: 'Up to 2 calendars (WIP)'},
             {title: 'large', value: 'Up to 5 calendars (WIP)'},
+        ],
+    },
+    {
+        title: 'Multi-Server Support',
+        tiers: [
+            {title: 'free', value: false},
+            {title: 'popular', featured: true, value: '1 server'},
+            {title: 'large', value: 'Up to 3 servers'},
         ],
     },
     {
@@ -179,6 +188,15 @@ const faqs: Faq[] = [
     {
         question: 'I have subscribed on Patreon, how do I get my benefits?',
         answer: 'Join our support server and open a ticket. We are actively working on making this process automatic.',
+    },
+    {
+        question: 'Can I activate premium in multiple servers?',
+        answer: 'The "large community" tier allows activating premium in up to 3 servers. ' +
+            'Premium can always be transferred to a different server.'
+    },
+    {
+        question: 'How do I cancel or change my premium?',
+        answer: 'All you need to do to cancel is go to your Patreon account and manage your membership.',
     },
 ]
 
