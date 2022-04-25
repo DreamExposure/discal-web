@@ -223,7 +223,7 @@ export default function PremiumPage() {
             <div className="relative space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3">
                 {plans.map((plan) => (
                     <div key={plan.title} className={classNames(
-                        plan.featured ? 'bg-white ring-2 ring-discal-dark-blue shadow-md' :
+                        plan.featured ? 'bg-discal-light-grey ring-2 ring-discal-dark-blue shadow-md' :
                             'bg-discal-dark-blue lg:bg-transparent', 'pt-6 px-6 pb-3 rounded-lg lg:px-8 lg:pt-12'
                     )}>
                         <div>
@@ -243,10 +243,10 @@ export default function PremiumPage() {
                                         ${plan.priceMonthly}
                                     </p>
                                     <div className="ml-4">
-                                        <p className={classNames(plan.featured ? 'text-gray-700' : 'text-white', 'text-sm')}>
+                                        <p className={classNames(plan.featured ? 'text-discal-dark-blue' : 'text-white', 'text-sm')}>
                                             USD / mo
                                         </p>
-                                        <p className={classNames(plan.featured ? 'text-gray-500' : 'text-gray-300', 'text-sm')}>
+                                        <p className={classNames(plan.featured ? 'text-discal-dark-grey' : 'text-gray-300', 'text-sm')}>
                                             Billed yearly (${plan.priceYearly})
                                         </p>
                                     </div>
@@ -268,14 +268,15 @@ export default function PremiumPage() {
 
                         {/* Plan Features */}
                         <h4 className="sr-only">Features</h4>
-                        <ul role="list" className={classNames(plan.featured ? 'border-gray-200 divide-gray-200' :
-                                'border-discal-blue divide-discal-blue divide-opacity-75',
-                            'mt-7 border-t divide-y lg:border-t-0'
-                        )}>
+                        <ul role="list"
+                            className={classNames(plan.featured ? 'border-discal-dark-grey divide-discal-dark-grey' :
+                                    'border-discal-blue divide-discal-blue divide-opacity-75',
+                                'mt-7 border-t divide-y lg:border-t-0'
+                            )}>
                             {plan.mainFeatures.map((mainFeature) => (
                                 <li key={mainFeature.id} className="py-3 flex items-center">
                                     <CheckIcon className='w-5 h-5 flex-shrink-0 text-discal-blue' aria-hidden="true"/>
-                                    <span className={classNames(plan.featured ? 'text-discal-dark-grey' : 'text-white',
+                                    <span className={classNames(plan.featured ? 'text-discal-dark-blue' : 'text-white',
                                         'ml-3 text-sm font-medium')}
                                     >
                                         {mainFeature.value}
@@ -293,7 +294,7 @@ export default function PremiumPage() {
         function FakeCardBackground(props: { plan: Plan }): JSX.Element {
             return <div aria-hidden="true" className="hidden absolute inset-0 pointer-events-none sm:block">
                 <div className={classNames(props.plan.featured ? 'shadow-md' : 'shadow',
-                    'absolute right-0 w-1/2 h-full bg-white rounded-lg'
+                    'absolute right-0 w-1/2 h-full bg-discal-light-grey rounded-lg'
                 )}/>
             </div>
         }
@@ -309,16 +310,16 @@ export default function PremiumPage() {
         function ChartCard(props: { plan: Plan, list: Feature[], index: number }): JSX.Element {
             return <div className={classNames(props.plan.featured ? 'ring-2 ring-discal-blue shadow-md' :
                     'ring-1 ring-black ring-opacity-5 shadow',
-                'relative py-3 px-4 bg-white rounded-lg sm:p-0 sm:bg-transparent sm:rounded-none sm:ring-0 sm:shadow-none'
+                'relative py-3 px-4 bg-discal-light-grey rounded-lg sm:p-0 sm:bg-transparent sm:rounded-none sm:ring-0 sm:shadow-none'
             )}>
                 <dl className="divide-y divide-gray-200">
                     {props.list.map((feat) => (
                         <div key={feat.title} className="py-3 flex items-center justify-between sm:grid sm:grid-cols-2">
-                            <dt className="pr-4 text-sm font-medium text-discal-dark-grey sm:text-gray-300">{feat.title}</dt>
+                            <dt className="pr-4 text-sm font-medium text-discal-dark-blue sm:text-gray-300">{feat.title}</dt>
                             <dd className="flex items-center justify-end sm:px-4 sm:justify-center">
                                 {typeof feat.tiers[props.index].value === 'string' ? (
                                     <span className={classNames(feat.tiers[props.index].featured ? 'text-discal-blue' :
-                                        'text-discal-dark-grey', 'text-sm font-medium'
+                                        'text-discal-dark-blue', 'text-sm font-medium'
                                     )}>
                                         {feat.tiers[props.index].value}
                                     </span>
@@ -327,7 +328,7 @@ export default function PremiumPage() {
                                         {feat.tiers[props.index].value === true ? (
                                             <CheckIcon className="mx-auto h-5 w-5 text-discal-blue" aria-hidden="true"/>
                                         ) : (
-                                            <XIcon className="mx-auto h-5 w-5 text-gray-500" aria-hidden="true"/>
+                                            <XIcon className="mx-auto h-5 w-5 text-discal-dark-blue" aria-hidden="true"/>
                                         )}
 
                                         <span className="sr-only">
@@ -392,13 +393,13 @@ export default function PremiumPage() {
             return <div className="absolute inset-0 flex items-stretch pointer-events-none" aria-hidden="true">
                 <div className="w-1/4 pr-4"/>
                 <div className="w-1/4 px-4">
-                    <div className="w-full h-full bg-white rounded-lg shadow"/>
+                    <div className="w-full h-full bg-discal-light-grey rounded-lg shadow"/>
                 </div>
                 <div className="w-1/4 px-4">
-                    <div className="w-full h-full bg-white rounded-lg shadow-md"/>
+                    <div className="w-full h-full bg-discal-light-grey rounded-lg shadow-md"/>
                 </div>
                 <div className="w-1/4 pl-4">
-                    <div className="w-full h-full bg-white rounded-lg shadow"/>
+                    <div className="w-full h-full bg-discal-light-grey rounded-lg shadow"/>
                 </div>
             </div>
         }
@@ -467,7 +468,7 @@ export default function PremiumPage() {
                             )}>
                         <span className="relative w-full h-full py-3">
                           {typeof tier.value === 'string' ? (
-                              <span className={classNames(tier.featured ? 'text-discal-blue' : 'text-discal-dark-grey',
+                              <span className={classNames(tier.featured ? 'text-discal-blue' : 'text-discal-dark-blue',
                                   'text-sm font-medium'
                               )}>
                               {tier.value}
@@ -477,7 +478,7 @@ export default function PremiumPage() {
                                   {tier.value ? (
                                       <CheckIcon className="mx-auto h-5 w-5 text-discal-blue" aria-hidden="true"/>
                                   ) : (
-                                      <XIcon className="mx-auto h-5 w-5 text-gray-500" aria-hidden="true"/>
+                                      <XIcon className="mx-auto h-5 w-5 text-discal-dark-red" aria-hidden="true"/>
                                   )}
 
                                   <span className="sr-only">{tier.value ? 'Yes' : 'No'}</span>
