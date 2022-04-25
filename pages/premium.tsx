@@ -1,6 +1,6 @@
 import {CheckIcon, XIcon} from '@heroicons/react/solid'
 import {classNames} from "../lib/utils";
-import type {Feature, Plan} from "../lib/types";
+import type {Feature, Plan, Faq} from "../lib/types";
 
 //TODO: Probably link to a place to actually handle subscribing to the correct tier. Right now it just redirects to patreon
 const plans: Plan[] = [
@@ -169,7 +169,18 @@ const perks: Feature[] = [
     },
 ]
 
-
+const faqs: Faq[] = [
+    {
+        question: 'Do I need to get premium?',
+        answer: 'No! DisCal is 100% free to use. The premium tiers exist to give some extra quality of life features' +
+            ' to those who can help support development of the bot. DisCal and its core features will always be ' +
+            '100% FOSS (Free Open Source Software).',
+    },
+    {
+        question: 'I have subscribed on Patreon, how do I get my benefits?',
+        answer: 'Join our support server and open a ticket. We are actively working on making this process automatic.',
+    },
+]
 
 export default function PremiumPage() {
     function Header(): JSX.Element {
@@ -492,6 +503,35 @@ export default function PremiumPage() {
         </section>
     }
 
+    function FaqSection(): JSX.Element {
+        return <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
+            <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+                <div>
+                    <h2 className="text-3xl font-extrabold text-discord-blurple">Frequently asked questions</h2>
+                    <p className="mt-4 text-lg text-gray-300">
+                        Can’t find the answer you’re looking for? Reach out in our{' '}
+                        <a href="https://discord.gg/2TFqyuy"
+                           className="font-medium text-discord-blurple hover:text-discal-green"
+                        >
+                            support
+                        </a>{' '}
+                        server.
+                    </p>
+                </div>
+                <div className="mt-12 lg:mt-0 lg:col-span-2">
+                    <dl className="space-y-12">
+                        {faqs.map((faq) => (
+                            <div key={faq.question}>
+                                <dt className="text-lg leading-6 font-medium text-discord-blurple">{faq.question}</dt>
+                                <dd className="mt-2 text-base text-gray-300">{faq.answer}</dd>
+                            </div>
+                        ))}
+                    </dl>
+                </div>
+            </div>
+        </div>
+    }
+
     return <>
         <div className="relative bg-discal-blue">
             {/* Overlapping background */}
@@ -504,5 +544,7 @@ export default function PremiumPage() {
 
         <FeatureComparisonMobile/>
         <FeatureComparisonDesktop/>
+
+        <FaqSection/>
     </>
 }

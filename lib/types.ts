@@ -59,7 +59,7 @@ export type LoginResponse = {
     link: string
 }
 
-/////////* Premium Plan stuff */////////
+/////////* Various objects typed for maintainability */////////
 export type Plan = {
     title: string,
     featured: boolean,
@@ -85,4 +85,9 @@ export type FeatureTier = {
     title: string,
     featured?: boolean,
     value: string | boolean,
+}
+
+export type Faq = {
+    question: string,
+    answer: string,
 }
