@@ -328,7 +328,7 @@ export default function PremiumPage() {
                                         {feat.tiers[props.index].value === true ? (
                                             <CheckIcon className="mx-auto h-5 w-5 text-discal-blue" aria-hidden="true"/>
                                         ) : (
-                                            <XIcon className="mx-auto h-5 w-5 text-discal-dark-blue" aria-hidden="true"/>
+                                            <XIcon className="mx-auto h-5 w-5 text-discal-dark-red" aria-hidden="true"/>
                                         )}
 
                                         <span className="sr-only">
