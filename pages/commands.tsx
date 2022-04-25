@@ -85,7 +85,7 @@ function CalendarCommandTable(): JSX.Element {
     return <CommandTable caption='/calendar commands'>
         <Row command='create'
              description='Starts cal create wizard'
-             usage='/calendar create [name]'
+             usage='/calendar create [name] (desc) (timezone) (host)'
              access='elevated'
         />
         <Row command='name'
