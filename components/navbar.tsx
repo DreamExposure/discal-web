@@ -90,7 +90,7 @@ export default function Navbar() {
         </a>
     }
 
-    function loginButton() {
+    function LoginButton(): JSX.Element {
         return <Link href="/login">
             <a className="bg-discal-dark-blue text-white px-3 py-2 rounded-md text-sm font-medium"
                onClick={() => saveToLocalStorage("previous_page", window.location.href)}>
@@ -99,7 +99,7 @@ export default function Navbar() {
         </Link>
     }
 
-    function profileDropdown(user: User) {
+    function ProfileDropdown(props: {user: User}): JSX.Element {
         return <Menu as="div" className="ml-3 relative">
             <div>
                 <Menu.Button
@@ -107,7 +107,7 @@ export default function Navbar() {
                                         focus:ring-offset-2 focus:ring-offset-discal-dark-grey focus:ring-white">
                     <span className="sr-only">Open user menu</span>
                     <img className="h-8 w-8 rounded-full"
-                         src={user.avatar}
+                         src={props.user.avatar}
                          alt="Profile Photo"
                     />
                 </Menu.Button>
@@ -121,11 +121,11 @@ export default function Navbar() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
             >
-                <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1
+                <Menu.Items className="z-[999] origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1
                                         bg-discord-not-quite-black ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <Menu.Item>
                         <p className="block px-4 py-2 text-sm text-discal-light-grey">
-                            {user.username}#{user.discriminator}
+                            {props.user.username}#{props.user.discriminator}
                         </p>
                     </Menu.Item>
                     <Menu.Item>
@@ -140,7 +140,7 @@ export default function Navbar() {
         </Menu>
     }
 
-    function MobileDropdownNav() {
+    function MobileDropdownNav(): JSX.Element {
         return <Disclosure.Panel className="sm:hidden" onClick={() => setOpen(!open)}>
             <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
@@ -173,7 +173,7 @@ export default function Navbar() {
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto
                     sm:ml-6 sm:pr-0">
                     <SupportButton/>
-                    {session.user != null ? profileDropdown(session.user) : loginButton()}
+                    {session.user != null ? <ProfileDropdown user={session.user}/> : <LoginButton/>}
                 </div>
             </div>
         </div>
