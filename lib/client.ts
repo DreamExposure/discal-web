@@ -17,7 +17,7 @@ export function useRequestJson() {
 
         const body: BodyInit | null = data ? JSON.stringify(data) : null;
 
-        const response = await fetch(getBaseUrl() + endpoint, {
+        const response = await fetch(`${getBaseUrl()}${endpoint}`, {
             method: method,
             headers: headers,
             body: body
@@ -42,7 +42,7 @@ export function useRequestText() {
 
         const body: BodyInit | null = data ? JSON.stringify(data) : null;
 
-        const response = await fetch(getBaseUrl() + endpoint, {
+        const response = await fetch(`${getBaseUrl()}${endpoint}`, {
             method: method,
             headers: headers,
             body: body
@@ -67,7 +67,7 @@ export function useRequestEmpty() {
 
         const body: BodyInit | null = data ? JSON.stringify(data) : null;
 
-        return await fetch(getBaseUrl() + endpoint, {
+        return await fetch(`${getBaseUrl()}${endpoint}`, {
             method: method,
             headers: headers,
             body: body

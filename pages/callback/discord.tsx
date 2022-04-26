@@ -45,7 +45,7 @@ export default function DiscordCallbackPage() {
 
     return <>
         <Head>
-            <title>Discord Login- DisCal Bot</title>
+            <title>Discord Login - DisCal Bot</title>
         </Head>
         <Loader/>
     </>

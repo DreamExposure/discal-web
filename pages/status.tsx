@@ -50,8 +50,8 @@ function GeneralStats(props: NetworkProps): JSX.Element {
         {name: 'Guilds', stat: props.data.total_guilds},
         {name: 'Calendars', stat: props.data.total_calendars},
         {name: 'Announcements', stat: props.data.total_announcements},
-        {name: 'Connected Shards', stat: props.data.bot_status.length + '/' + props.data.expected_shard_count},
-        {name: 'Memory Usage', stat: totalMemUsageInGb(props.data) + "GB"},
+        {name: 'Connected Shards', stat: `${props.data.bot_status.length}/${props.data.expected_shard_count}`},
+        {name: 'Memory Usage', stat: `${totalMemUsageInGb(props.data)}GB`},
     ]
 
     function totalMemUsageInGb(data: NetworkStatus) {
@@ -90,7 +90,7 @@ function ServiceStats(props: NetworkProps): JSX.Element {
             icon: ServerIcon,
             version: props.data.api_status.version,
             d4jVersion: props.data.api_status.d4j_version,
-            memory: mbToGb(props.data.api_status.memory) + 'GB',
+            memory: `${mbToGb(props.data.api_status.memory)}GB`,
             uptime: props.data.api_status.human_uptime,
             lastHeartbeat: minutesAgo(new Date(props.data.api_status.last_heartbeat))
         },
@@ -99,7 +99,7 @@ function ServiceStats(props: NetworkProps): JSX.Element {
             icon: LockClosedIcon,
             version: props.data.cam_status.version,
             d4jVersion: props.data.cam_status.d4j_version,
-            memory: mbToGb(props.data.cam_status.memory) + 'GB',
+            memory: `${mbToGb(props.data.cam_status.memory)}GB`,
             uptime: props.data.cam_status.human_uptime,
             lastHeartbeat: minutesAgo(new Date(props.data.cam_status.last_heartbeat))
         }
@@ -151,11 +151,11 @@ function ShardStats(props: NetworkProps): JSX.Element {
 
         props.data.bot_status.forEach(bot => {
             array.push({
-                name: 'Shard ' + bot.shard_index,
+                name: `Shard ${bot.shard_index}`,
                 version: bot.instance.version,
                 d4jVersion: bot.instance.d4j_version,
                 guilds: bot.guilds,
-                memory: mbToGb(bot.instance.memory) + 'GB',
+                memory:  `${mbToGb(bot.instance.memory)}GB`,
                 uptime: bot.instance.human_uptime,
                 lastHeartbeat: minutesAgo(new Date(bot.instance.last_heartbeat))
             })
@@ -207,12 +207,12 @@ function ShardStats(props: NetworkProps): JSX.Element {
     </div>
 }
 
-function mbToGb(value: number) {
+function mbToGb(value: number): string {
     return (((value / 1024) * 100) / 100).toFixed(2)
 }
 
 function minutesAgo(past: Date): string {
     let seconds = ((new Date().getTime() - past.getTime()) / 1000)
 
-    return seconds > 60 ? (seconds / 60).toFixed(1) + 'm ago' : seconds.toFixed(0) + 's ago';
+    return seconds > 60 ? `${(seconds / 60).toFixed(1)}m ago` : `${seconds.toFixed(0)}s ago`
 }
