@@ -40,42 +40,45 @@ export default function Navbar() {
     }
 
     function BrandingImage() {
-        return <div className="flex-shrink-0 flex items-center">
-            <Link href={"/"}>
-                <img
-                    className="block lg:hidden h-8 w-auto"
-                    src="/logos/dark/transparent/logo.png"
-                    alt="DisCal"
-                />
-                <img
-                    className="hidden lg:block h-8 w-auto"
-                    src="/logos/dark/transparent/logo-type.png"
-                    alt="DisCal"
-                />
-                <span className="sr-only">Homepage</span>
-            </Link>
-        </div>
+        return (
+            <div className="flex-shrink-0 flex items-center">
+                <Link href={"/"}>
+                    <img
+                        className="block lg:hidden h-8 w-auto"
+                        src="/logos/dark/transparent/logo.png"
+                        alt="DisCal"
+                    />
+                    <img
+                        className="hidden lg:block h-8 w-auto"
+                        src="/logos/dark/transparent/logo-type.png"
+                        alt="DisCal"
+                    />
+                    <span className="sr-only">Homepage</span>
+                </Link>
+            </div>
+        );
     }
 
     function DesktopNavigationItems() {
-        return <div className="hidden sm:block sm:ml-6">
-            <div className="flex space-x-4">
-                {navigation.map((item) => (
-                    <Link href={item.href} key={item.name}>
-                        <a
+        return (
+            <div className="hidden sm:block sm:ml-6">
+                <div className="flex space-x-4">
+                    {navigation.map((item) => (
+                        <Link
+                            href={item.href}
+                            key={item.name}
                             className={classNames(
                                 currentPage(router, item.href) ? 'bg-discal-dark-blue text-white' :
                                     'text-white hover:bg-discal-dark-grey hover:text-white',
                                 'px-3 py-2 rounded-md text-sm font-medium'
                             )}
-                            aria-current={currentPage(router, item.href) ? 'page' : undefined}
-                        >
+                            aria-current={currentPage(router, item.href) ? 'page' : undefined}>
                             {item.name}
-                        </a>
-                    </Link>
-                ))}
+                        </Link>
+                    ))}
+                </div>
             </div>
-        </div>
+        );
     }
 
     function SupportButton() {
@@ -89,75 +92,86 @@ export default function Navbar() {
     }
 
     function LoginButton(): JSX.Element {
-        return <Link href="/login">
-            <a className="bg-discal-dark-blue text-white px-3 py-2 rounded-md text-sm font-medium"
-               onClick={() => saveToLocalStorage("previous_page", window.location.href)}>
-                Login
-            </a>
-        </Link>
+        return (
+            <Link
+                href="/login"
+                className="bg-discal-dark-blue text-white px-3 py-2 rounded-md text-sm font-medium"
+                onClick={() => saveToLocalStorage("previous_page", window.location.href)}>
+                
+                    Login
+                
+            </Link>
+        );
     }
 
     function ProfileDropdown(props: {user: User}): JSX.Element {
-        return <Menu as="div" className="ml-3 relative">
-            <div>
-                <Menu.Button
-                    className="bg-discal-dark-blue flex text-sm rounded-full focus:outline-none focus:ring-2
-                                        focus:ring-offset-2 focus:ring-offset-discal-dark-grey focus:ring-white">
-                    <span className="sr-only">Open user menu</span>
-                    <img className="h-8 w-8 rounded-full"
-                         src={props.user.avatar}
-                         alt="Profile Photo"
-                    />
-                </Menu.Button>
-            </div>
-            <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-            >
-                <Menu.Items className="z-[999] origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1
-                                        bg-discord-not-quite-black ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <Menu.Item>
-                        <p className="block px-4 py-2 text-sm text-discal-light-grey">
-                            {props.user.username}#{props.user.discriminator}
-                        </p>
-                    </Menu.Item>
-                    <Menu.Item>
-                        <Link href='/logout'>
-                            <a role={"button"} className="block px-4 py-2 text-sm text-discal-red">
-                                Sign out
-                            </a>
-                        </Link>
-                    </Menu.Item>
-                </Menu.Items>
-            </Transition>
-        </Menu>
+        return (
+            <Menu as="div" className="ml-3 relative">
+                <div>
+                    <Menu.Button
+                        className="bg-discal-dark-blue flex text-sm rounded-full focus:outline-none focus:ring-2
+                                            focus:ring-offset-2 focus:ring-offset-discal-dark-grey focus:ring-white">
+                        <span className="sr-only">Open user menu</span>
+                        <img className="h-8 w-8 rounded-full"
+                             src={props.user.avatar}
+                             alt="Profile Photo"
+                        />
+                    </Menu.Button>
+                </div>
+                <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="opacity-0 scale-95"
+                    enterTo="opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="opacity-100 scale-100"
+                    leaveTo="opacity-0 scale-95"
+                >
+                    <Menu.Items className="z-[999] origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1
+                                            bg-discord-not-quite-black ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Item>
+                            <p className="block px-4 py-2 text-sm text-discal-light-grey">
+                                {props.user.username}#{props.user.discriminator}
+                            </p>
+                        </Menu.Item>
+                        <Menu.Item>
+                            <Link
+                                href='/logout'
+                                role={"button"}
+                                className="block px-4 py-2 text-sm text-discal-red">
+                                
+                                    Sign out
+                                
+                            </Link>
+                        </Menu.Item>
+                    </Menu.Items>
+                </Transition>
+            </Menu>
+        );
     }
 
     function MobileDropdownNav(): JSX.Element {
-        return <Disclosure.Panel className="sm:hidden" onClick={() => setOpen(!open)}>
-            <div className="px-2 pt-2 pb-3 space-y-1">
-                {navigation.map((item) => (
-                    <Link href={item.href} key={item.name} passHref>
-                        <Disclosure.Button
-                            as="a"
-                            className={classNames(
-                                currentPage(router, item.href) ? 'bg-discal-dark-blue text-white' :
-                                    'text-white hover:bg-discal-dark-grey hover:text-white',
-                                'block px-3 py-2 rounded-md text-base font-medium'
-                            )}
-                            aria-current={currentPage(router, item.href) ? 'page' : undefined}
-                        >
-                            {item.name}
-                        </Disclosure.Button>
-                    </Link>
-                ))}
-            </div>
-        </Disclosure.Panel>
+        return (
+            <Disclosure.Panel className="sm:hidden" onClick={() => setOpen(!open)}>
+                <div className="px-2 pt-2 pb-3 space-y-1">
+                    {navigation.map((item) => (
+                        <Link href={item.href} key={item.name} passHref legacyBehavior>
+                            <Disclosure.Button
+                                as="a"
+                                className={classNames(
+                                    currentPage(router, item.href) ? 'bg-discal-dark-blue text-white' :
+                                        'text-white hover:bg-discal-dark-grey hover:text-white',
+                                    'block px-3 py-2 rounded-md text-base font-medium'
+                                )}
+                                aria-current={currentPage(router, item.href) ? 'page' : undefined}
+                            >
+                                {item.name}
+                            </Disclosure.Button>
+                        </Link>
+                    ))}
+                </div>
+            </Disclosure.Panel>
+        );
     }
 
     return <Disclosure as="nav" className="bg-discal-blue">

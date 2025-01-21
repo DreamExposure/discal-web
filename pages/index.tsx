@@ -30,27 +30,37 @@ function Hero(): JSX.Element {
 
     function ButtonContainer(): JSX.Element {
         function GetStartedButton(): JSX.Element {
-            return <div className="rounded-md shadow">
-                <Link href='/invite' passHref>
-                    <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base
-                    font-medium rounded-md text-white bg-discal-blue hover:bg-discal-green
-                    hover:text-discord-not-quite-black md:py-4 md:text-lg md:px-10">
-                        Get Started
-                    </a>
-                </Link>
-            </div>
+            return (
+                <div className="rounded-md shadow">
+                    <Link
+                        href='/invite'
+                        passHref
+                        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base
+                        font-medium rounded-md text-white bg-discal-blue hover:bg-discal-green
+                        hover:text-discord-not-quite-black md:py-4 md:text-lg md:px-10">
+                        
+                            Get Started
+                        
+                    </Link>
+                </div>
+            );
         }
 
         function PremiumButton(): JSX.Element {
-            return <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                <Link href='/premium' passHref>
-                    <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base
-                    font-medium rounded-md text-discal-blue bg-white hover:bg-discal-green
-                    hover:text-discord-not-quite-black md:py-4 md:text-lg md:px-10">
-                        Premium
-                    </a>
-                </Link>
-            </div>
+            return (
+                <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+                    <Link
+                        href='/premium'
+                        passHref
+                        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base
+                        font-medium rounded-md text-discal-blue bg-white hover:bg-discal-green
+                        hover:text-discord-not-quite-black md:py-4 md:text-lg md:px-10">
+                        
+                            Premium
+                        
+                    </Link>
+                </div>
+            );
         }
 
         return <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
@@ -197,12 +207,14 @@ function CTA(): JSX.Element {
     }
 
     function InviteButton(): JSX.Element {
-        return <Link href='/invite' passHref>
-            <a className="mt-8 bg-white border border-transparent rounded-md shadow px-5 py-3 inline-flex items-center
-            text-base font-medium text-discal-blue hover:bg-discal-green hover:text-white">
-                Invite DisCal
-            </a>
-        </Link>
+        return (
+            <Link
+                href='/invite'
+                className="mt-8 bg-white border border-transparent rounded-md shadow px-5 py-3 inline-flex items-center
+                text-base font-medium text-discal-blue hover:bg-discal-green hover:text-white">
+                    Invite DisCal
+            </Link>
+        );
     }
 
     function CTAImage(): JSX.Element {

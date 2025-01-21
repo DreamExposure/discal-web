@@ -57,94 +57,107 @@ const navigation = {
 
 
 function Branding() {
-    return <div className="space-y-8 xl:col-span-1">
-        <img
-            className="h-10"
-            src="/logos/light/transparent/logo-type.png"
-            alt="DisCal Bot"
-        />
-        <p className="text-white text-base">
-            The ultimate Discord calendar bot.
-        </p>
-        <div className="flex space-x-6">
-            {navigation.social.map((item) => (
-                <Link key={item.name} href={item.href}>
-                    <a className="text-discord-greyple hover:text-discal-blue">
+    return (
+        <div className="space-y-8 xl:col-span-1">
+            <img
+                className="h-10"
+                src="/logos/light/transparent/logo-type.png"
+                alt="DisCal Bot"
+            />
+            <p className="text-white text-base">
+                The ultimate Discord calendar bot.
+            </p>
+            <div className="flex space-x-6">
+                {navigation.social.map((item) => (
+                    <Link
+                        key={item.name}
+                        href={item.href}
+                        className="text-discord-greyple hover:text-discal-blue">
+
                         <span className="sr-only">{item.name}</span>
                         <item.icon className={"h-6 w-6"} aria-hidden="true"/>
-                    </a>
-                </Link>
-            ))}
+
+                    </Link>
+                ))}
+            </div>
         </div>
-    </div>
+    );
 }
 
 function DiscalSection() {
-    return <div>
-        <h3 className="text-sm font-semibold text-white tracking-wider uppercase">DisCal</h3>
-        <ul role="list" className="mt-4 space-y-4">
-            {navigation.discal.map((item) => (
-                <li key={item.name}>
-                    <Link href={item.href}>
-                        <a className="text-base text-discord-greyple hover:text-discal-blue">
+    return (
+        <div>
+            <h3 className="text-sm font-semibold text-white tracking-wider uppercase">DisCal</h3>
+            <ul role="list" className="mt-4 space-y-4">
+                {navigation.discal.map((item) => (
+                    <li key={item.name}>
+                        <Link
+                            href={item.href}
+                            className="text-base text-discord-greyple hover:text-discal-blue">
                             {item.name}
-                        </a>
-                    </Link>
-                </li>
-            ))}
-        </ul>
-    </div>
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }
 
 function DevelopersSection() {
-    return <div className="mt-12 md:mt-0">
-        <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Developers</h3>
-        <ul role="list" className="mt-4 space-y-4">
-            {navigation.developers.map((item) => (
-                <li key={item.name}>
-                    <Link href={item.href}>
-                        <a className="text-base text-discord-greyple hover:text-discal-blue">
+    return (
+        <div className="mt-12 md:mt-0">
+            <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Developers</h3>
+            <ul role="list" className="mt-4 space-y-4">
+                {navigation.developers.map((item) => (
+                    <li key={item.name}>
+                        <Link
+                            href={item.href}
+                            className="text-base text-discord-greyple hover:text-discal-blue">
                             {item.name}
-                        </a>
-                    </Link>
-                </li>
-            ))}
-        </ul>
-    </div>
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }
 
 function CompanySection() {
-    return <div>
-        <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Company</h3>
-        <ul role="list" className="mt-4 space-y-4">
-            {navigation.company.map((item) => (
-                <li key={item.name}>
-                    <Link href={item.href}>
-                        <a className="text-base text-discord-greyple hover:text-discal-blue">
+    return (
+        <div>
+            <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Company</h3>
+            <ul role="list" className="mt-4 space-y-4">
+                {navigation.company.map((item) => (
+                    <li key={item.name}>
+                        <Link
+                            href={item.href}
+                            className="text-base text-discord-greyple hover:text-discal-blue">
                             {item.name}
-                        </a>
-                    </Link>
-                </li>
-            ))}
-        </ul>
-    </div>
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }
 
 function LegalSection() {
-    return <div className="mt-12 md:mt-0">
-        <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Legal</h3>
-        <ul role="list" className="mt-4 space-y-4">
-            {navigation.legal.map((item) => (
-                <li key={item.name}>
-                    <Link href={item.href}>
-                        <a className="text-base text-discord-greyple hover:text-discal-blue">
+    return (
+        <div className="mt-12 md:mt-0">
+            <h3 className="text-sm font-semibold text-white tracking-wider uppercase">Legal</h3>
+            <ul role="list" className="mt-4 space-y-4">
+                {navigation.legal.map((item) => (
+                    <li key={item.name}>
+                        <Link
+                            href={item.href}
+                            className="text-base text-discord-greyple hover:text-discal-blue">
                             {item.name}
-                        </a>
-                    </Link>
-                </li>
-            ))}
-        </ul>
-    </div>
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }
 
 function LinksBlock() {
