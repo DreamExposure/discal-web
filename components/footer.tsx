@@ -27,28 +27,28 @@ const navigation = {
         {
             name: 'Discord',
             href: 'https://discord.gg/2TFqyuy',
-            icon: (props: PropsOf) => (
+            icon: (props: PropsOf<any>) => (
                 <FontAwesomeIcon icon={faDiscord} {...props}/>
             ),
         },
         {
             name: 'GitHub',
             href: 'https://github.com/DreamExposure/',
-            icon: (props: PropsOf) => (
+            icon: (props: PropsOf<any>) => (
                 <FontAwesomeIcon icon={faGithub} {...props}/>
             ),
         },
         {
             name: 'Patreon',
             href: 'https://patreon.com/Novafox',
-            icon: (props: PropsOf) => (
+            icon: (props: PropsOf<any>) => (
                 <FontAwesomeIcon icon={faPatreon} {...props}/>
             ),
         },
         {
             name: 'Twitter',
             href: 'https://twitter.com/DisCalBot',
-            icon: (props: PropsOf) => (
+            icon: (props: PropsOf<any>) => (
                 <FontAwesomeIcon icon={faTwitter} {...props}/>
             ),
         },

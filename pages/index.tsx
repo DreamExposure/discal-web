@@ -1,13 +1,14 @@
 import Link from 'next/link'
+import Head from "next/head";
+import { JSX } from 'react';
 import {
     CalendarIcon,
-    CodeIcon,
+    UserPlusIcon,
     LockClosedIcon,
-    SpeakerphoneIcon,
-    UserAddIcon,
-    ViewListIcon,
-} from '@heroicons/react/outline'
-import Head from "next/head";
+    CalendarDaysIcon,
+    CommandLineIcon,
+    MegaphoneIcon,
+} from "@heroicons/react/24/outline";
 
 function Hero(): JSX.Element {
     function Heading(): JSX.Element {
@@ -114,15 +115,15 @@ function FeatureList(): JSX.Element {
             description: 'Create a fully custom calendar to suit your community\'s needs, without feeling out of place.',
         }, {
             name: 'Unlimited Events',
-            icon: ViewListIcon,
+            icon: CalendarDaysIcon,
             description: 'Have a busy community? DisCal can make sure all your community events are scheduled, no matter the amount.',
         }, {
             name: 'Automated Reminders',
-            icon: SpeakerphoneIcon,
+            icon: MegaphoneIcon,
             description: 'DisCal\'s announcement system gives you complete control in reminding your community about upcoming events.',
         }, {
             name: 'Integrated RSVP',
-            icon: UserAddIcon,
+            icon: UserPlusIcon,
             description: 'Need to know who is planning to attend? Community members can let you know whether they are attending.',
         }, {
             name: 'Privacy First',
@@ -130,7 +131,7 @@ function FeatureList(): JSX.Element {
             description: 'We take your privacy seriously. Data is stored securely and locked down so your community activity stays with you.',
         }, {
             name: 'Continuous Development',
-            icon: CodeIcon,
+            icon: CommandLineIcon,
             description: 'DisCal undergoes continuous development with regular bug fixes, improvements, and new features.',
         },
     ]

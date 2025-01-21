@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, {JSX, useEffect, useState} from "react";
 import Loader from "../components/loader";
 import {toast} from "react-toastify";
 import type {NetworkProps, NetworkStatus} from "../lib/types";
 import Custom500 from "./500";
-import {LockClosedIcon, ServerIcon} from "@heroicons/react/solid";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRobot} from "@fortawesome/free-solid-svg-icons"
 import {useRequestStatus} from "../lib/service";
 import Container from "../components/container";
 import Head from "next/head";
+import {ServerStackIcon, LockClosedIcon} from "@heroicons/react/24/solid";
 
 export default function StatusPage() {
     const requestStatus = useRequestStatus();
@@ -87,7 +87,7 @@ function ServiceStats(props: NetworkProps): JSX.Element {
     const services = [
         {
             name: 'API',
-            icon: ServerIcon,
+            icon: ServerStackIcon,
             version: props.data.api_status.version,
             d4jVersion: props.data.api_status.d4j_version,
             memory: `${mbToGb(props.data.api_status.memory)}GB`,

@@ -1,5 +1,5 @@
-import React from "react";
-import {CogIcon} from "@heroicons/react/outline";
+import React, { JSX } from "react";
+import {CogIcon} from "@heroicons/react/24/outline";
 
 export default function Loader(): JSX.Element {
     return <React.Fragment>

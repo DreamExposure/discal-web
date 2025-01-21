@@ -1,6 +1,6 @@
-import React, {Fragment, useContext} from 'react'
+import React, {Fragment, JSX, useContext} from 'react'
 import {Disclosure, Menu, Transition} from '@headlessui/react'
-import {MenuIcon, QuestionMarkCircleIcon, XIcon} from '@heroicons/react/outline'
+import {Bars3Icon, QuestionMarkCircleIcon, XMarkIcon} from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import {NextRouter, useRouter} from 'next/router'
 import SessionContext from "../lib/context";
@@ -31,9 +31,9 @@ export default function Navbar() {
                                 focus:ring-2 focus:ring-inset focus:ring-white">
                 <span className="sr-only">Open main menu</span>
                 {open ? (
-                    <XIcon className="block h-6 w-6" aria-hidden="true"/>
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true"/>
                 ) : (
-                    <MenuIcon className="block h-6 w-6" aria-hidden="true"/>
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true"/>
                 )}
             </Disclosure.Button>
         </div>
@@ -42,19 +42,17 @@ export default function Navbar() {
     function BrandingImage() {
         return <div className="flex-shrink-0 flex items-center">
             <Link href={"/"}>
-                <a>
-                    <img
-                        className="block lg:hidden h-8 w-auto"
-                        src="/logos/dark/transparent/logo.png"
-                        alt="DisCal"
-                    />
-                    <img
-                        className="hidden lg:block h-8 w-auto"
-                        src="/logos/dark/transparent/logo-type.png"
-                        alt="DisCal"
-                    />
-                    <span className="sr-only">Homepage</span>
-                </a>
+                <img
+                    className="block lg:hidden h-8 w-auto"
+                    src="/logos/dark/transparent/logo.png"
+                    alt="DisCal"
+                />
+                <img
+                    className="hidden lg:block h-8 w-auto"
+                    src="/logos/dark/transparent/logo-type.png"
+                    alt="DisCal"
+                />
+                <span className="sr-only">Homepage</span>
             </Link>
         </div>
     }

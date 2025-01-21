@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import type {Props} from "../lib/types";
 import Container from "../components/container";
 import Head from "next/head";

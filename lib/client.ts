@@ -1,6 +1,5 @@
 import {useCallback, useContext} from "react";
 import SessionContext from "./context";
-import type {HeadersInit} from "next/dist/server/web/spec-compliant/headers";
 
 export function useRequestJson() {
     const {session} = useContext(SessionContext);

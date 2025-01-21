@@ -6,7 +6,6 @@ import SessionContext from "../lib/context";
 import {useEffect, useState} from "react";
 import {loadFromLocalStorage, saveToLocalStorage} from "../lib/utils";
 import {ToastContainer} from "react-toastify";
-import {injectStyle} from "react-toastify/dist/inject-style";
 import {Session} from '../lib/types';
 
 export default function MyApp({Component, pageProps}: AppProps) {
@@ -23,10 +22,6 @@ export default function MyApp({Component, pageProps}: AppProps) {
 
     // Always save the session
     useEffect(() => saveToLocalStorage("session", session), [session])
-
-    // Inject the toastify styles
-    if (typeof document !== 'undefined') injectStyle();
-
 
     return <SessionContext.Provider value={value}>
         <Navbar/>

@@ -1,3 +1,5 @@
+import { JSX } from "react"
+
 /////////* Props */////////
 export type Props = {
     children?: JSX.Element | JSX.Element[] | string

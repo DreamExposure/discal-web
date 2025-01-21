@@ -1,6 +1,7 @@
-import {CheckIcon, XIcon} from '@heroicons/react/solid'
 import {classNames} from "../lib/utils";
 import type {Feature, Plan, Faq} from "../lib/types";
+import { JSX } from "react";
+import {CheckIcon, XMarkIcon} from "@heroicons/react/24/solid";
 
 //TODO: Probably link to a place to actually handle subscribing to the correct tier. Right now it just redirects to patreon
 const plans: Plan[] = [
@@ -328,7 +329,7 @@ export default function PremiumPage() {
                                         {feat.tiers[props.index].value === true ? (
                                             <CheckIcon className="mx-auto h-5 w-5 text-discal-blue" aria-hidden="true"/>
                                         ) : (
-                                            <XIcon className="mx-auto h-5 w-5 text-discal-dark-red" aria-hidden="true"/>
+                                            <XMarkIcon className="mx-auto h-5 w-5 text-discal-dark-red" aria-hidden="true"/>
                                         )}
 
                                         <span className="sr-only">
@@ -478,7 +479,7 @@ export default function PremiumPage() {
                                   {tier.value ? (
                                       <CheckIcon className="mx-auto h-5 w-5 text-discal-blue" aria-hidden="true"/>
                                   ) : (
-                                      <XIcon className="mx-auto h-5 w-5 text-discal-dark-red" aria-hidden="true"/>
+                                      <XMarkIcon className="mx-auto h-5 w-5 text-discal-dark-red" aria-hidden="true"/>
                                   )}
 
                                   <span className="sr-only">{tier.value ? 'Yes' : 'No'}</span>
