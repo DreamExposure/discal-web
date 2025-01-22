@@ -1,5 +1,14 @@
 import React, {Fragment, JSX, useContext} from 'react'
-import {Disclosure, Menu, Transition} from '@headlessui/react'
+import {
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems,
+    Transition
+} from '@headlessui/react'
 import {Bars3Icon, QuestionMarkCircleIcon, XMarkIcon} from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import {NextRouter, useRouter} from 'next/router'
@@ -26,7 +35,7 @@ export default function Navbar() {
 
     function MobileMenuButton() {
         return <div className="absolute inset-y-0 left-0 flex items-center sm:hidden" onClick={() => setOpen(!open)}>
-            <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md
+            <DisclosureButton className="inline-flex items-center justify-center p-2 rounded-md
                                 text-discal-light-grey hover:text-white hover:bg-discal-dark-grey focus:outline-none
                                 focus:ring-2 focus:ring-inset focus:ring-white">
                 <span className="sr-only">Open main menu</span>
@@ -35,7 +44,7 @@ export default function Navbar() {
                 ) : (
                     <Bars3Icon className="block h-6 w-6" aria-hidden="true"/>
                 )}
-            </Disclosure.Button>
+            </DisclosureButton>
         </div>
     }
 
@@ -108,7 +117,7 @@ export default function Navbar() {
         return (
             <Menu as="div" className="ml-3 relative">
                 <div>
-                    <Menu.Button
+                    <MenuButton
                         className="bg-discal-dark-blue flex text-sm rounded-full focus:outline-none focus:ring-2
                                             focus:ring-offset-2 focus:ring-offset-discal-dark-grey focus:ring-white">
                         <span className="sr-only">Open user menu</span>
@@ -116,7 +125,7 @@ export default function Navbar() {
                              src={props.user.avatar}
                              alt="Profile Photo"
                         />
-                    </Menu.Button>
+                    </MenuButton>
                 </div>
                 <Transition
                     as={Fragment}
@@ -127,14 +136,14 @@ export default function Navbar() {
                     leaveFrom="opacity-100 scale-100"
                     leaveTo="opacity-0 scale-95"
                 >
-                    <Menu.Items className="z-[999] origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1
+                    <MenuItems className="z-[999] origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1
                                             bg-discord-not-quite-black ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <Menu.Item>
+                        <MenuItem>
                             <p className="block px-4 py-2 text-sm text-discal-light-grey">
                                 {props.user.username}#{props.user.discriminator}
                             </p>
-                        </Menu.Item>
-                        <Menu.Item>
+                        </MenuItem>
+                        <MenuItem>
                             <Link
                                 href='/logout'
                                 role={"button"}
@@ -143,8 +152,8 @@ export default function Navbar() {
                                     Sign out
                                 
                             </Link>
-                        </Menu.Item>
-                    </Menu.Items>
+                        </MenuItem>
+                    </MenuItems>
                 </Transition>
             </Menu>
         );
@@ -152,11 +161,11 @@ export default function Navbar() {
 
     function MobileDropdownNav(): JSX.Element {
         return (
-            <Disclosure.Panel className="sm:hidden" onClick={() => setOpen(!open)}>
+            <DisclosurePanel className="sm:hidden" onClick={() => setOpen(!open)}>
                 <div className="px-2 pt-2 pb-3 space-y-1">
                     {navigation.map((item) => (
                         <Link href={item.href} key={item.name} passHref legacyBehavior>
-                            <Disclosure.Button
+                            <DisclosureButton
                                 as="a"
                                 className={classNames(
                                     currentPage(router, item.href) ? 'bg-discal-dark-blue text-white' :
@@ -166,11 +175,11 @@ export default function Navbar() {
                                 aria-current={currentPage(router, item.href) ? 'page' : undefined}
                             >
                                 {item.name}
-                            </Disclosure.Button>
+                            </DisclosureButton>
                         </Link>
                     ))}
                 </div>
-            </Disclosure.Panel>
+            </DisclosurePanel>
         );
     }
 
