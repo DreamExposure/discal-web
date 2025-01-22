@@ -2,6 +2,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDiscord, faGithub, faPatreon, faTwitter} from "@fortawesome/free-brands-svg-icons";
 import {PropsOf} from "@headlessui/react/dist/types";
 import Link from "next/link";
+import Image from "next/image"
+import logoTypePic from "../public/logos/light/transparent/logo-type.png"
 
 const navigation = {
     discal: [
@@ -59,9 +61,9 @@ const navigation = {
 function Branding() {
     return (
         <div className="space-y-8 xl:col-span-1">
-            <img
-                className="h-10"
-                src="/logos/light/transparent/logo-type.png"
+            <Image
+                className="h-10 w-fit"
+                src={logoTypePic}
                 alt="DisCal Bot"
             />
             <p className="text-white text-base">

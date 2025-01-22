@@ -15,6 +15,9 @@ import {NextRouter, useRouter} from 'next/router'
 import SessionContext from "../lib/context";
 import {classNames, saveToLocalStorage} from "../lib/utils";
 import { User } from '../lib/types'
+import Image from "next/image";
+import logoImageDark from "../public/logos/dark/transparent/logo.png"
+import logoTypeDark from "../public/logos/dark/transparent/logo-type.png"
 
 const navigation = [
     {name: 'Commands', href: '/commands'},
@@ -52,14 +55,14 @@ export default function Navbar() {
         return (
             <div className="flex-shrink-0 flex items-center">
                 <Link href={"/"}>
-                    <img
+                    <Image
                         className="block lg:hidden h-8 w-auto"
-                        src="/logos/dark/transparent/logo.png"
+                        src={logoImageDark}
                         alt="DisCal"
                     />
-                    <img
+                    <Image
                         className="hidden lg:block h-8 w-auto"
-                        src="/logos/dark/transparent/logo-type.png"
+                        src={logoTypeDark}
                         alt="DisCal"
                     />
                     <span className="sr-only">Homepage</span>
@@ -121,6 +124,7 @@ export default function Navbar() {
                         className="bg-discal-dark-blue flex text-sm rounded-full focus:outline-none focus:ring-2
                                             focus:ring-offset-2 focus:ring-offset-discal-dark-grey focus:ring-white">
                         <span className="sr-only">Open user menu</span>
+                        {/*TODO: Should be Image, but need to define remote patterns for image optimization*/}
                         <img className="h-8 w-8 rounded-full"
                              src={props.user.avatar}
                              alt="Profile Photo"
