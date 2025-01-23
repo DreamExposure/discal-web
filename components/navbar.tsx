@@ -145,7 +145,7 @@ export default function Navbar() {
                                             bg-discord-not-quite-black ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <MenuItem>
                             <p className="block px-4 py-2 text-sm text-discal-light-grey">
-                                {props.user.username}#{props.user.discriminator}
+                                {props.user.username}
                             </p>
                         </MenuItem>
                         <MenuItem>
