@@ -17,6 +17,12 @@ module.exports = {
               port: '',
               search: ''
           },
+          {
+              protocol: "https",
+              hostname: "cdn.discordapp.com",
+              port: '',
+              search: ''
+          }
       ],
     },
 }

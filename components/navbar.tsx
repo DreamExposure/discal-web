@@ -124,10 +124,11 @@ export default function Navbar() {
                         className="bg-discal-dark-blue flex text-sm rounded-full focus:outline-none focus:ring-2
                                             focus:ring-offset-2 focus:ring-offset-discal-dark-grey focus:ring-white">
                         <span className="sr-only">Open user menu</span>
-                        {/*TODO: Should be Image, but need to define remote patterns for image optimization*/}
-                        <img className="h-8 w-8 rounded-full"
+                        <Image className="h-8 w-8 rounded-full"
                              src={props.user.avatar}
                              alt="Profile Photo"
+                             width={32}
+                             height={32}
                         />
                     </MenuButton>
                 </div>
