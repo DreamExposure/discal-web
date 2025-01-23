@@ -78,10 +78,9 @@ function getBaseUrl(): string {
     if (typeof window !== 'undefined') {
         switch (window.location.hostname) {
             case 'dev.discalbot.com':
-                return 'https://dev-api.discalbot.com'
+                return 'https://dev.discalbot.com'
             case 'discalbot.com':
             case 'www.discalbot.com':
-                return 'https://api.discalbot.com'
             case 'localhost':
                 return '/api'
             default:
