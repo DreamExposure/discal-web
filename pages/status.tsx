@@ -58,8 +58,8 @@ function GeneralStats(props: NetworkProps): JSX.Element {
         let totalMem = 0.0
 
         totalMem += data.api_status.memory
-        totalMem += data.cam_status?.memory ?? 0.0
 
+        data.cam_status.forEach(value => totalMem += value.memory)
         data.bot_status.forEach(value => totalMem += value.instance.memory)
 
         return mbToGb(totalMem)
@@ -85,6 +85,7 @@ function GeneralStats(props: NetworkProps): JSX.Element {
 
 function ServiceStats(props: NetworkProps): JSX.Element {
     const services = [
+        // Since there's only 1 API server, we can just statically add it to this list
         {
             name: 'API',
             icon: ServerStackIcon,
@@ -94,17 +95,21 @@ function ServiceStats(props: NetworkProps): JSX.Element {
             uptime: props.data.api_status.human_uptime,
             lastHeartbeat: minutesAgo(new Date(props.data.api_status.last_heartbeat))
         },
-        {
-            name: 'Authentication',
-            icon: LockClosedIcon,
-            version: props.data.cam_status.version,
-            d4jVersion: props.data.cam_status.d4j_version,
-            memory: `${mbToGb(props.data.cam_status.memory)}GB`,
-            uptime: props.data.cam_status.human_uptime,
-            lastHeartbeat: minutesAgo(new Date(props.data.cam_status.last_heartbeat))
-        }
-        // More services one day, hopefully...
     ]
+
+    // Iterate CAM clients and add to service list
+    props.data.cam_status.forEach(cam => {
+        services.push({
+            name: `Authentication ${cam.instance_id.substring(0, 8)}`,
+            icon: LockClosedIcon,
+            version: cam.version,
+            d4jVersion: cam.d4j_version,
+            memory: `${mbToGb(cam.memory)}GB`,
+            uptime: cam.human_uptime,
+            lastHeartbeat: minutesAgo(new Date(cam.last_heartbeat))
+        })
+    })
+
 
     function ServiceList(): JSX.Element {
         return <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -155,7 +160,7 @@ function ShardStats(props: NetworkProps): JSX.Element {
                 version: bot.instance.version,
                 d4jVersion: bot.instance.d4j_version,
                 guilds: bot.guilds,
-                memory:  `${mbToGb(bot.instance.memory)}GB`,
+                memory: `${mbToGb(bot.instance.memory)}GB`,
                 uptime: bot.instance.human_uptime,
                 lastHeartbeat: minutesAgo(new Date(bot.instance.last_heartbeat))
             })

@@ -33,7 +33,7 @@ export type NetworkStatus = {
     total_announcements: number;
     api_status: InstanceData;
     website_status: InstanceData;
-    cam_status:InstanceData;
+    cam_status:InstanceData[];
     bot_status: BotInstanceData[];
     expected_shard_count: number;
     total_guilds: number;
