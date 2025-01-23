@@ -9,6 +9,8 @@ import {
     CommandLineIcon,
     MegaphoneIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
+import calendarOverviewScreenshotImage from "../public/screenshots/calendar-overview.png"
 
 function Hero(): JSX.Element {
     function Heading(): JSX.Element {
@@ -72,10 +74,13 @@ function Hero(): JSX.Element {
     function MainImage() {
         return <div
             className="relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
-            <img
+            <Image
                 className="absolute inset-0 w-full h-full object-cover"
-                src="https://images.unsplash.com/photo-1588453251771-cd919b362ed4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2102&q=80"
+                src="https://images.unsplash.com/photo-1588453251771-cd919b362ed4"
                 alt="Calendar with muffins and coffee cup"
+                width={1152}
+                height={720}
+                priority
             />
         </div>
     }
@@ -107,9 +112,9 @@ function Example(): JSX.Element {
                 </p>
             </div>
             <div className="mt-12 -mb-10 sm:-mb-24 lg:-mb-80">
-                <img
+                <Image
                     className="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5"
-                    src="/screenshots/calendar-overview.png"
+                    src={calendarOverviewScreenshotImage}
                     alt=""
                 />
             </div>
@@ -219,9 +224,9 @@ function CTA(): JSX.Element {
 
     function CTAImage(): JSX.Element {
         return <div className="-mt-6 aspect-w-5 aspect-h-3 md:aspect-w-2 md:aspect-h-1">
-            <img className="transform translate-x-6 translate-y-6 rounded-md object-cover object-left-top
+            <Image className="transform translate-x-6 translate-y-6 rounded-md object-cover object-left-top
             sm:translate-x-16 lg:translate-y-20"
-                 src="/screenshots/calendar-overview.png"
+                 src={calendarOverviewScreenshotImage}
                  alt="App screenshot"
             />
         </div>

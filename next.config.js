@@ -5,8 +5,18 @@ module.exports = {
       return [
           {
               source: '/api/:slug*',
-              destination: 'https://dev-api.discalbot.com/:slug*'
-          }
+              destination: 'https://dev.discalbot.com/api/:slug*'
+          },
       ]
-    }
+    },
+    images: {
+      remotePatterns: [
+          {
+              protocol: 'https',
+              hostname: "images.unsplash.com",
+              port: '',
+              search: ''
+          },
+      ],
+    },
 }
