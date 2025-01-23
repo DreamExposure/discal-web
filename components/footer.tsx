@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faDiscord, faGithub, faPatreon, faTwitter} from "@fortawesome/free-brands-svg-icons";
+import {faDiscord, faGithub, faPatreon} from "@fortawesome/free-brands-svg-icons";
 import {PropsOf} from "@headlessui/react/dist/types";
 import Link from "next/link";
 import Image from "next/image"
@@ -45,13 +45,6 @@ const navigation = {
             href: 'https://patreon.com/Novafox',
             icon: (props: PropsOf<any>) => (
                 <FontAwesomeIcon icon={faPatreon} {...props}/>
-            ),
-        },
-        {
-            name: 'Twitter',
-            href: 'https://twitter.com/DisCalBot',
-            icon: (props: PropsOf<any>) => (
-                <FontAwesomeIcon icon={faTwitter} {...props}/>
             ),
         },
     ],
