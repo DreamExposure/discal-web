@@ -1,16 +1,3 @@
-import {ReactNode} from "react"
-
-/////////* Props */////////
-export type Props = {
-    children?: ReactNode
-    extraClass?: string
-    caption?: string
-}
-
-export type NetworkProps = {
-    data: NetworkStatus,
-}
-
 /////////* Session Objects */////////
 export type User = {
     id: string,

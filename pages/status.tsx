@@ -1,7 +1,7 @@
 import React, {JSX, useEffect, useState} from "react";
 import Loader from "../components/loader";
 import {toast} from "react-toastify";
-import type {NetworkProps, NetworkStatus} from "../lib/types";
+import type { NetworkStatus} from "../lib/types";
 import Custom500 from "./500";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRobot} from "@fortawesome/free-solid-svg-icons"
@@ -45,7 +45,7 @@ export default function StatusPage() {
     </>
 }
 
-function GeneralStats(props: NetworkProps): JSX.Element {
+function GeneralStats(props: {data: NetworkStatus}): JSX.Element {
     const stats = [
         {name: 'Guilds', stat: props.data.total_guilds},
         {name: 'Calendars', stat: props.data.total_calendars},
@@ -83,7 +83,7 @@ function GeneralStats(props: NetworkProps): JSX.Element {
     </div>
 }
 
-function ServiceStats(props: NetworkProps): JSX.Element {
+function ServiceStats(props: {data: NetworkStatus}): JSX.Element {
     const services = [
         // Since there's only 1 API server, we can just statically add it to this list
         {
@@ -150,7 +150,7 @@ function ServiceStats(props: NetworkProps): JSX.Element {
     </div>
 }
 
-function ShardStats(props: NetworkProps): JSX.Element {
+function ShardStats(props: {data: NetworkStatus}): JSX.Element {
     function listAll(): any[] {
         let array: any[] = [];
 
