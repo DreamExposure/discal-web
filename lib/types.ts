@@ -1,8 +1,8 @@
-import { JSX } from "react"
+import {ReactNode} from "react"
 
 /////////* Props */////////
 export type Props = {
-    children?: JSX.Element | JSX.Element[] | string
+    children?: ReactNode
     extraClass?: string
     caption?: string
 }
@@ -92,4 +92,29 @@ export type FeatureTier = {
 export type Faq = {
     question: string,
     answer: string,
+}
+
+export type CommandTableData = {
+    title: string,
+    commands: CommandData[],
+}
+
+export type CommandData = {
+    command: string,
+    description: string,
+    usage: string,
+    access: CommandAccessData,
+}
+
+export type CommandAccessData = {
+    renderedAccessLevel: CommandAccessLevel,
+    alternateText?: string,
+}
+
+export enum CommandAccessLevel {
+    Elevated   = "Elevated",
+    Privileged = "Privileged",
+    Everyone   = "Everyone",
+    PatronOnly = "Patron-only",
+    DevOnly    = "Developer-Only",
 }
