@@ -279,13 +279,19 @@ const allCommands: CommandTableData[] = [
            {
                command: 'create',
                description: 'Starts the announcement create wizard',
-               usage: '/announcement create (type) (channel) (minutes) (hours) (calendar)',
+               usage: '/announcement create (type) (modifier) (channel) (minutes) (hours) (calendar)',
                access: { renderedAccessLevel: CommandAccessLevel.Privileged },
            },
            {
                command: 'type',
                description: 'Sets the announcement type. Valid types: UNIVERSAL, SPECIFIC, COLOR, RECUR',
                usage: '/announcement type [type]',
+               access: { renderedAccessLevel: CommandAccessLevel.Privileged },
+           },
+           {
+               command: 'modifier',
+               description: 'Sets the announcement modifier. Valid types: BEFORE (default), DURING',
+               usage: '/announcement modifier [modifier]',
                access: { renderedAccessLevel: CommandAccessLevel.Privileged },
            },
            {
@@ -424,6 +430,12 @@ const allCommands: CommandTableData[] = [
                 description: 'Changes the style announcements will be posted as',
                 usage: '/settings announcement-style [style]',
                 access: { renderedAccessLevel: CommandAccessLevel.Elevated },
+            },
+            {
+                command: 'pause-announcements',
+                description: 'Allows pausing and unpausing of all announcements for a period of time. Leave options blank to unpause',
+                usage: '/settings pause-announcements (hours) (days) (weeks)',
+                access: { renderedAccessLevel: CommandAccessLevel.Elevated }
             },
             {
                 command: 'language',
