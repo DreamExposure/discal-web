@@ -38,7 +38,7 @@ export type InstanceData = {
     version: string;
     d4jVersion: string;
     uptime: string;
-    lastHeartbeat: bigint;
+    lastHeartbeat: string;
     memory: number;
     humanUptime: string;
 }
