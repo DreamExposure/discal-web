@@ -1,7 +1,7 @@
 import React, {JSX, useEffect, useState} from "react";
 import Loader from "../components/loader";
 import {toast} from "react-toastify";
-import type { NetworkStatus} from "../lib/types";
+import type {NetworkStatus, Service} from "../lib/types";
 import Custom500 from "./500";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRobot} from "@fortawesome/free-solid-svg-icons"
@@ -47,20 +47,19 @@ export default function StatusPage() {
 
 function GeneralStats(props: {data: NetworkStatus}): JSX.Element {
     const stats = [
-        {name: 'Guilds', stat: props.data.total_guilds},
-        {name: 'Calendars', stat: props.data.total_calendars},
-        {name: 'Announcements', stat: props.data.total_announcements},
-        {name: 'Connected Shards', stat: `${props.data.bot_status.length}/${props.data.expected_shard_count}`},
+        {name: 'Guilds', stat: props.data.totalGuildsCount},
+        {name: 'Calendars', stat: props.data.totalCalendars},
+        {name: 'Announcements', stat: props.data.totalAnnouncements},
+        {name: 'Connected Shards', stat: `${props.data.botStatus.length}/${props.data.expectedShardCount}`},
         {name: 'Memory Usage', stat: `${totalMemUsageInGb(props.data)}GB`},
     ]
 
     function totalMemUsageInGb(data: NetworkStatus) {
         let totalMem = 0.0
 
-        totalMem += data.api_status.memory
-
-        data.cam_status.forEach(value => totalMem += value.memory)
-        data.bot_status.forEach(value => totalMem += value.instance.memory)
+        data.apiStatus.forEach(value => totalMem += value.memory)
+        data.camStatus.forEach(value => totalMem += value.memory)
+        data.botStatus.forEach(value => totalMem += value.instanceData.memory)
 
         return mbToGb(totalMem)
     }
@@ -84,29 +83,30 @@ function GeneralStats(props: {data: NetworkStatus}): JSX.Element {
 }
 
 function ServiceStats(props: {data: NetworkStatus}): JSX.Element {
-    const services = [
-        // Since there's only 1 API server, we can just statically add it to this list
-        {
-            name: 'API',
+    const services: Service[] = []
+    // Iterate API clients as API is now stateless
+    props.data.apiStatus.forEach(api => {
+        services.push({
+            name: `API ${api.instanceId.substring(0, 8)}`,
             icon: ServerStackIcon,
-            version: props.data.api_status.version,
-            d4jVersion: props.data.api_status.d4j_version,
-            memory: `${mbToGb(props.data.api_status.memory)}GB`,
-            uptime: props.data.api_status.human_uptime,
-            lastHeartbeat: minutesAgo(new Date(props.data.api_status.last_heartbeat))
-        },
-    ]
+            version: api.version,
+            d4jVersion: api.d4jVersion,
+            memory: `${mbToGb(api.memory)}GB`,
+            uptime: api.humanUptime,
+            lastHeartbeat: minutesAgo(new Date(api.lastHeartbeat))
+        })
+    })
 
     // Iterate CAM clients and add to service list
-    props.data.cam_status.forEach(cam => {
+    props.data.camStatus.forEach(cam => {
         services.push({
-            name: `Authentication ${cam.instance_id.substring(0, 8)}`,
+            name: `Authentication ${cam.instanceId.substring(0, 8)}`,
             icon: LockClosedIcon,
             version: cam.version,
-            d4jVersion: cam.d4j_version,
+            d4jVersion: cam.d4jVersion,
             memory: `${mbToGb(cam.memory)}GB`,
-            uptime: cam.human_uptime,
-            lastHeartbeat: minutesAgo(new Date(cam.last_heartbeat))
+            uptime: cam.humanUptime,
+            lastHeartbeat: minutesAgo(new Date(cam.lastHeartbeat))
         })
     })
 
@@ -154,15 +154,15 @@ function ShardStats(props: {data: NetworkStatus}): JSX.Element {
     function listAll(): any[] {
         let array: any[] = [];
 
-        props.data.bot_status.forEach(bot => {
+        props.data.botStatus.forEach(bot => {
             array.push({
-                name: `Shard ${bot.shard_index}`,
-                version: bot.instance.version,
-                d4jVersion: bot.instance.d4j_version,
+                name: `Shard ${bot.shardIndex}`,
+                version: bot.instanceData.version,
+                d4jVersion: bot.instanceData.d4jVersion,
                 guilds: bot.guilds,
-                memory: `${mbToGb(bot.instance.memory)}GB`,
-                uptime: bot.instance.human_uptime,
-                lastHeartbeat: minutesAgo(new Date(bot.instance.last_heartbeat))
+                memory: `${mbToGb(bot.instanceData.memory)}GB`,
+                uptime: bot.instanceData.humanUptime,
+                lastHeartbeat: minutesAgo(new Date(bot.instanceData.lastHeartbeat))
             })
         })
 
