@@ -93,7 +93,7 @@ function ServiceStats(props: {data: NetworkStatus}): JSX.Element {
             d4jVersion: api.d4jVersion,
             memory: `${mbToGb(api.memory)}GB`,
             uptime: api.humanUptime,
-            lastHeartbeat: minutesAgo(new Date(api.lastHeartbeat))
+            lastHeartbeat: minutesAgo(new Date(api.lastHeartbeat.toString()))
         })
     })
 
@@ -106,7 +106,7 @@ function ServiceStats(props: {data: NetworkStatus}): JSX.Element {
             d4jVersion: cam.d4jVersion,
             memory: `${mbToGb(cam.memory)}GB`,
             uptime: cam.humanUptime,
-            lastHeartbeat: minutesAgo(new Date(cam.lastHeartbeat))
+            lastHeartbeat: minutesAgo(new Date(cam.lastHeartbeat.toString()))
         })
     })
 
@@ -162,7 +162,7 @@ function ShardStats(props: {data: NetworkStatus}): JSX.Element {
                 guilds: bot.guilds,
                 memory: `${mbToGb(bot.instanceData.memory)}GB`,
                 uptime: bot.instanceData.humanUptime,
-                lastHeartbeat: minutesAgo(new Date(bot.instanceData.lastHeartbeat))
+                lastHeartbeat: minutesAgo(new Date(bot.instanceData.lastHeartbeat.toString()))
             })
         })
 
