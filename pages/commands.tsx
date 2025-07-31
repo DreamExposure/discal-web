@@ -438,6 +438,12 @@ const allCommands: CommandTableData[] = [
                 access: { renderedAccessLevel: CommandAccessLevel.Elevated }
             },
             {
+                command: 'show-rsvp-dropdown',
+                description: 'Allows showing/hiding the RSVP dropdown on all event and announcement posts',
+                usage: `/settings show-rsvp dropdown [true/false]`,
+                access: { renderedAccessLevel: CommandAccessLevel.Elevated },
+            },
+            {
                 command: 'language',
                 description: 'Changes the language the bot will use in responses',
                 usage: '/settings language [lang]',
