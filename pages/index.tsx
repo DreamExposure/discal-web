@@ -154,7 +154,7 @@ function FeatureList(): JSX.Element {
     function Heading(): JSX.Element {
         return <>
             <h2 className="text-base font-semibold tracking-wider text-discal-blue uppercase">
-                Scheduler Easier
+                Schedule Easier
             </h2>
             <p className="mt-2 text-3xl font-extrabold text-discal-green tracking-tight sm:text-4xl">
                 Everything you need to organize your community
