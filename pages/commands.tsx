@@ -102,7 +102,7 @@ const allCommands: CommandTableData[] = [
             {
                 command: 'create',
                 description: 'Starts the event create wizard',
-                usage: '/event create (name) (calendar)',
+                usage: '/event create',
                 access: { renderedAccessLevel: CommandAccessLevel.Privileged },
             },
             {
@@ -120,7 +120,7 @@ const allCommands: CommandTableData[] = [
             {
                 command: 'start',
                 description: 'Sets the event\'s start',
-                usage: '/event start [yyyy] [MM] [dd] (hh) (mm) (keep-duration)',
+                usage: '/event start [yyyy] [MM] [dd] (hh) (mm) (duration) (keep-duration)',
                 access: { renderedAccessLevel: CommandAccessLevel.Privileged },
             },
             {
