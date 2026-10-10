@@ -28,10 +28,11 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
-  ]
+    "node_modules",
+  ],
+  // Stops nextjs from rewriting this config and breaking the build because fuck you that's why
+  // https://github.com/vercel/next.js/discussions/39942#discussioncomment-16676508
+  "references": []
 }
