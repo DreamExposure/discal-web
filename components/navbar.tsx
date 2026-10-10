@@ -53,7 +53,7 @@ export default function Navbar() {
 
     function BrandingImage() {
         return (
-            <div className="flex-shrink-0 flex items-center">
+            <div className="shrink-0 flex items-center">
                 <Link href={"/"}>
                     <Image
                         className="block lg:hidden h-8 w-auto"
@@ -141,7 +141,7 @@ export default function Navbar() {
                     leaveFrom="opacity-100 scale-100"
                     leaveTo="opacity-0 scale-95"
                 >
-                    <MenuItems className="z-[999] origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1
+                    <MenuItems className="z-999 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1
                                             bg-discord-not-quite-black ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <MenuItem>
                             <p className="block px-4 py-2 text-sm text-discal-light-grey">

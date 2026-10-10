@@ -224,7 +224,7 @@ function CTA(): JSX.Element {
 
     function CTAImage(): JSX.Element {
         return <div className="-mt-6 aspect-w-5 aspect-h-3 md:aspect-w-2 md:aspect-h-1">
-            <Image className="transform translate-x-6 translate-y-6 rounded-md object-cover object-left-top
+            <Image className="transform translate-x-6 translate-y-6 rounded-md object-cover object-top-left
             sm:translate-x-16 lg:translate-y-20"
                  src={calendarOverviewScreenshotImage}
                  alt="App screenshot"

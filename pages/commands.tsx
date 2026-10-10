@@ -564,7 +564,7 @@ export default function Commands() {
                                     {commandTableData.title}
                                 </span>
                                 <span className='flex items-center my-5 size-8 text-discal-blue'>
-                                    <PlusIcon aria-hidden='true' className='group-data-[open]:hidden' />
+                                    <PlusIcon aria-hidden='true' className='group-data-open:hidden' />
                                     <MinusIcon aria-hidden='true' className='group-[&:not([data-open])]:hidden' />
                                 </span>
                             </DisclosureButton>

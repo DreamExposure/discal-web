@@ -276,7 +276,7 @@ export default function PremiumPage() {
                             )}>
                             {plan.mainFeatures.map((mainFeature) => (
                                 <li key={mainFeature.id} className="py-3 flex items-center">
-                                    <CheckIcon className='w-5 h-5 flex-shrink-0 text-discal-blue' aria-hidden="true"/>
+                                    <CheckIcon className='w-5 h-5 shrink-0 text-discal-blue' aria-hidden="true"/>
                                     <span className={classNames(plan.featured ? 'text-discal-dark-blue' : 'text-white',
                                         'ml-3 text-sm font-medium')}
                                     >

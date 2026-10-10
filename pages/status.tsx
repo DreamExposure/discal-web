@@ -119,7 +119,7 @@ function ServiceStats(props: {data: NetworkStatus}): JSX.Element {
                         <div className="flex-1 truncate">
                             <div className="flex items-center space-x-3">
                                 <h3 className="text-discal-not-black text-sm font-semibold truncate">{srv.name}</h3>
-                                <span className="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs
+                                <span className="shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs
                                 font-medium bg-green-100 rounded-full" aria-label='version'>
                                     {srv.version}
                                 </span>
@@ -137,7 +137,7 @@ function ServiceStats(props: {data: NetworkStatus}): JSX.Element {
                                 Last Heartbeat: {srv.lastHeartbeat}
                             </p>
                         </div>
-                        <srv.icon className="w-10 h-10 rounded-full flex-shrink-0 text-discal-dark-blue"/>
+                        <srv.icon className="w-10 h-10 rounded-full shrink-0 text-discal-dark-blue"/>
                     </div>
                 </li>
             ))}
@@ -177,7 +177,7 @@ function ShardStats(props: {data: NetworkStatus}): JSX.Element {
                         <div className="flex-1 truncate">
                             <div className="flex items-center space-x-3">
                                 <h3 className="text-discal-not-black text-sm font-semibold truncate">{srv.name}</h3>
-                                <span className="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs
+                                <span className="shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs
                                 font-medium bg-green-100 rounded-full" aria-label='version'>
                                     {srv.version}
                                 </span>
@@ -199,7 +199,7 @@ function ShardStats(props: {data: NetworkStatus}): JSX.Element {
                             </p>
                         </div>
                         <FontAwesomeIcon icon={faRobot}
-                                         className="w-10 h-10 rounded-full flex-shrink-0 text-discal-dark-blue"/>
+                                         className="w-10 h-10 rounded-full shrink-0 text-discal-dark-blue"/>
                     </div>
                 </li>
             ))}
