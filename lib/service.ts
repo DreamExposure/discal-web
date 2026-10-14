@@ -1,6 +1,6 @@
 import {useRequestEmpty, useRequestJson, useRequestText} from "./client";
 import {useCallback} from "react";
-import type {LoginResponse, NetworkStatus, Session} from "./types";
+import type {CalendarV3Model, LoginResponse, NetworkStatus, Session} from "./types";
 
 /////////* login requests */////////
 export function useRequestLogin() {
@@ -46,3 +46,14 @@ export function useRequestStatus() {
         return await requestJson('GET', '/v3/status');
     }, [requestJson])
 }
+
+/////////* Calendar requests */////////
+export function useRequestCalendar(guildId: string, calendarNumber: number) {
+    const requestJson = useRequestJson()
+
+    return useCallback(async (): Promise<CalendarV3Model> => {
+        return await requestJson('GET', `/v3/guilds/${guildId}/calendars/${calendarNumber}`)
+    }, [requestJson])
+}
+
+/////////* Event requests */////////

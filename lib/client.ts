@@ -75,16 +75,6 @@ export function useRequestEmpty() {
 }
 
 function getBaseUrl(): string {
-    if (typeof window !== 'undefined') {
-        switch (window.location.hostname) {
-            case 'dev.discalbot.com':
-            case 'discalbot.com':
-            case 'www.discalbot.com':
-            case 'localhost':
-                return '/api'
-            default:
-                return 'invalid-hostname'
-        }
-    } else return 'no-hostname-found'
+    return '/api'
 }
 

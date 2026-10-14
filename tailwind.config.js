@@ -26,6 +26,8 @@ module.exports = {
 
 
                 'google': `#EA4335`,
+                'google-melrose': '#A4BDFC',
+                'google-riptide': '#7AE7BF',
                 'google-mauve': '#DBADFF',
                 'google-tangerine': '#FF887C',
                 'google-dandelion': '#FBD75B',

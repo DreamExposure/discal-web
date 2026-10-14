@@ -14,6 +14,7 @@ export type Session = {
 }
 
 
+
 /////////* Network Objects */////////
 export type NetworkStatus = {
     totalCalendars: number;
@@ -41,6 +42,106 @@ export type InstanceData = {
     lastHeartbeat: string;
     memory: number;
     humanUptime: string;
+}
+
+/////////* Calendar Objects */////////
+export enum CalendarHost {
+    GOOGLE = "Google"
+}
+
+export type CalendarV3Model = {
+    number: number,
+    guildId: string,
+    name: string,
+    description: string,
+    timezone: string,
+    link: string,
+    host: CalendarHost,
+    hostLink: string,
+    external: boolean,
+}
+
+export enum EventColor {
+    MELROSE,
+    RIPTIDE,
+    MAUVE,
+    TANGERINE,
+    DANDELION,
+    MAC_AND_CHEESE,
+    TURQUOISE,
+    MERCURY,
+    BLUE,
+    GREEN,
+    RED,
+    NONE,
+}
+
+export enum Frequency {
+    DAILY,
+    WEEKLY,
+    MONTHLY,
+    YEARLY,
+}
+
+export enum SetPos {
+    FIRST,
+    SECOND,
+    THIRD,
+    FOURTH,
+    LAST,
+}
+
+export enum Day {
+    SUNDAY,
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY,
+}
+
+export enum Month {
+    JANUARY,
+    FEBRUARY,
+    MARCH,
+    APRIL,
+    MAY,
+    JUNE,
+    JULY,
+    AUGUST,
+    SEPTEMBER,
+    OCTOBER,
+    NOVEMBER,
+    DECEMBER,
+}
+
+export type EventRecurrence = {
+    frequency: Frequency,
+    interval: number,
+    count: number | null,
+    bySetPos: SetPos | null,
+    byDay: Day[],
+    byMonthDay:  number | null,
+    byMonth: Month | null,
+
+}
+
+export type Event = {
+    id: string,
+    guildId: string,
+    calendarNumber: number,
+    name: string,
+    description: string,
+    location: string,
+    link: string,
+    color: EventColor,
+    start: Date,
+    end: Date,
+    recur: boolean,
+    recurrence: EventRecurrence,
+    image: string,
+    timezone: string,
 }
 
 /////////* DisCal API Responses */////////
