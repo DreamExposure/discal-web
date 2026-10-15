@@ -57,3 +57,20 @@ export function useRequestCalendar(guildId: string, calendarNumber: number) {
 }
 
 /////////* Event requests */////////
+export function useRequestEvent(guildId: string, calendarNumber: number, eventId: string) {
+    const requestJson = useRequestJson()
+
+    return useCallback(async (): Promise<Event> => {
+        return await requestJson('GET', `/v3/guilds/${guildId}/calendars/${calendarNumber}/events/${eventId}`)
+    }, [requestJson])
+}
+
+export function useRequestEventsRange(guildId: string, calendarNumber: number, start: Date, end: Date) {
+    const requestJson = useRequestJson()
+
+    return useCallback(async (): Promise<Event[]> => {
+        return await requestJson('GET', `/v3/guilds/${guildId}/calendars/${calendarNumber}/events?start=${start.toISOString()}&end=${end.toISOString()}`)
+    }, [requestJson])
+}
+
+

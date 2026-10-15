@@ -142,6 +142,12 @@ export type Event = {
     recurrence: EventRecurrence,
     image: string,
     timezone: string,
+
+    allDay: boolean,
+    multiDay: boolean,
+    ongoing: boolean,
+    started: boolean,
+    over: boolean,
 }
 
 /////////* DisCal API Responses */////////
