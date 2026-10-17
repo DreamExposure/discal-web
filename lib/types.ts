@@ -14,7 +14,6 @@ export type Session = {
 }
 
 
-
 /////////* Network Objects */////////
 export type NetworkStatus = {
     totalCalendars: number;
@@ -153,6 +152,13 @@ export type Event = {
 /////////* DisCal API Responses */////////
 export type LoginResponse = {
     link: string
+}
+
+export type TemporaryTokenResponse = {
+    token: string,
+    guildId: string,
+    expiresAt: Date,
+    scopes: string[],
 }
 
 /////////* Various objects typed for maintainability */////////
