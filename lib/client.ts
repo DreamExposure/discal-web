@@ -1,6 +1,41 @@
 import {useCallback, useContext} from "react";
 import SessionContext from "./context";
 
+function buildRequest(method: string, endpoint: string, data?: Object) {
+    const {session} = useContext(SessionContext);
+    const token = session.token
+
+    const headers: HeadersInit = {
+        "Content-Type": "application/json",
+    };
+
+    if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    const body: BodyInit | null = data ? JSON.stringify(data) : null;
+
+    return fetch(`${getBaseUrl()}${endpoint}`, {
+        method: method,
+        headers: headers,
+        body: body
+    });
+}
+
+export async function requestJson(method: string, endpoint: string, data?: Object) {
+    return (await buildRequest(method, endpoint, data)).json
+}
+
+export async function requestText(method: string, endpoint: string, data?: Object) {
+    return (await buildRequest(method, endpoint, data)).text()
+}
+
+export async function requestEmpty(method: string, endpoint: string, data?: Object) {
+    return (await buildRequest(method, endpoint, data))
+}
+
+
+// UseCallback/useEffects // TODO: Maybe get rid of these???
 export function useRequestJson() {
     const {session} = useContext(SessionContext);
     const token = session.token

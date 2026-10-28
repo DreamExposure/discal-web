@@ -1,4 +1,4 @@
-import {useRequestEmpty, useRequestJson, useRequestText} from "./client";
+import {requestJson, useRequestEmpty, useRequestJson, useRequestText} from "./client";
 import {useCallback} from "react";
 import type {CalendarV3Model, LoginResponse, NetworkStatus, Session} from "./types";
 
@@ -48,29 +48,31 @@ export function useRequestStatus() {
 }
 
 /////////* Calendar requests */////////
-export function useRequestCalendar(guildId: string, calendarNumber: number) {
+export async function requestCalendar(guildId: string, calendarNumber: number): Promise<() => Promise<CalendarV3Model>> {
+    return await requestJson('GET', `/v3/guilds/${guildId}/calendars/${calendarNumber}`)
+}
+
+export function useRequestCalendar() {
     const requestJson = useRequestJson()
 
-    return useCallback(async (): Promise<CalendarV3Model> => {
+    return useCallback(async (guildId: string, calendarNumber: number): Promise<CalendarV3Model> => {
         return await requestJson('GET', `/v3/guilds/${guildId}/calendars/${calendarNumber}`)
     }, [requestJson])
 }
 
 /////////* Event requests */////////
-export function useRequestEvent(guildId: string, calendarNumber: number, eventId: string) {
+export function useRequestEvent() {
     const requestJson = useRequestJson()
 
-    return useCallback(async (): Promise<Event> => {
+    return useCallback(async (guildId: string, calendarNumber: number, eventId: string): Promise<Event> => {
         return await requestJson('GET', `/v3/guilds/${guildId}/calendars/${calendarNumber}/events/${eventId}`)
     }, [requestJson])
 }
 
-export function useRequestEventsRange(guildId: string, calendarNumber: number, start: Date, end: Date) {
+export function useRequestEventsRange() {
     const requestJson = useRequestJson()
 
-    return useCallback(async (): Promise<Event[]> => {
+    return useCallback(async (guildId: string, calendarNumber: number, start: Date, end: Date): Promise<Event[]> => {
         return await requestJson('GET', `/v3/guilds/${guildId}/calendars/${calendarNumber}/events?start=${start.toISOString()}&end=${end.toISOString()}`)
     }, [requestJson])
 }
-
-

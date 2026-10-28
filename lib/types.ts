@@ -150,6 +150,14 @@ export type Event = {
 }
 
 /////////* DisCal API Responses */////////
+export type ApiRequestResponse<T> = {
+    success: boolean,
+    code: number,
+    error: string | null,
+    exception: string | null,
+    data: T,
+}
+
 export type LoginResponse = {
     link: string
 }
