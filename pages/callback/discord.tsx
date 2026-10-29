@@ -12,6 +12,7 @@ export default function DiscordCallbackPage() {
     const { setSession } = useContext(SessionContext);
     const requestCode = useRequestDiscordCode()
 
+    // TODO: clean this up, bring in line with new patterns established in calendar embed page
     useEffect(() => {
         // Check if we have code, if so, request token from server
         const params = new URL(window.location.href).searchParams
@@ -23,7 +24,7 @@ export default function DiscordCallbackPage() {
         if (params.has("code") && params.has("state")) {
             // Send code and state to backend
             requestCode(params.get("code")!, params.get("state")!).then(session => {
-                setSession(session)
+                setSession(session.data)
 
                 toast("Logged in successfully")
                 router.push(storedUrl)

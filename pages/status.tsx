@@ -16,11 +16,13 @@ export default function StatusPage() {
     const [data, setData] = useState<NetworkStatus>()
     const [isLoading, setLoading] = useState(true)
 
+
+    // TODO: clean this up, bring in line with new patterns established in calendar embed page
     useEffect(() => {
         setLoading(true)
         // get link and push the client to it
         requestStatus().then(data => {
-            setData(data)
+            setData(data.data)
         }).catch(error => {
             console.error("Status get error", error)
             toast.error("Failed to get status")

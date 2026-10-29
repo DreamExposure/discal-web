@@ -153,9 +153,13 @@ export type Event = {
 export type ApiRequestResponse<T> = {
     success: boolean,
     code: number,
-    error: string | null,
-    exception: string | null,
+    error: ApiRequestResponseError | null,
     data: T,
+}
+
+export type ApiRequestResponseError = {
+    error: string | null
+    exception: string | null
 }
 
 export type LoginResponse = {

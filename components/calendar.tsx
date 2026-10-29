@@ -14,8 +14,6 @@ import {CalendarV3Model} from "../lib/types";
 
 
 export default function Calendar(props: {calendar: CalendarV3Model}) {
-        // TODO: handle loading state while fetching data to render initial view
-        // TODO: Fetch initial data
         // TODO: Handlers for on event click and popping event view modal
         // TODO: Handlers for fetching events on view change
         // TODO: Custom button to view on 3rd party host

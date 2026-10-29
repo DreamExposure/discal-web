@@ -1,14 +1,13 @@
 import {useCallback, useContext} from "react";
 import SessionContext from "./context";
+import {ApiRequestResponse} from './types'
 
-function buildRequest(method: string, endpoint: string, data?: Object) {
-    const {session} = useContext(SessionContext);
-    const token = session.token
-
+function buildRequest(method: string, endpoint: string, token: string | null, data?: Object) {
     const headers: HeadersInit = {
         "Content-Type": "application/json",
     };
 
+    // TODO: Gonna need handling of the embed token???
     if (token) {
         headers["Authorization"] = `Bearer ${token}`;
     }
@@ -22,42 +21,23 @@ function buildRequest(method: string, endpoint: string, data?: Object) {
     });
 }
 
-export async function requestJson(method: string, endpoint: string, data?: Object) {
-    return (await buildRequest(method, endpoint, data)).json
-}
-
-export async function requestText(method: string, endpoint: string, data?: Object) {
-    return (await buildRequest(method, endpoint, data)).text()
-}
-
-export async function requestEmpty(method: string, endpoint: string, data?: Object) {
-    return (await buildRequest(method, endpoint, data))
-}
-
-
-// UseCallback/useEffects // TODO: Maybe get rid of these???
-export function useRequestJson() {
+// UseCallback/useEffects
+export function useRequestJson<T>() {
     const {session} = useContext(SessionContext);
     const token = session.token
 
     return useCallback(async (method: string, endpoint: string, data?: Object) => {
-        const headers: HeadersInit = {
-            "Content-Type": "application/json",
-        };
+        const webResponse = await buildRequest(method, endpoint, token, data)
 
-        if (token) {
-            headers["Authorization"] = `Bearer ${token}`;
-        }
+        let response =  {
+            success: webResponse.ok,
+            code: webResponse.status,
+        } as ApiRequestResponse<T>
 
-        const body: BodyInit | null = data ? JSON.stringify(data) : null;
+        if (webResponse.ok) response.data = await webResponse.json()
+        else response.error = await webResponse.json()
 
-        const response = await fetch(`${getBaseUrl()}${endpoint}`, {
-            method: method,
-            headers: headers,
-            body: body
-        });
-
-        return response.json()
+        return response
     }, [token])
 }
 
@@ -66,23 +46,17 @@ export function useRequestText() {
     const token = session.token
 
     return useCallback(async (method: string, endpoint: string, data?: Object) => {
-        const headers: HeadersInit = {
-            "Content-Type": "application/json",
-        };
+        const webResponse = await buildRequest(method, endpoint, token, data)
 
-        if (token) {
-            headers["Authorization"] = `Bearer ${token}`;
-        }
+        let response =  {
+            success: webResponse.ok,
+            code: webResponse.status,
+        } as ApiRequestResponse<string>
 
-        const body: BodyInit | null = data ? JSON.stringify(data) : null;
+        if (webResponse.ok) response.data = await webResponse.text()
+        else response.error = await webResponse.json()
 
-        const response = await fetch(`${getBaseUrl()}${endpoint}`, {
-            method: method,
-            headers: headers,
-            body: body
-        });
-
-        return response.text()
+        return response
     }, [token])
 }
 
@@ -91,21 +65,17 @@ export function useRequestEmpty() {
     const token = session.token
 
     return useCallback(async (method: string, endpoint: string, data?: Object) => {
-        const headers: HeadersInit = {
-            "Content-Type": "application/json",
-        };
+        const webResponse = await buildRequest(method, endpoint, token, data)
 
-        if (token) {
-            headers["Authorization"] = `Bearer ${token}`;
-        }
+        let response =  {
+            success: webResponse.ok,
+            code: webResponse.status,
+            data: null
+        } as ApiRequestResponse<null>
 
-        const body: BodyInit | null = data ? JSON.stringify(data) : null;
+        if (!webResponse.ok) response.error = await webResponse.json()
 
-        return await fetch(`${getBaseUrl()}${endpoint}`, {
-            method: method,
-            headers: headers,
-            body: body
-        })
+        return response
     }, [token])
 }
 

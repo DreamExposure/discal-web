@@ -14,55 +14,54 @@ export default function CalendarEmbedPage() {
     const requestCalendar = useRequestCalendar();
 
     const [data, setData] = useState<CalendarV3Model>()
+    const [loginRequired, setLoginRequired] = useState(false)
     const [isLoading, setLoading] = useState(true)
 
     // FIXME: This is gonna need some logic to handle malformed URLs
     const guildId = router.query.guildId?.toString()
     const calendarNumber = parseInt(router.query.calendarNumber?.toString() ?? "1")
 
-    const fetchData = async () => {
-        console.log("Hit 1")
-        if (guildId === undefined) return
+    const fetchCalendarData = async () => {
+        // Reset state
+        setLoading(true)
+        setLoginRequired(false)
+        setData(undefined)
 
-        // FIXME: response handling code is eating network errors... figure out how to deal with that
-        let response = await requestCalendar(guildId, calendarNumber)
-        console.log(response)
-        setData(response)
+        let response = await requestCalendar(guildId as string, calendarNumber)
+        console.log(response) //TODO: remove debug log here
+
+        if (response.success) {
+            setData(response.data)
+            setLoading(false)
+        } else if (response.code == 403) {
+            // Calendar is private, user must log in and be a member of the guild
+            setLoginRequired(true)
+            setLoading(false)
+        } else {
+            // Other error state
+            setLoading(false)
+            toast.error(`Error requesting calendar data - ${response.error?.error}`)
+        }
+
+
+        setData(response.data)
     }
 
     useEffect(() => {
-        setLoading(true)
-
+        // Need guildId, wait for next render
         if (guildId === undefined) return
 
-        fetchData()
-
-        /*
-        requestCalendar(guildId, calendarNumber).then(data => {
-            //FIXME: Apparently the 401 is still hitting this instead of the catch block???... wtf
-
-            console.log("Hit")
-            setData(data)
-        }).catch(error => {
-            // TODO: Handle special case for private calendars
-
-            console.error("Calendar get error", error)
-            toast.error("Failed to get calendar")
-        }).finally(() => {
-            // Always set loading state here for sanity
-            setLoading(false)
-        })
-         */
-
-
         // Get calendar
+        fetchCalendarData()
     }, [requestCalendar, guildId])
 
 
 
     if (isLoading) return <Loader/>
-    console.log(`data: ${data}`)
-
+    // TODO: Show something for login being required and/or not being a member of the guild
+    if (!data && loginRequired) return <>
+        <p>Oopsie Woopsie you need to loggie insie</p>
+    </>
     if (!data) return <Custom500/>
 
     return <>

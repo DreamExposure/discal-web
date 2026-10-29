@@ -1,7 +1,7 @@
 import 'server-only'
-import {TemporaryTokenResponse} from "../types";
+import {ApiRequestResponse, TemporaryTokenResponse} from "../types";
 
-export async function getJsonServerSide(method: string, endpoint: string ,data?: Object) {
+function buildRequest(method: string, endpoint: string, data?: Object) {
     const headers: HeadersInit = {
         "Content-Type": "application/json",
         "Authorization": `INT ${process.env.DISCAL_API_KEY}`
@@ -9,16 +9,29 @@ export async function getJsonServerSide(method: string, endpoint: string ,data?:
 
     const body: BodyInit | null = data ? JSON.stringify(data) : null;
 
-    const response = await fetch(`${getBaseUrl()}${endpoint}`, {
+    return fetch(`${getBaseUrl()}${endpoint}`, {
         method: method,
         headers: headers,
         body: body
     });
-
-    return response.json
 }
 
-export async function getTemporaryEmbedToken(guildId: string): Promise<() => Promise<TemporaryTokenResponse>> {
+export async function getJsonServerSide<T>(method: string, endpoint: string ,data?: Object) {
+    const webResponse = await buildRequest(method, endpoint, data)
+
+
+    let response =  {
+        success: webResponse.ok,
+        code: webResponse.status,
+    } as ApiRequestResponse<T>
+
+    if (webResponse.ok) response.data = await webResponse.json()
+    else response.error = await webResponse.json()
+
+    return response
+}
+
+export async function getTemporaryEmbedToken(guildId: string): Promise<ApiRequestResponse<TemporaryTokenResponse>> {
     return await getJsonServerSide('GET', `/cam/v1/token/calendar-embed&guildId=${guildId}`)
 }
 

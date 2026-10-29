@@ -8,10 +8,11 @@ export default function InvitePage() {
     const router = useRouter()
     const requestInviteLink = useRequestInviteLink()
 
+    // TODO: clean this up, bring in line with new patterns established in calendar embed page
     useEffect(() => {
         // get link and push the client to it
         requestInviteLink().then(data => {
-            router.push(data)
+            router.push(data.data)
         })
     }, [router, requestInviteLink]);
 
