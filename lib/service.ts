@@ -1,6 +1,6 @@
 import {useRequestEmpty, useRequestJson, useRequestText} from "./client";
 import {useCallback} from "react";
-import type {ApiRequestResponse, CalendarV3Model, LoginResponse, NetworkStatus, Session} from "./types";
+import type {CalendarV3Model, Event, LoginResponse, NetworkStatus, Session} from "./types";
 
 /////////* login requests */////////
 export function useRequestLogin() {

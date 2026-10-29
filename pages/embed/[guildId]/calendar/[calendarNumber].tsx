@@ -27,7 +27,7 @@ export default function CalendarEmbedPage() {
         setLoginRequired(false)
         setData(undefined)
 
-        let response = await requestCalendar(guildId as string, calendarNumber)
+        const response = await requestCalendar(guildId as string, calendarNumber)
         console.log(response) //TODO: remove debug log here
 
         if (response.success) {
@@ -53,7 +53,7 @@ export default function CalendarEmbedPage() {
 
         // Get calendar
         fetchCalendarData()
-    }, [requestCalendar, guildId])
+    }, [guildId])
 
 
 
