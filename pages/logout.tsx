@@ -4,7 +4,7 @@ import Loader from "../components/loader";
 import SessionContext from "../lib/context";
 import {toast} from "react-toastify";
 import {useRequestLogout} from "../lib/service";
-import {Session} from "../lib/types";
+import {Session, SessionContextData} from "../lib/types";
 import Head from "next/head";
 
 export default function LogoutPage() {
@@ -13,9 +13,9 @@ export default function LogoutPage() {
     const requestLogout = useRequestLogout()
 
     useEffect(() => {
-        // clear session
+        // clear entire session - including temp token
         requestLogout().finally(() => {
-            setSession({} as Session)
+            setSession({} as SessionContextData)
 
             toast("Logged out successfully")
             router.back()

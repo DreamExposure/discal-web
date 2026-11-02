@@ -9,14 +9,14 @@ import Head from "next/head";
 
 export default function DiscordCallbackPage() {
     const router = useRouter()
-    const { setSession } = useContext(SessionContext);
+    const { session, setSession } = useContext(SessionContext);
     const requestCode = useRequestDiscordCode()
 
     const fetchDiscordCode = async (code: string, state: string) => {
         let response = await requestCode(code, state)
 
         if (response.success) {
-            setSession(response.data)
+            setSession({session: response.data, tempToken: session.tempToken})
 
             toast("Logged in successfully")
         } else {

@@ -13,6 +13,10 @@ export type Session = {
     user: User | null,
 }
 
+export type SessionContextData = {
+    session: Session | null,
+    tempToken: TemporaryToken | null
+}
 
 /////////* Network Objects */////////
 export type NetworkStatus = {
@@ -139,14 +143,16 @@ export type Event = {
     end: Date,
     recur: boolean,
     recurrence: EventRecurrence,
+    rrule: string,
     image: string,
     timezone: string,
 
-    allDay: boolean,
-    multiDay: boolean,
-    ongoing: boolean,
-    started: boolean,
-    over: boolean,
+    isAllDay: boolean,
+    isMultiDay: boolean,
+    isOngoing: boolean,
+    isStarted: boolean,
+    isOver: boolean,
+    is24Hours: boolean,
 }
 
 /////////* DisCal API Responses */////////
@@ -166,7 +172,7 @@ export type LoginResponse = {
     link: string
 }
 
-export type TemporaryTokenResponse = {
+export type TemporaryToken = {
     token: string,
     guildId: string,
     expiresAt: Date,

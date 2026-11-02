@@ -1,8 +1,8 @@
-import {useRequestEmpty, useRequestJson, useRequestText} from "./client";
+import {requestJson, useRequestEmpty, useRequestJson, useRequestText} from "./client";
 import {useCallback} from "react";
-import type {CalendarV3Model, Event, LoginResponse, NetworkStatus, Session} from "./types";
+import type {CalendarV3Model, Event, LoginResponse, NetworkStatus, Session, TemporaryToken} from "./types";
 
-/////////* login requests */////////
+/////////* login+auth requests */////////
 export function useRequestLogin() {
     const requestJson = useRequestJson<LoginResponse>();
 
@@ -17,7 +17,14 @@ export function useRequestLogout() {
     return useCallback(async () => {
         return await requestEmpty('GET', '/cam/oauth2/discord/logout')
     }, [requestEmpty])
+}
 
+export function useRequestTemporaryEmbedToken() {
+    const requestJson = useRequestJson<TemporaryToken>()
+
+    return useCallback(async (guildId: string) => {
+        return await requestJson('GET', `/cam/v1/token/calendar-embed?guildId=${guildId}`)
+    }, [requestJson])
 }
 
 /////////* oauth callback requests */////////
@@ -71,4 +78,8 @@ export function useRequestEventsRange() {
     return useCallback(async (guildId: string, calendarNumber: number, start: Date, end: Date) => {
         return await requestJson('GET', `/v3/guilds/${guildId}/calendars/${calendarNumber}/events?start=${start.toISOString()}&end=${end.toISOString()}`)
     }, [requestJson])
+}
+
+export async function requestEventsRange(guildId: string, calendarNumber: number, start: Date, end: Date) {
+    return await requestJson<Event[]>('GET', `/v3/guilds/${guildId}/calendars/${calendarNumber}/events/range?start=${start.toISOString()}&end=${end.toISOString()}`)
 }

@@ -1,9 +1,9 @@
 import React from "react";
-import type { Session } from "./types";
+import type {Session, SessionContextData} from "./types";
 
 const SessionContext = React.createContext({
-    session: {} as Session,
-    setSession: (session: Session) => {},
-});
+    session: {} as SessionContextData,
+    setSession: (session: SessionContextData) => {},
+})
 
 export default SessionContext

@@ -1,5 +1,5 @@
 import 'server-only'
-import {ApiRequestResponse, TemporaryTokenResponse} from "../types";
+import {ApiRequestResponse, TemporaryToken} from "../types";
 
 function buildRequest(method: string, endpoint: string, data?: Object) {
     const headers: HeadersInit = {
@@ -31,8 +31,8 @@ export async function getJsonServerSide<T>(method: string, endpoint: string ,dat
     return response
 }
 
-export async function getTemporaryEmbedToken(guildId: string): Promise<ApiRequestResponse<TemporaryTokenResponse>> {
-    return await getJsonServerSide('GET', `/cam/v1/token/calendar-embed&guildId=${guildId}`)
+export async function getTemporaryEmbedToken(guildId: string): Promise<ApiRequestResponse<TemporaryToken>> {
+    return await getJsonServerSide('GET', `/cam/v1/token/calendar-embed?guildId=${guildId}`)
 }
 
 function getBaseUrl(): string {
