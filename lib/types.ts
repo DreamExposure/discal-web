@@ -145,6 +145,7 @@ export type Event = {
     recurrence: EventRecurrence,
     rrule: string,
     image: string,
+    imageAlt: string,
     timezone: string,
 
     isAllDay: boolean,

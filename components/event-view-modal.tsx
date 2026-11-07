@@ -19,8 +19,7 @@ function ModalContent(props: {event: Event}) {
 
     function EventImage() {
         return <div className='flex justify-center'>
-            {/*TODO: ya know, it would be really cool to support alt text on event images tbh...*/}
-            <img className='max-w-fit rounded-xl' src={props.event.image} alt={'Event image'}/>
+            <img className='max-w-fit rounded-xl' src={props.event.image} alt={props.event.imageAlt}/>
         </div>
     }
 
