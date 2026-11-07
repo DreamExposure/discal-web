@@ -1,4 +1,4 @@
-import {Event, EventColor} from './types'
+import {Event, EventColor, EventRecurrence} from './types'
 import {EventInput} from "@fullcalendar/react";
 
 export function classNames(...classes: string[]) {
@@ -86,4 +86,39 @@ export function eventColorRGB(color: EventColor) {
             return '#DC2127';
         }
     }
+}
+
+export function recurrenceAsHumanReadable(recurrence: EventRecurrence) {
+    let text = `Repeat ${recurrence.frequency.toString().toLowerCase()} every ${recurrence.interval} `;
+
+    // I really shouldn't have to convert it to a string, but it doesn't work otherwise
+    switch (recurrence.frequency.toString()) {
+        case "DAILY": {
+            text += 'days(s) '
+            break
+        }
+        case "WEEKLY": {
+            text += 'week(s) '
+            break
+        }
+        case "MONTHLY": {
+            text += 'month(s) '
+            break
+        }
+        case "YEARLY": {
+            text += 'year(s) '
+            break
+        }
+    }
+
+    if (recurrence.byMonth !== null && recurrence.byMonthDay !== null)  text += `on ${recurrence.byMonth} ${recurrence.byMonthDay} `
+    else if (recurrence.byMonthDay !== null) text += `on the ${recurrence.byMonthDay} `
+
+    if (recurrence.byMonth !== null && recurrence.bySetPos !== null && recurrence.byDay.length > 0) text += `on the ${recurrence.bySetPos} ${recurrence.byDay.join(',')} of ${recurrence.byMonth} `
+    else if (recurrence.bySetPos !== null && recurrence.byDay.length > 0) text += `on the ${recurrence.bySetPos} ${recurrence.byDay.join(',')} `
+    else if (recurrence.byDay.length > 0) text += `on ${recurrence.byDay.join(',')} `
+
+    if (recurrence.count != null) text += `End after ${recurrence.count} occurrence(s)`
+
+    return text
 }

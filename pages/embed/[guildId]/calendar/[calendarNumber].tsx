@@ -33,7 +33,7 @@ export default function CalendarEmbedPage() {
         if (session.session) return
 
         // Do not fetch if existing temp token still valid + for this guild
-        if (session.tempToken && session.tempToken.guildId == guildId) return
+        if (session.tempToken && session.tempToken.guildId == guildId && (new Date(session.tempToken.expiresAt).valueOf() - new Date().valueOf() > 0)) return
 
         // response logic
         const response = await requestTempToken(guildId!)
@@ -114,7 +114,7 @@ export default function CalendarEmbedPage() {
 
         <Container>
             <h1 className='text-xl text-discal-red'>Guild ID: {guildId} | Calendar Number: {calendarNumber}</h1>
-            <Calendar calendar={data} timezones={timezones}/>
+            <Calendar calendar={data} timezones={timezones} />
         </Container>
     </>
 
