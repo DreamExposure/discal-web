@@ -9,6 +9,54 @@ import {useRequestCalendar, useRequestTemporaryEmbedToken} from "../../../../lib
 import {toast} from "react-toastify";
 import Head from "next/head";
 import SessionContext from "../../../../lib/context";
+import Link from "next/link";
+import {saveToLocalStorage} from "../../../../lib/utils";
+
+
+function PrivateCalendar() {
+    const router = useRouter()
+
+    return <div className="max-w-7xl mx-auto px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8 lg:py-48">
+        <h1 className="text-3xl font-semibold text-discal-blue uppercase tracking-wide">
+            403 error
+        </h1>
+        <h1 className="mt-3 text-4xl font-extrabold text-white tracking-tight sm:text-5xl">
+            Looks like this calendar is private.
+        </h1>
+        <p className="mt-4 text-lg font-medium text-discord-greyple">
+            Only members of the guild may view this calendar. The account you are logged in with is not a member of the guild.
+        </p>
+        <div className="mt-6">
+            <button onClick={() => router.back()}
+                    className='bg-discal-light-grey text-sm font-medium rounded-md px-4 py-2 text-black
+                    hover:bg-discal-blue hover:text-white'>
+                Go back
+            </button>
+        </div>
+    </div>
+}
+
+function LoginRequired() {
+    return <div className="max-w-7xl mx-auto px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8 lg:py-48">
+        <h1 className="text-3xl font-semibold text-discal-blue uppercase tracking-wide">
+            403 error
+        </h1>
+        <h1 className="mt-3 text-4xl font-extrabold text-white tracking-tight sm:text-5xl">
+            Looks like this calendar is private.
+        </h1>
+        <p className="mt-4 text-lg font-medium text-discord-greyple">
+            Only members of the guild may view this calendar. Try logging in if you are a member of the guild.
+        </p>
+        <div className="mt-6">
+            <Link onClick={() => saveToLocalStorage("previous_page", window.location.href)}
+                  href='/login'
+                    className='bg-discal-light-grey text-sm font-medium rounded-md px-4 py-2 text-black
+                    hover:bg-discal-blue hover:text-white'>
+                Login with Discord
+            </Link>
+        </div>
+    </div>
+}
 
 export default function CalendarEmbedPage() {
     const router = useRouter()
@@ -82,6 +130,19 @@ export default function CalendarEmbedPage() {
         if (response.ok) setTimezones(await response.json())
     }
 
+    const renderCorrectView = () => {
+        if (isLoading) return <Loader/>
+
+        if (!data && loginRequired) {
+            if (session.session) return <PrivateCalendar/>
+            else return <LoginRequired/>
+        }
+
+        if (!data) return <Custom500/>
+
+        return <Calendar calendar={data} timezones={timezones}/>
+    }
+
     // Fire once on page load
     useEffect(() => {
         fetchValidTimezones()
@@ -99,22 +160,13 @@ export default function CalendarEmbedPage() {
     }, [guildId, session])
 
 
-
-    if (isLoading) return <Loader/>
-    // TODO: Show something for login being required and/or not being a member of the guild
-    if (!data && loginRequired) return <>
-        <p>Oopsie Woopsie you need to loggie insie</p>
-    </>
-    if (!data) return <Custom500/>
-
     return <>
         <Head>
             <title>Guild Calendar - DisCal Bot</title>
         </Head>
 
         <Container>
-            <h1 className='text-xl text-discal-red'>Guild ID: {guildId} | Calendar Number: {calendarNumber}</h1>
-            <Calendar calendar={data} timezones={timezones} />
+            {renderCorrectView()}
         </Container>
     </>
 
