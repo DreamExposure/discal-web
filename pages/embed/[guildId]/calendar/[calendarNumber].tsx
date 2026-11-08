@@ -11,6 +11,7 @@ import Head from "next/head";
 import SessionContext from "../../../../lib/context";
 import Link from "next/link";
 import {saveToLocalStorage} from "../../../../lib/utils";
+import Custom400 from "../../../../components/400";
 
 
 function PrivateCalendar() {
@@ -67,9 +68,10 @@ export default function CalendarEmbedPage() {
     const [data, setData] = useState<CalendarV3Model>()
     const [timezones, setTimezones] = useState<string[]>([])
     const [loginRequired, setLoginRequired] = useState(false)
+    const [invalidInput, setInvalidInput] = useState(false)
     const [isLoading, setLoading] = useState(true)
 
-    // FIXME: This is gonna need some logic to handle malformed URLs
+   // Technically there should be logic handling this on the front end,
     const guildId = router.query.guildId?.toString()
     const calendarNumber = parseInt(router.query.calendarNumber?.toString() ?? "1")
 
@@ -138,6 +140,7 @@ export default function CalendarEmbedPage() {
             else return <LoginRequired/>
         }
 
+        if (invalidInput) return <Custom400/>
         if (!data) return <Custom500/>
 
         return <Calendar calendar={data} timezones={timezones}/>
@@ -150,7 +153,14 @@ export default function CalendarEmbedPage() {
 
     useEffect(() => {
         // Need guildId, wait for next render
-        if (guildId === undefined) return
+        if (guildId === undefined || calendarNumber === undefined) return
+
+        // Make sure calendar number and guildId are at least numbers
+        if (isNaN(Number(guildId)) || isNaN(calendarNumber)) {
+            setInvalidInput(true)
+            setLoading(false)
+            return
+        }
 
         // Get temp token
         fetchTemporaryToken()
