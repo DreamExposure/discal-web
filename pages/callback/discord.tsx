@@ -9,39 +9,36 @@ import Head from "next/head";
 
 export default function DiscordCallbackPage() {
     const router = useRouter()
-    const { setSession } = useContext(SessionContext);
+    const { session, setSession } = useContext(SessionContext);
     const requestCode = useRequestDiscordCode()
+
+    const fetchDiscordCode = async (code: string, state: string) => {
+        let response = await requestCode(code, state)
+
+        if (response.success) {
+            setSession({session: response.data, tempToken: session.tempToken})
+
+            toast("Logged in successfully")
+        } else {
+            console.error(response.error)
+            toast.error("Something went wrong, please try again")
+        }
+
+        let storedUrl = loadFromLocalStorage("previous_page", "/")
+        removeFromLocalStorage("previous_page")
+        await router.push(storedUrl)
+    }
 
     useEffect(() => {
         // Check if we have code, if so, request token from server
         const params = new URL(window.location.href).searchParams
+        const code = params.get("code")
+        const state = params.get("state")
 
-        // check if previous page is stored, otherwise redirect to home
-        let storedUrl = loadFromLocalStorage("previous_page", "/")
-        removeFromLocalStorage("previous_page")
-
-        if (params.has("code") && params.has("state")) {
-            // Send code and state to backend
-            requestCode(params.get("code")!, params.get("state")!).then(session => {
-                setSession(session)
-
-                toast("Logged in successfully")
-                router.push(storedUrl)
-            }).catch(err => {
-                console.error(err)
-
-                toast.error("Something went wrong, please try again")
-                router.push(storedUrl)
-            })
-        } else {
-            let storedUrl = loadFromLocalStorage("previous_page", "/")
-            removeFromLocalStorage("previous_page")
-
-            // redirect and show error toast
-            toast.error("Something went wrong, please try again")
-            router.push(storedUrl)
+        if (code && state) {
+            fetchDiscordCode(code, state)
         }
-    }, [router, requestCode, setSession])
+    }, [])
 
     return <>
         <Head>
