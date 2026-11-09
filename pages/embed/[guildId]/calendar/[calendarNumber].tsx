@@ -1,17 +1,17 @@
 import {useRouter} from 'next/router'
-import Calendar from "../../../../components/calendar";
-import Container from "../../../../components/container";
-import {useContext, useEffect, useState} from "react";
-import {CalendarV3Model, SessionContextData} from "../../../../lib/types";
-import Loader from "../../../../components/loader";
-import Custom500 from "../../../500";
-import {useRequestCalendar, useRequestTemporaryEmbedToken} from "../../../../lib/service";
-import {toast} from "react-toastify";
-import Head from "next/head";
-import SessionContext from "../../../../lib/context";
-import Link from "next/link";
-import {saveToLocalStorage} from "../../../../lib/utils";
-import Custom400 from "../../../../components/400";
+import {useContext, useEffect, useState} from "react"
+import {CalendarV3Model, SessionContextData} from "../../../../lib/types"
+import Loader from "../../../../components/loader"
+import Custom500 from "../../../500"
+import {useRequestCalendar, useRequestTemporaryEmbedToken} from "../../../../lib/service"
+import {toast} from "react-toastify"
+import Head from "next/head"
+import SessionContext from "../../../../lib/context"
+import Link from "next/link"
+import {saveToLocalStorage} from "../../../../lib/utils"
+import Calendar from "../../../../components/calendar"
+import Container from "../../../../components/container"
+import Custom400 from "../../../../components/400"
 
 
 function PrivateCalendar() {
@@ -151,6 +151,7 @@ export default function CalendarEmbedPage() {
         fetchValidTimezones()
     }, [])
 
+    // re-render cuz params don't populate on first hydrate
     useEffect(() => {
         // Need guildId, wait for next render
         if (guildId === undefined || calendarNumber === undefined) return

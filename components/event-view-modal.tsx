@@ -1,10 +1,9 @@
-import {Dialog, DialogBackdrop, DialogPanel, DialogTitle} from "@headlessui/react";
-import {Dispatch, SetStateAction} from "react";
+import {Dialog, DialogBackdrop, DialogPanel, DialogTitle} from "@headlessui/react"
 import {Event, EventColor} from "../lib/types"
-import moment from "moment";
-import {MapPinIcon} from "@heroicons/react/16/solid";
-import {classNames, recurrenceAsHumanReadable} from "../lib/utils";
-import {CodeBracketIcon} from "@heroicons/react/24/outline";
+import moment from "moment"
+import {MapPinIcon} from "@heroicons/react/16/solid"
+import {classNames, recurrenceAsHumanReadable} from "../lib/utils"
+import {CodeBracketIcon} from "@heroicons/react/24/outline"
 
 
 function ModalHeader(props: {event: Event}) {
@@ -83,7 +82,7 @@ function ModalContent(props: {event: Event}) {
     </div>
 }
 
-export function ModalFooter(props: { setOpen: Dispatch<SetStateAction<boolean>>}) {
+export function ModalFooter(props: { setOpen: (state: boolean) => void}) {
     return <div className="mt-5 sm:mt-6">
         <button
             type="button"
@@ -99,7 +98,7 @@ export function ModalFooter(props: { setOpen: Dispatch<SetStateAction<boolean>>}
 
 
 
-export default function EventViewModal(props: {open: boolean, setOpen: Dispatch<SetStateAction<boolean>>, event: Event}) {
+export default function EventViewModal(props: {open: boolean, setOpen: (state: boolean) => void, event: Event}) {
     const eventColor = (props.event?.color ?? EventColor.NONE).toString()
 
     return <Dialog open={props.open} onClose={props.setOpen} className="relative z-10">

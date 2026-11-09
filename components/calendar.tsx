@@ -5,18 +5,17 @@ import timeGridPlugin from '@fullcalendar/react/timegrid'
 import interactionPlugin from '@fullcalendar/react/interaction'
 import {toast} from "react-toastify"
 import {Select} from "@headlessui/react"
-import {useRef, useState} from "react";
+import {useRef, useState} from "react"
 import {CalendarV3Model, Event} from "../lib/types"
 import {requestEventsRange} from "../lib/service"
 import {discalEventToFullCalendarEvent} from "../lib/utils"
-import EventViewModal from "./event-view-modal";
+import EventViewModal from "./event-view-modal"
 
 // Stylesheets
 import '@fullcalendar/react/skeleton.css'
 import '@fullcalendar/react/themes/breezy/theme.css'
 import '@fullcalendar/react/themes/breezy/palettes/indigo.css'
-
-// TODO: see if I can override pallet color without needing entire custom theme
+// Maybe one day I'll fork the palette and make it in DisCal's color scheme, but it's not worth it right now
 
 
 export default function Calendar(props: {calendar: CalendarV3Model, timezones: string[]}) {
@@ -48,6 +47,7 @@ export default function Calendar(props: {calendar: CalendarV3Model, timezones: s
         <FullCalendar
             ref={calendarRef}
             expandRows={false}
+            editable={false}
             plugins={[themePlugin, dayGridPlugin, timeGridPlugin, interactionPlugin]}
             initialView='dayGridMonth'
             colorScheme='dark'
