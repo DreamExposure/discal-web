@@ -3,7 +3,7 @@ import Document, {Head, Html, Main, NextScript} from 'next/document'
 export default class MyDocument extends Document {
     render() {
         return (
-            <Html className='bg-discal-not-black'>
+            <Html className='bg-discal-not-black' lang='en'>
                 <Head>
                     <link rel="icon" href="/favicon.ico"/>
                     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
