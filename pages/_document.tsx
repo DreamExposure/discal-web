@@ -23,6 +23,11 @@ export default class MyDocument extends Document {
                     <meta property='og:image' content='/logos/dark/opaque/logo-type.png'/>
                     <meta name='theme-color' content='#5566C2'/>
                     <meta name='twitter:card' content='summary_large_image'/>
+
+                    <meta name='description' content='A calendar bot made for communities,
+                        DisCal integrates directly with calendar services to bring you superior support and features.
+                        Custom calendars, events, automated reminders and more,
+                        ready for you, and ready for your community.'/>
                 </Head>
                 <body>
                 <Main/>
