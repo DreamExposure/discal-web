@@ -75,7 +75,7 @@ function Hero(): JSX.Element {
         return <div
             className="relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
             <Image
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover rounded-bl-xl"
                 src="https://images.unsplash.com/photo-1588453251771-cd919b362ed4"
                 alt="Calendar with muffins and coffee cup"
                 width={1152}
