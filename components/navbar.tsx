@@ -194,7 +194,7 @@ export default function Navbar() {
 
     useEffect(() => {
         setShowUser(session.session?.user !== undefined && session?.session.user !== null)
-    })
+    }, [session])
 
     return <Disclosure as="nav" className="bg-discal-blue">
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
