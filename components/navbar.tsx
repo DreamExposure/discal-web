@@ -34,8 +34,8 @@ function currentPage(router: NextRouter, href: string): Boolean {
 }
 
 export default function Navbar() {
-    const {session} = useContext(SessionContext);
-    const [showUser, setShowUser] = useState(false)
+    const {session} = useContext(SessionContext)
+    const [loggedIn, setLoggedIn] = useState(false)
     const [open, setOpen] = useState(false)
     const router = useRouter()
 
@@ -172,16 +172,15 @@ export default function Navbar() {
             <DisclosurePanel className="sm:hidden" onClick={() => setOpen(!open)}>
                 <div className="px-2 pt-2 pb-3 space-y-1">
                     {navigation.map((item) => (
-                        <Link href={item.href} key={item.name} passHref legacyBehavior>
-                            <DisclosureButton
-                                as="a"
-                                className={classNames(
-                                    currentPage(router, item.href) ? 'bg-discal-dark-blue text-white' :
-                                        'text-white hover:bg-discal-dark-grey hover:text-white',
-                                    'block px-3 py-2 rounded-md text-base font-medium'
-                                )}
-                                aria-current={currentPage(router, item.href) ? 'page' : undefined}
-                            >
+                        <Link href={item.href} key={item.name}
+                              passHref
+                              className={classNames(
+                                  currentPage(router, item.href) ? 'bg-discal-dark-blue text-white' :
+                                      'text-white hover:bg-discal-dark-grey hover:text-white',
+                                  'block px-3 py-2 rounded-md text-base font-medium'
+                              )}
+                        >
+                            <DisclosureButton aria-current={currentPage(router, item.href) ? 'page' : undefined}>
                                 {item.name}
                             </DisclosureButton>
                         </Link>
@@ -193,7 +192,7 @@ export default function Navbar() {
 
 
     useEffect(() => {
-        setShowUser(session.session?.user !== undefined && session?.session.user !== null)
+        setLoggedIn(session.session !== undefined && session.session !== null)
     }, [session])
 
     return <Disclosure as="nav" className="bg-discal-blue">
@@ -207,7 +206,7 @@ export default function Navbar() {
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto
                     sm:ml-6 sm:pr-0">
                     <SupportButton/>
-                    {showUser ? <ProfileDropdown user={session.session!.user!}/> : <LoginButton/>}
+                    {loggedIn && session.session ? <ProfileDropdown user={session.session.user}/> : <LoginButton/>}
                 </div>
             </div>
         </div>

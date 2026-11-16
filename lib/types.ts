@@ -8,9 +8,9 @@ export type User = {
 }
 
 export type Session = {
-    token: string | null,
-    expires: Date | null,
-    user: User | null,
+    token: string,
+    expires: Date,
+    user: User,
 }
 
 export type SessionContextData = {
