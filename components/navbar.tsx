@@ -1,4 +1,6 @@
-import React, {Fragment, JSX, useContext} from 'react'
+import "client-only"
+
+import {Fragment, JSX, useContext, useEffect, useState} from 'react'
 import {
     Disclosure,
     DisclosureButton,
@@ -33,7 +35,8 @@ function currentPage(router: NextRouter, href: string): Boolean {
 
 export default function Navbar() {
     const {session} = useContext(SessionContext);
-    const [open, setOpen] = React.useState(false)
+    const [showUser, setShowUser] = useState(false)
+    const [open, setOpen] = useState(false)
     const router = useRouter()
 
     function MobileMenuButton() {
@@ -188,6 +191,11 @@ export default function Navbar() {
         );
     }
 
+
+    useEffect(() => {
+        setShowUser(session.session?.user !== undefined && session?.session.user !== null)
+    })
+
     return <Disclosure as="nav" className="bg-discal-blue">
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
@@ -199,7 +207,7 @@ export default function Navbar() {
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto
                     sm:ml-6 sm:pr-0">
                     <SupportButton/>
-                    {session.session?.user ? <ProfileDropdown user={session.session!.user}/> : <LoginButton/>}
+                    {showUser ? <ProfileDropdown user={session.session!.user!}/> : <LoginButton/>}
                 </div>
             </div>
         </div>
