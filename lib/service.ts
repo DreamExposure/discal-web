@@ -1,6 +1,14 @@
 import {requestJson, useRequestEmpty, useRequestJson, useRequestText} from "./client";
 import {useCallback} from "react";
-import type {CalendarV3Model, Event, LoginResponse, NetworkStatus, Session, TemporaryToken} from "./types";
+import type {
+    CalendarV3Model,
+    Event,
+    LoginResponse,
+    NetworkStatus,
+    PartialGuild,
+    Session,
+    TemporaryToken
+} from "./types";
 
 /////////* login+auth requests */////////
 export function useRequestLogin() {
@@ -82,4 +90,13 @@ export function useRequestEventsRange() {
 
 export async function requestEventsRange(guildId: string, calendarNumber: number, start: Date, end: Date) {
     return await requestJson<Event[]>('GET', `/v3/guilds/${guildId}/calendars/${calendarNumber}/events/range?start=${start.toISOString()}&end=${end.toISOString()}`)
+}
+
+/////////* Dashboard requests */////////
+export function useRequestUserGuilds() {
+    const requestJson = useRequestJson<PartialGuild[]>()
+
+    return useCallback(async (userId: string, skipCache: boolean = false) => {
+        return await requestJson('GET', `/v3/users/${userId}/guilds?elevatedAccessOnly=true&skipCache=${skipCache}`)
+    }, [requestJson])
 }

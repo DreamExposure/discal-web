@@ -71,7 +71,6 @@ export default function CalendarEmbedPage() {
     const [invalidInput, setInvalidInput] = useState(false)
     const [isLoading, setLoading] = useState(true)
 
-   // Technically there should be logic handling this on the front end,
     const guildId = router.query.guildId?.toString()
     const calendarNumber = parseInt(router.query.calendarNumber?.toString() ?? "1")
 

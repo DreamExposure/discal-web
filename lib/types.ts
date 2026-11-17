@@ -180,6 +180,14 @@ export type TemporaryToken = {
     scopes: string[],
 }
 
+export type PartialGuild = {
+    id: string,
+    name: string,
+    iconUrl: string | null,
+    isOwner: boolean,
+    permissions: string | null,
+}
+
 /////////* Various objects typed for maintainability */////////
 export type Service = {
     name: string;
