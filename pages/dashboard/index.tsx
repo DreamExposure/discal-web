@@ -83,7 +83,10 @@ export default function DashboardIndex() {
         setGuilds([])
 
         // Sanity check
-        if (!session.session || !loggedIn) return
+        if (!session.session || !loggedIn) {
+            setLoading(false)
+            return
+        }
 
         const response = await requestGuilds(session.session.user.id, skipCache)
 
@@ -101,9 +104,8 @@ export default function DashboardIndex() {
     }
 
     const renderCorrectView = () => {
-        if (!loggedIn) return <LoginRequired/>
-
         if (isLoading) return <Loader/>
+        if (!loggedIn) return <LoginRequired/>
         if (isError) return <Custom400/>
 
         return <GuildsList guilds={guilds} refreshHook={fetchGuilds}/>
