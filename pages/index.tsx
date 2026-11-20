@@ -115,7 +115,8 @@ function Example(): JSX.Element {
                 <Image
                     className="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5"
                     src={calendarOverviewScreenshotImage}
-                    alt=""
+                    alt="A screenshot from Discord of an embed posted by the DisCal bot. Within the embed is a display
+                    of the guild's calendar, broken down by day and listing upcoming events"
                 />
             </div>
         </div>
@@ -227,7 +228,8 @@ function CTA(): JSX.Element {
             <Image className="transform translate-x-6 translate-y-6 rounded-md object-cover object-top-left
             sm:translate-x-16 lg:translate-y-20"
                  src={calendarOverviewScreenshotImage}
-                 alt="App screenshot"
+                 alt="A screenshot from Discord of an embed posted by the DisCal bot. Within the embed is a display
+                    of the guild's calendar, broken down by day and listing upcoming events"
             />
         </div>
     }
