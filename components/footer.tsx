@@ -9,7 +9,7 @@ const navigation = {
         {name: 'Premium', href: '/premium'},
         {name: 'Commands', href: '/commands'},
         {name: 'Invite', href: '/invite'},
-        {name: 'Support', href: 'https://discord.gg/2TFqyuy'},
+        {name: 'Support', href: '/support'},
     ],
     developers: [
         {name: 'API', href: '/docs/api/reference'},
@@ -18,7 +18,7 @@ const navigation = {
     company: [
         {name: 'DreamExposure', href: 'https://dreamexposure.org'},
         {name: 'TicketBird', href: 'https://ticketbird.dreamexposure.org'},
-        {name: 'Contact', href: 'https://discord.gg/2TFqyuy'},
+        {name: 'Contact', href: '/support'},
     ],
     legal: [
         {name: 'Privacy', href: '/legal/privacy'},
@@ -27,7 +27,7 @@ const navigation = {
     social: [
         {
             name: 'Discord',
-            href: 'https://discord.gg/2TFqyuy',
+            href: '/support',
             icon: (props: any) => (
                 <FontAwesomeIcon icon={faDiscord} {...props}/>
             ),

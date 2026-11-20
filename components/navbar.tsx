@@ -99,7 +99,7 @@ export default function Navbar() {
     function SupportButton() {
         return <a className="bg-discal-dark-blue p-1 rounded-full text-discal-light-grey
             hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-discal-dark-grey
-            focus:ring-white mx-2" href="https://discord.gg/2TFqyuy" target={'_blank'} rel="noreferrer"
+            focus:ring-white mx-2" href="/support" target={'_blank'} rel="noreferrer"
         >
             <span className="sr-only">Get Support</span>
             <QuestionMarkCircleIcon className="h-6 w-6" aria-hidden="true"/>

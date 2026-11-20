@@ -53,6 +53,14 @@ export function useRequestInviteLink() {
     }, [requestText])
 }
 
+export function useRequestSupportLink() {
+    const requestText = useRequestText()
+
+    return useCallback(async () => {
+        return await requestText('GET', '/v3/invite/support')
+    }, [requestText])
+}
+
 /////////* Status requests */////////
 export function useRequestStatus() {
     const requestJson = useRequestJson<NetworkStatus>();

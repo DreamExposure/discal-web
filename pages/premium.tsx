@@ -530,7 +530,7 @@ export default function PremiumPage() {
                     <h2 className="text-3xl font-extrabold text-discord-blurple">Frequently asked questions</h2>
                     <p className="mt-4 text-lg text-gray-300">
                         Can’t find the answer you’re looking for? Reach out in our{' '}
-                        <a href="https://discord.gg/2TFqyuy"
+                        <a href="/support"
                            className="font-medium text-discord-blurple hover:text-discal-green"
                         >
                             support
