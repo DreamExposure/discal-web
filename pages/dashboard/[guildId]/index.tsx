@@ -7,6 +7,7 @@ import Head from "next/head";
 import Container from "../../../components/container";
 import LoginRequired from "../../../components/login-required";
 import {useRouter} from "next/router";
+import WorkInProgress from "../../../components/work-in-progress";
 
 export default function DashboardIndex() {
     const router = useRouter()
@@ -24,8 +25,8 @@ export default function DashboardIndex() {
         if (isLoading) return <Loader/>
         if (isError) return <Custom400/>
 
-        // TODO: Render actual view instead of terrible place holder
-        return <h1 className='text-6xl text-center text-white'>Under Construction</h1>
+        // TODO: Render actual view instead of WIP
+        return <WorkInProgress/>
     }
 
     useEffect(() => {
