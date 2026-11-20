@@ -14,9 +14,19 @@ import {Button} from "@headlessui/react";
 import LoginRequired from "../../components/login-required";
 
 function GuildsList(props: {guilds: PartialGuild[], refreshHook: (skipCache: boolean) => void}) {
+    const [searchFilter, setSearchFilter] = useState<string>("")
+
     function GuildBlocks(): JSX.Element {
+        let filteredGuilds = props.guilds
+
+        if (searchFilter?.trim().length > 0) {
+            filteredGuilds = props.guilds.filter((guild) => {
+                return guild.name.toLowerCase().includes(searchFilter.toLowerCase())
+            })
+        }
+
         return <>
-            {props.guilds.map((guild) => (
+            {filteredGuilds.map((guild) => (
                 <Link href={`dashboard/${guild.id}`} key={guild.id} className="rounded-lg bg-discal-light-grey text-discal-dark-blue hover:bg-discal-blue hover:text-white focus:outline-discal-blue">
                     <div className="flex items-center">
                         <div>
@@ -29,7 +39,7 @@ function GuildsList(props: {guilds: PartialGuild[], refreshHook: (skipCache: boo
                             </span>
                         </div>
 
-                        <p className="text-lg font-medium  tracking-tight">
+                        <p className="text-lg font-medium tracking-tight pr-4">
                             {guild.name}
                         </p>
                     </div>
@@ -42,9 +52,22 @@ function GuildsList(props: {guilds: PartialGuild[], refreshHook: (skipCache: boo
         <h1 className="mt-3 text-4xl font-extrabold text-white tracking-tight">
             Guilds
         </h1>
+
         <p className="mt-4 text-lg font-medium text-discord-greyple">
             Select a guild below to continue
         </p>
+
+        <div className='flex flex-col'>
+            <input
+                onChange={(event) => {setSearchFilter(event.target.value)}}
+                value={searchFilter}
+                name="Guild search"
+                type="text"
+                placeholder="Search guilds"
+                aria-label="Guild Search"
+                className="w-full sm:w-1/2 lg:w-1/3 rounded-md mt-2 px-3 py-1.5 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2 sm:text-sm/6 bg-white/5 text-white outline-white/10 placeholder:text-discal-light-grey focus:outline-discal-blue"
+            />
+        </div>
 
         <div className="mt-12">
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
