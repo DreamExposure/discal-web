@@ -10,8 +10,12 @@ export default function InvitePage() {
     const requestInviteLink = useRequestInviteLink()
 
     useEffect(() => {
+        // Check if we have guildId
+        const params = new URL(window.location.href).searchParams
+        const guildId = params.get("guildId")
+
         // get link and push the client to it
-        requestInviteLink().then(response => {
+        requestInviteLink(guildId).then(response => {
             if (response.success) router.push(response.data)
             else {
                 console.log(response.error)
@@ -19,7 +23,7 @@ export default function InvitePage() {
                 router.back()
             }
         })
-    }, [router, requestInviteLink]);
+    }, []);
 
     return <>
         <Head>

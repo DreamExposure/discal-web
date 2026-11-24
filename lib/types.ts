@@ -188,6 +188,65 @@ export type PartialGuild = {
     permissions: string | null,
 }
 
+export enum TimeFormat {
+    TWENTY_FOUR_HOUR = 1,
+    TWELVE_HOUR = 2,
+}
+
+export enum AnnouncementStyle {
+    FUll = 1,
+    SIMPLE = 2,
+    EVENT = 3,
+    MINIMAL = 4,
+}
+
+export type InterfaceStyle = {
+    timeFormat: TimeFormat,
+    announcementStyle: AnnouncementStyle,
+    branded: boolean,
+}
+
+export type GuildSettings = {
+    guildId: string,
+
+    controlRole: string | null,
+    patronGuild: boolean,
+    devGuild: boolean,
+    maxCalendars: number,
+    locale: string,
+    eventKeepDuration: boolean,
+    showRsvpDropdown: boolean,
+    pausedAnnouncementsUntil: Date | null,
+
+    interfaceStyle: InterfaceStyle,
+}
+
+export type WebRoleV3Model = {
+    id: string,
+    name: string,
+
+    managed: boolean,
+    controlRole: boolean,
+    everyone: boolean,
+}
+
+export type WebGuildV3Model = {
+    id: string,
+    name: string,
+    iconUrl: string | null,
+
+    botNickname: string | null,
+
+    userHasElevatedAccess: boolean,
+    userHasDisCalControlRole: boolean,
+
+    roles: WebRoleV3Model[],
+
+    settings: GuildSettings,
+    calendars: CalendarV3Model[],
+
+}
+
 /////////* Various objects typed for maintainability */////////
 export type Service = {
     name: string;

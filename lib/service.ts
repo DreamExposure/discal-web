@@ -7,7 +7,7 @@ import type {
     NetworkStatus,
     PartialGuild,
     Session,
-    TemporaryToken
+    TemporaryToken, WebGuildV3Model
 } from "./types";
 
 /////////* login+auth requests */////////
@@ -48,8 +48,11 @@ export function useRequestDiscordCode() {
 export function useRequestInviteLink() {
     const requestText = useRequestText()
 
-    return useCallback(async () => {
-        return await requestText('GET', '/v3/invite')
+    return useCallback(async (guildId?: string | null) => {
+        let params = ""
+        if (guildId) params = `?guildId=${guildId}`
+
+        return await requestText('GET', `/v3/invite${params}`)
     }, [requestText])
 }
 
@@ -106,5 +109,13 @@ export function useRequestUserGuilds() {
 
     return useCallback(async (userId: string, skipCache: boolean = false) => {
         return await requestJson('GET', `/v3/users/${userId}/guilds?elevatedAccessOnly=true&skipCache=${skipCache}`)
+    }, [requestJson])
+}
+
+export function useRequestWebGuild() {
+    const requestJson = useRequestJson<WebGuildV3Model>()
+
+    return useCallback(async (guildId: string, userId: string) => {
+        return await requestJson('GET', `/v3/guilds/${guildId}?userId=${userId}`)
     }, [requestJson])
 }
