@@ -11,6 +11,7 @@ export default function WorkInProgress() {
             src={discalDevLogo}
             alt="A screenshot from Discord of an embed posted by the DisCal bot. Within the embed is a display
                  of the guild's calendar, broken down by day and listing upcoming events"
+            loading='eager'
         />
 
         <h1 className="text-3xl font-semibold text-discal-blue uppercase tracking-wide mt-8">

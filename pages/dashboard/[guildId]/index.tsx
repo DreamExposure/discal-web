@@ -69,7 +69,7 @@ export default function DashboardIndex() {
     const [loggedIn, setLoggedIn] = useState(false)
     const [isLoading, setLoading] = useState(true)
     const [isError, setIsError] = useState(false)
-    const [botNotInGuild, setBotNotInGuild] = useState(true)
+    const [botNotInGuild, setBotNotInGuild] = useState(false)
     const [unauthorized, setUnauthorized] = useState(false)
     const [guild, setGuild] = useState<WebGuildV3Model>()
 
@@ -82,10 +82,7 @@ export default function DashboardIndex() {
         setIsError(false)
 
         // Sanity check
-        if (!session.session || !loggedIn || !guildId) {
-            setLoading(false)
-            return
-        }
+        if (!session.session || !loggedIn || !guildId) return
 
         const response = await requestWebGuild(guildId, session.session.user.id)
 
@@ -112,9 +109,11 @@ export default function DashboardIndex() {
     }
 
     const renderCorrectView = () => {
-        if (!loggedIn) return <LoginRequired/>
+        if (!guildId) return <></>
 
+        if (!loggedIn) return <LoginRequired/>
         if (isLoading) return <Loader/>
+
         if (unauthorized) return <Unauthorized/>
         if (botNotInGuild) return <BotNotInGuild guildId={guildId!}/>
         if (isError) return <Custom400/>
